@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bigiz — Visual Problem Solver</title>
+    
+    <!-- Google Fonts: Inter for UI, Ballet for the authentic signature style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP Core & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <!-- Lenis for Buttery Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'seb-red': '#E60000', 
+                        'seb-black': '#111111',
+                        'seb-gray': '#f4f4f4'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                        script: ['"Ballet"', 'cursive'],
+                    },
+                    cursor: {
+                        'none': 'none',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            cursor: none; 
+            background-color: #000000; 
+            color: #111111;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Lenis base styles */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: #E60000;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(230, 0, 0, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        body:has(a:hover) .cursor-outline, body:has(button:hover) .cursor-outline {
+            width: 60px; height: 60px;
+            background-color: rgba(230, 0, 0, 0.15); 
+            border-color: #E60000;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        ::selection {
+            background-color: #E60000;
+            color: white;
+        }
+
+        /* Nav Headline Transition */
+        #nav-headline {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+        .nav-hidden { opacity: 0; transform: translateY(100%); }
+        .nav-visible { opacity: 1; transform: translateY(0); }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .gsap-reveal { visibility: hidden; }
+        .hero-fade { visibility: hidden; }
+
+        /* Initial Background state for GSAP */
+        #fixed-background { opacity: 0; background-color: #ffffff; }
+    </style>
+</head>
+<body class="selection:bg-seb-red selection:text-white">
+
+    <!-- Preloader / Entrance Animation -->
+    <div id="preloader" class="fixed inset-0 w-full h-full z-[10000] bg-seb-black flex items-center justify-center pointer-events-none">
+        <!-- Changed to a fixed width of 120px for all screens -->
+        <img src="logo.gif" alt="Bigiz Loading" class="w-[120px] h-auto object-contain">
+    </div>
+
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-50">
+        <!-- Changed href to # and added onclick to smoothly scroll to the top without reloading the page -->
+        <a href="#" onclick="event.preventDefault(); lenis.scrollTo(0, {duration: 1.5});" class="px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg">
+            <img src="bigiz.gif" alt="Bigiz Logo" class="h-4 md:h-5 w-auto object-contain">
+        </a>
+
+        <div id="nav-headline" class="absolute left-1/2 -translate-x-1/2 nav-hidden hidden md:flex items-center gap-1 p-1 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg pointer-events-none">
+            <!-- Removed 'uppercase' from the main span, manually applied to the second half so the name stays lowercase -->
+            <span class="px-5 py-1.5 rounded-full text-xs font-bold tracking-widest text-white">Anass Biyguise <span class="uppercase">— Visual Problem Solver</span></span>
+        </div>
+
+        <a href="#work-section" onclick="lenis.scrollTo('#work-section', {offset: 0})" class="px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
+            <span class="text-seb-red animate-pulse">●</span> Selected Works
+        </a>
+    </nav>
+
+    <!-- Faded Video Backdrop specifically for the Hero (Scrolls away as you move down) -->
+    <div class="absolute top-0 left-0 w-full h-[100svh] z-[-3] bg-black overflow-hidden pointer-events-none">
+        <!-- Native HTML5 Background Video (Faster, no UI, seamless loop) -->
+        <video 
+            id="hero-video"
+            src="hero.mp4" 
+            autoplay 
+            loop 
+            muted 
+            playsinline
+            class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale"
+        ></video>
+        <!-- Overlay to ensure text readability -->
+        <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+    </div>
+
+    <!-- Background Layer (Opacity & Color Controlled seamlessly by GSAP ScrollTrigger) -->
+    <div id="fixed-background" class="fixed top-0 left-0 w-full h-full z-[-2]"></div>
+
+    <div class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[-1] pointer-events-none">
+        <!-- MATCHED SIZE: text-[15vw] on mobile, scaling to text-[11vw] on desktop -->
+        <h1 id="fixed-title-text" class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-white mix-blend-difference text-center uppercase">
+            Visual<br>
+            Problem<br>
+            Solver
+        </h1>
+    </div>
+
+    <main class="w-full relative">
+
+        <section id="hero" class="min-h-[100svh] flex flex-col justify-center items-center px-6 md:px-10 text-center relative z-10 bg-transparent">
+            
+            <!-- THE ANCHOR WRAPPER -->
+            <!-- This wrapper sits absolutely dead-center in the screen, matching the background text perfectly -->
+            <div class="relative flex flex-col items-center justify-center w-full z-10">
+                
+                <!-- TOP ABSOLUTE: Signature -->
+                <!-- Pinned to the top of the spacer, pointing UP -->
+                <!-- INCREASED pb-6 md:pb-10 lg:pb-12 to push the name higher up and create more distance -->
+                <div class="absolute bottom-full w-[150vw] sm:w-max flex justify-center pb-6 md:pb-10 lg:pb-12 pointer-events-none">
+                    <!-- Removed autoplay! GSAP will trigger the video to play at the exact right moment -->
+                    <video id="signature-anim" src="anass.webm" muted playsinline class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain relative z-10 -mb-2 md:-mb-6 lg:-mb-8"></video>
+                </div>
+                
+                <!-- THE SPACER -->
+                <h1 class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-center uppercase opacity-0 select-none pointer-events-none my-0">
+                    Visual<br>
+                    Problem<br>
+                    Solver
+                </h1>
+
+                <!-- BOTTOM ABSOLUTE: Description & Arrow -->
+                <!-- Pinned to the bottom of the spacer, pointing DOWN -->
+                <div class="absolute top-full flex flex-col items-center w-[90vw] md:w-max pt-8 md:pt-12">
+                    <!-- Removed the periods/points from the description -->
+                    <h2 class="hero-fade text-[13px] sm:text-[14px] md:text-sm lg:text-base font-light tracking-[0.2em] uppercase text-seb-red max-w-2xl leading-relaxed mt-0">
+                        Based in Casablanca<br>
+                        Specializing in 3D, Branding<br>
+                        and Motion Design
+                    </h2>
+
+                    <!-- Clickable Animated Arrow -->
+                    <button onclick="lenis.scrollTo('#work-section', {offset: 0})" class="hero-fade mt-8 md:mt-12 animate-bounce cursor-pointer z-20 focus:outline-none group pointer-events-auto">
+                        <div class="p-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white shadow-lg group-hover:bg-seb-red group-hover:border-seb-red transition-all group-hover:scale-110">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-fade absolute bottom-8 left-0 w-full px-10 flex justify-between items-end text-xs font-bold uppercase tracking-widest text-white/70">
+                <div>(Scroll)</div>
+                <div>© 2026</div>
+            </div>
+        </section>
+
+        <!-- Marquee Break -->
+        <div class="gsap-reveal py-10 bg-seb-black text-white overflow-hidden z-20 relative">
+            <div class="marquee-container">
+                <!-- Duplicated the new text 8 times to ensure a perfectly seamless, infinite connected loop -->
+                <div class="marquee-content text-4xl md:text-5xl font-black uppercase tracking-tighter">
+                    &nbsp;3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN • 3D DESIGN • BRANDING • MOTION DESIGN • PRINT • WEB DESIGN •
+                </div>
+            </div>
+        </div>
+
+        <!-- Horizontal Scroll Projects Section -->
+        <section id="work-section" class="relative w-full z-10 bg-transparent overflow-hidden">
+            <!-- Pinned Container -->
+            <div id="work-pin-container" class="h-[100svh] flex flex-col justify-center w-full">
+                
+                <!-- Fixed Header for Works -->
+                <div class="w-full absolute top-[15%] left-0 px-6 md:px-10 z-20 pointer-events-none">
+                    <div class="flex items-center gsap-reveal w-full pr-6 md:pr-10">
+                        <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-black">Selected Work</h2>
+                        
+                        <!-- Minimalist text indicator for scrolling -->
+                        <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">
+                            (SCROLL)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horizontal Slider Wrapper -->
+                <div class="pl-6 md:pl-10 w-full overflow-visible mt-10">
+                    <div id="work-slider" class="flex flex-row flex-nowrap gap-10 md:gap-16 w-max items-center pb-10 pt-10">
+
+                        <!-- Project 1: Treino Wod -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="armani/armani.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="armani/armani.png" 
+                                             alt="Armani" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-1" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-1" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • UI/UX DESIGN • 2025 • UI/UX DESIGN • 2025 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Armani</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Project 2: Visual Engine -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="visual-engine/project.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="visual-engine/project.png" 
+                                             alt="Visual Engine" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-2" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-2" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • 3D RENDERING • 2025 • 3D RENDERING • 2025 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Visual Engine</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Project 3: Neon Interface -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="neon-interface/project.png" 
+                                             alt="Neon Interface" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • BRANDING • 2026 • BRANDING • 2026 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Neon Interface</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Project 4: Mono Clay -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="mono-clay/project.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="mono-clay/project.png" 
+                                             alt="Mono Clay" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-4" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-4" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • ART DIRECTION • 2024 • ART DIRECTION • 2024 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Mono® Clay</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Project 3: Neon Interface -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="neon-interface/project.png" 
+                                             alt="Neon Interface" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • BRANDING • 2026 • BRANDING • 2026 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">p4</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Project 3: Neon Interface -->
+                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
+                            <!-- Updated link path -->
+                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <!-- Updated image path -->
+                                        <img src="neon-interface/project.png" 
+                                             alt="Neon Interface" 
+                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
+                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
+                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
+                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
+                                                        • BRANDING • 2026 • BRANDING • 2026 
+                                                    </textPath>
+                                                </text>
+                                            </svg>
+                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">p5</h3>
+                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Extra padding element to ensure we can scroll fully past the last slide so it hits the focus zone -->
+                        <!-- Reduced from 60vw to 40vw to shorten the dead-space at the end of the scroll -->
+                        <div class="w-[40vw] flex-shrink-0"></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minimal Spacer to reveal "Visual Problem Solver" cleanly before About section -->
+        <div class="h-[5vh] w-full pointer-events-none bg-transparent"></div>
+
+        <!-- Smaller About Section without glass frame -->
+        <section id="about" class="px-6 md:px-10 py-10 relative z-20 bg-transparent text-seb-black min-h-[80svh] flex flex-col justify-center">
+            <div class="container mx-auto max-w-[70rem] relative">
+                
+                <!-- Perfectly Centered Rotating Avatar (Resized) -->
+                <div class="absolute -top-10 right-0 md:-top-10 md:-right-4 w-28 h-28 md:w-40 md:h-40 z-30 flex items-center justify-center gsap-reveal">
+                    <!-- Rotating Text Ring -->
+                    <div class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite]">
+                        <!-- Changed back to text-seb-black and made the text ALL CAPS -->
+                        <svg viewBox="0 0 100 100" class="w-full h-full text-seb-black overflow-visible opacity-80">
+                            <!-- Adjusted radius -->
+                            <path id="path-about-badge" d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="transparent" />
+                            <text fill="currentColor" font-size="8.5" font-weight="bold" font-family="sans-serif" letter-spacing="2">
+                                <textPath href="#path-about-badge" textLength="260" lengthAdjust="spacingAndGlyphs">
+                                    ANASS BIYGUISE • GRAPHIC DESIGNER •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <!-- Transparent Logo Image (Restored logo.gif) -->
+                    <div class="w-[80%] h-[80%] relative z-10 flex items-center justify-center">
+                        <img src="logo.gif" alt="Bigiz Logo" class="w-full h-full object-contain transition-all duration-500">
+                    </div>
+                </div>
+
+                <!-- Content (No background/glass frame, purely transparent backdrop) -->
+                <div id="about-content" class="gsap-reveal flex flex-col justify-center max-w-3xl pt-16 md:pt-0 relative z-20">
+                    <div class="py-4 w-full">
+                        <!-- ABOUT Title styled like Selected Work -->
+                        <div class="flex items-center mb-6">
+                            <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-black">About</h2>
+                        </div>
+                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-4">
+                            I am a visual problem solver based in Casablanca, specializing in 3D rendering, brand identity, and motion design. My approach is rooted in functional aesthetics and brutalist simplicity.
+                        </p>
+                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-10">
+                            I partner with forward-thinking brands to create digital experiences that are not only visually striking but also deeply engaging and intuitive.
+                        </p>
+                        
+                        <!-- Experience Lines -->
+                        <div id="experience-list" class="w-full mb-10">
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Experience</h3>
+                            <div class="flex flex-col w-full border-b border-black/10">
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default">
+                                    <div class="flex flex-col">
+                                        <span class="text-base font-bold text-seb-black">Senior 3D Artist</span>
+                                        <span class="text-xs text-gray-600 mt-1">Creative Studio Agency</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red">2024 — Pres</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default">
+                                    <div class="flex flex-col">
+                                        <span class="text-base font-bold text-seb-black">Art Director</span>
+                                        <span class="text-xs text-gray-600 mt-1">Mono® Brands</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red">2021 — 2024</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default">
+                                    <div class="flex flex-col">
+                                        <span class="text-base font-bold text-seb-black">Motion Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Visual Engine</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red">2018 — 2021</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex flex-wrap gap-4">
+                           <!-- Changed onclick to trigger the new modal -->
+                           <button onclick="openSocialModal()" class="px-6 py-3 bg-seb-red text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-black hover:text-white transition-all duration-300 hover:scale-105 shadow-lg">Let's Collaborate</button>
+                           <!-- Added href="cv.pdf" and the download attribute -->
+                           <a href="cv.pdf" download="cv.pdf" target="_blank" class="px-6 py-3 bg-seb-black text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-red hover:text-white transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-lg">Download CV</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reduced Spacer to reveal "Visual Problem Solver" in light background before footer -->
+        <div class="h-[15vh] md:h-[20vh] w-full pointer-events-none bg-transparent"></div>
+
+        <!-- Footer -->
+        <footer id="contact" class="px-6 md:px-10 py-16 md:py-24 min-h-[85vh] flex flex-col justify-between relative z-20 bg-[#0a0a0a] text-white overflow-hidden">
+            
+            <!-- Hidden Interactive Grid (Logo Shapes) -->
+            <div id="footer-grid" class="absolute inset-0 grid w-full h-full z-0 pointer-events-none"></div>
+
+            <!-- Main Footer Content -->
+            <div class="gsap-reveal flex flex-col md:flex-row justify-between items-start w-full relative z-10">
+                
+                <!-- Left Side: Text (Uniform size across all screens) -->
+                <div class="flex flex-col mb-16 md:mb-0">
+                    <span class="uppercase tracking-widest text-[10px] md:text-xs font-bold mb-6 text-gray-500">Have an idea?</span>
+                    <!-- Increased size to 5.5rem/6.5rem and changed from anchor to button for the modal interaction -->
+                    <button onclick="openSocialModal()" class="group block text-[5.5rem] md:text-[6.5rem] leading-[0.8] font-black tracking-tighter uppercase hover:text-seb-red transition-colors duration-300 text-left cursor-pointer">
+                        <span class="block">Let's</span>
+                        <!-- Adjusted margins slightly to accommodate the larger text size -->
+                        <span class="block ml-16 md:ml-20 group-hover:ml-24 md:group-hover:ml-28 transition-all duration-500">
+                            Talk
+                            <span class="inline-block text-[0.4em] align-top text-seb-red opacity-0 group-hover:opacity-100 transition-opacity duration-500">↗</span>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Right Side: Social Buttons vertically aligned -->
+                <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12">
+                    
+                    <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span class="font-bold tracking-widest mt-0.5">MAIL</span>
+                    </a>
+                    
+                    <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span class="font-bold tracking-widest mt-0.5">PHONE</span>
+                    </a>
+                    
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
+                    </a>
+                    
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
+                    </a>
+                    
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
+                        <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Bottom Credits -->
+            <!-- Removed gsap-reveal so it doesn't get stuck hidden at the bottom of the scroll -->
+            <div class="flex flex-row justify-between items-end w-full mt-20 md:mt-32 relative z-10">
+                <!-- "Made by me" aligned on the left side -->
+                <div class="flex flex-col pointer-events-auto">
+                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-500">Made by me</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Back to Top Arrow (Styled to match screenshot) -->
+    <button id="back-to-top" class="fixed bottom-10 right-6 md:right-10 z-[50] p-4 md:p-5 bg-[#0a0a0a] text-white border border-white/20 rounded-full opacity-0 pointer-events-none transition-all duration-300 hover:bg-white hover:text-black shadow-2xl">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <!-- NEW SOCIAL OVERLAY MODAL -->
+    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none">
+        
+        <!-- Low opacity black blurred backdrop -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer transition-opacity"></div>
+        
+        <!-- Animated X close button -->
+        <button id="modal-close" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-10 cursor-pointer">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Centered Links container -->
+        <div class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6 pointer-events-none">
+            
+            <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="modal-link pointer-events-auto w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span class="font-bold tracking-widest mt-0.5">MAIL</span>
+            </a>
+            
+            <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="modal-link pointer-events-auto w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5">PHONE</span>
+            </a>
+            
+            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link pointer-events-auto w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
+            </a>
+            
+            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link pointer-events-auto w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
+            </a>
+            
+            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link pointer-events-auto w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        // --- 0. Smooth Scrolling Setup (Lenis) ---
+        // Force scroll to top on page load and prevent browser scroll memory
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 0.8,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Pause scrolling during entrance animation
+        lenis.stop();
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0, 0);
+
+
+        // --- 1. Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const isHoverable = window.matchMedia('(hover: hover)').matches;
+
+        if (isHoverable) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+        }
+
+
+        // --- 2. Nav Headline & Back-to-Top Observer Logic ---
+        const navHeadline = document.getElementById('nav-headline');
+        const heroSection = document.getElementById('hero');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const heroHeight = heroSection.offsetHeight;
+
+            // Nav Headline Pill
+            if (scrollPosition > (heroHeight * 0.6)) {
+                navHeadline.classList.remove('nav-hidden');
+                navHeadline.classList.add('nav-visible');
+            } else {
+                navHeadline.classList.add('nav-hidden');
+                navHeadline.classList.remove('nav-visible');
+            }
+
+            // Back to Top Button Visibility
+            if (scrollPosition > window.innerHeight * 1.5) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.pointerEvents = 'auto';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.pointerEvents = 'none';
+            }
+        });
+
+        // Back to Top Click Action
+        backToTopBtn.addEventListener('click', () => {
+            lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        });
+
+
+        // --- 3. GSAP Master Animations ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // =========================================================
+        // ENTRANCE ANIMATION (Preloader & Site Slide Up)
+        // =========================================================
+        const introTl = gsap.timeline({
+            paused: true, // FIX: Start paused, wait for Vimeo to load!
+            onComplete: () => {
+                lenis.start(); // Re-enable scrolling after entrance
+                ScrollTrigger.refresh(); // FIX: Recalculate pin positions after layout settles
+            }
+        });
+
+        // 1. Preloader slides up out of view after the video is ready
+        introTl.to("#preloader", {
+            yPercent: -100,
+            duration: 1.2,
+            ease: "expo.inOut",
+            delay: 0.5 // Small buffer so the logo doesn't vanish instantly on fast connections
+        })
+        // 2. The entire website slides up into place smoothly
+        .fromTo(["main", "nav", "#fixed-title-text", ".absolute.top-0"], {
+            y: 80,
+        }, {
+            y: 0,
+            duration: 1.2,
+            ease: "expo.out",
+            clearProps: "transform" // FIX: Removes the transform so the horizontal scroll pinning works correctly
+        }, "-=0.8")
+        // 3. Signature Video fades in and STARTS PLAYING exactly when revealed
+        .from("#signature-anim", {
+            autoAlpha: 0,
+            y: 20,
+            duration: 0.8,
+            ease: "power2.out",
+            onStart: () => {
+                const sigVideo = document.getElementById('signature-anim');
+                if(sigVideo) {
+                    sigVideo.currentTime = 0; // Force it to start from frame 0
+                    sigVideo.play();
+                }
+            }
+        }, "-=0.6")
+        // 4. "Visual Problem Solver" text fades in
+        .from("#fixed-title-text", {
+            duration: 1.5,
+            scale: 0.9,
+            opacity: 0,
+            ease: "power4.out"
+        }, "-=1")
+        // 5. Bio and button fade in
+        .fromTo(".hero-fade", 
+            { autoAlpha: 0, y: 30 },
+            { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.2, ease: "power3.out" },
+            "-=1.2"
+        );
+
+        // =========================================================
+        // NATIVE VIDEO PRELOADER SYNC LOGIC
+        // =========================================================
+        const bgVideo = document.getElementById('hero-video');
+        let siteStarted = false;
+
+        function startSiteAnimation() {
+            if (!siteStarted) {
+                siteStarted = true;
+                introTl.play();
+            }
+        }
+
+        // Listen for the exact moment the native video starts playing
+        if (bgVideo) {
+            bgVideo.addEventListener('playing', startSiteAnimation);
+            
+            // Failsafe for Safari/Cached videos: if it's already ready, start immediately
+            if (bgVideo.readyState >= 3) {
+                startSiteAnimation();
+            }
+        }
+
+        // Failsafe: If the user's device is slow, force the site to show up after 4 seconds anyway.
+        setTimeout(startSiteAnimation, 4000);
+
+        // =========================================================
+        // IMPORTANT: Pinning must be declared BEFORE elements below 
+        // it so GSAP calculates the trigger start positions correctly.
+        // =========================================================
+
+        // B. Horizontal Scroll For "Selected Works"
+        let workSlider = document.getElementById("work-slider");
+        
+        let scrollTween = gsap.to(workSlider, {
+            x: () => -(workSlider.scrollWidth - window.innerWidth),
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#work-section",
+                pin: true,
+                start: "top top",
+                end: () => "+=" + workSlider.scrollWidth,
+                scrub: 1,
+                invalidateOnRefresh: true
+            }
+        });
+
+        // Focus effect for project cards inside the horizontal scroll
+        gsap.utils.toArray(".project-card").forEach((card) => {
+            // Target the INNER wrapper so we don't mess with the flex container's layout size
+            const inner = card.querySelector('.card-inner');
+            
+            // Enter from right small and faded, grow to full size on the left
+            // CHANGED: transformOrigin to "left center" so alignment stays mathematically perfect on the left edge
+            gsap.fromTo(inner, 
+                { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
+                {
+                    opacity: 1, 
+                    scale: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card, // The static parent remains the trigger point
+                        containerAnimation: scrollTween,
+                        start: "left 85%", // Start scaling when entering from the right
+                        end: "left 10%",   // Finish scaling when locked into the focus area on the left
+                        scrub: true,
+                    }
+                }
+            );
+        });
+
+        // A. Seamless Background Color Engine 
+        // 1. Fade in grey over video (Keeps mix-blend text visible consistently)
+        gsap.to("#fixed-background", {
+            opacity: 1,
+            backgroundColor: "#e5e5e5",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom center",
+                scrub: true
+            }
+        });
+
+        // D. Scroll Triggered Storytelling (For general text reveals)
+        gsap.utils.toArray(".gsap-reveal").forEach(element => {
+            gsap.fromTo(element, 
+                { autoAlpha: 0, y: 80, scale: 0.85 },
+                {
+                    autoAlpha: 1, y: 0, scale: 1, duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 95%", 
+                        end: "top 65%",   
+                        scrub: 1,         
+                        toggleActions: "play reverse play reverse" 
+                    }
+                }
+            );
+        });
+
+        // E. Experience List Animation (Synchronized perfectly with About section scrub)
+        gsap.fromTo(".exp-line", 
+            { autoAlpha: 0, x: -30 }, // Slides in beautifully from the left
+            { 
+                autoAlpha: 1, 
+                x: 0, 
+                stagger: 0.1, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#about-content", // Linked to the exact same trigger as the parent text block
+                    start: "top 95%",          // Matches parent start
+                    end: "top 65%",            // Matches parent end
+                    scrub: 1                   // Scrubs along with the scroll
+                }
+            }
+        );
+
+        // --- 4. Footer Playful Grid Interaction (Logo Hover Reveal) ---
+        const footerElement = document.getElementById('contact');
+        const footerGrid = document.getElementById('footer-grid');
+        let footerGridCols = 0;
+        let footerGridRows = 0;
+        let footerCellArray = [];
+
+        function initFooterGrid() {
+            footerGrid.innerHTML = '';
+            footerCellArray = [];
+            const cellSize = window.innerWidth < 768 ? 40 : 60; // Grid density based on screen
+            
+            footerGridCols = Math.ceil(footerElement.offsetWidth / cellSize);
+            footerGridRows = Math.ceil(footerElement.offsetHeight / cellSize);
+            
+            footerGrid.style.gridTemplateColumns = `repeat(${footerGridCols}, 1fr)`;
+            footerGrid.style.gridTemplateRows = `repeat(${footerGridRows}, 1fr)`;
+            
+            const totalCells = footerGridCols * footerGridRows;
+            
+            // Build the grid containing the custom logo shape
+            for (let i = 0; i < totalCells; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'w-full h-full flex items-center justify-center';
+                cell.innerHTML = `
+                    <svg viewBox="0 0 100 100" class="w-[50%] h-[50%] opacity-0 transform">
+                        <!-- Precise SVG recreating your logo shape -->
+                        <path fill="currentColor" d="M 0 0 L 100 0 A 50 50 0 0 1 0 0 Z M 0 100 L 100 100 A 50 50 0 0 0 0 100 Z" />
+                    </svg>
+                `;
+                footerGrid.appendChild(cell);
+                footerCellArray.push(cell.querySelector('svg'));
+            }
+        }
+
+        // Setup mathematical hover logic for Footer
+        footerElement.addEventListener('mousemove', (e) => {
+            const rect = footerElement.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const actualCellWidth = footerElement.offsetWidth / footerGridCols;
+            const actualCellHeight = footerElement.offsetHeight / footerGridRows;
+            
+            const col = Math.floor(x / actualCellWidth);
+            const row = Math.floor(y / actualCellHeight);
+            
+            const index = row * footerGridCols + col;
+            
+            if (index >= 0 && index < footerCellArray.length) {
+                const svg = footerCellArray[index];
+                
+                // Animate if it's not currently animating
+                if (!svg.dataset.animating) {
+                    svg.dataset.animating = "true";
+                    gsap.killTweensOf(svg);
+                    
+                    // Pop in with random 2D rotation direction to make it playful
+                    gsap.fromTo(svg, 
+                        { opacity: 1, scale: 0, rotation: gsap.utils.random([-90, 90]), color: "#E60000" },
+                        { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }
+                    );
+                    
+                    // Fade out & spin away smoothly
+                    gsap.to(svg, {
+                        opacity: 0,
+                        scale: 0.2,
+                        rotation: gsap.utils.random([-180, 180]),
+                        color: "#333333", // Fades to a dark grey before disappearing
+                        duration: 1,
+                        delay: 0.3,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            svg.dataset.animating = "";
+                        }
+                    });
+                }
+            }
+        });
+
+        // --- 6. Social Overlay Modal Logic ---
+        const socialModal = document.getElementById('social-modal');
+        const modalLinks = document.querySelectorAll('.modal-link');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalCloseBtn = document.getElementById('modal-close');
+
+        // Function to open the modal (triggered by "Let's Talk" & "Let's Collaborate")
+        window.openSocialModal = function() {
+            // Stop background scrolling
+            lenis.stop(); 
+            
+            // Make modal clickable
+            socialModal.classList.remove('pointer-events-none');
+            
+            // Fade in the dark backdrop instantly
+            gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
+            
+            // The "Fly Up from Footer" Effect - Made extremely fast and snappy
+            // Start the buttons below the screen and shoot them up instantly
+            gsap.fromTo(modalLinks, 
+                { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
+                { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
+            );
+        };
+
+        // Function to close the modal
+        window.closeSocialModal = function() {
+            // Drop them back down instantly
+            gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
+            
+            // Fade out the backdrop and re-enable scrolling much faster
+            gsap.to(socialModal, { 
+                opacity: 0, 
+                duration: 0.2, 
+                delay: 0.1, 
+                ease: "power2.in", 
+                onComplete: () => {
+                    socialModal.classList.add('pointer-events-none');
+                    lenis.start();
+                } 
+            });
+        };
+
+        // Attach close events
+        modalCloseBtn.addEventListener('click', closeSocialModal);
+        modalBackdrop.addEventListener('click', closeSocialModal);
+
+
+        // Rebuild grids on resize to maintain perfect squares
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(() => {
+                initFooterGrid();
+            }, 300);
+        });
+
+        // Initialize grids on load
+        initFooterGrid();
+
+    </script>
+</body>
+</html>
