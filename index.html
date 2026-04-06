@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bigiz — Visual Problem Solver</title>
+    <title>Bigiz — Visual Experience Builder</title>
     
     <!-- Google Fonts: Inter for UI, Ballet for the authentic signature style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,11 +25,12 @@
                     colors: {
                         'seb-red': '#E60000', 
                         'seb-black': '#111111',
-                        'seb-gray': '#f4f4f4'
+                        'seb-gray': '#e5e5e5',
+                        'seb-light': '#f4f4f4'
                     },
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-                        script: ['"Ballet"', 'cursive'],
+                        script: ['"Alex Brush"', 'cursive'],
                     },
                     cursor: {
                         'none': 'none',
@@ -41,7 +42,7 @@
     <style>
         body {
             cursor: none; 
-            background-color: #000000; 
+            background-color: #ffffff; 
             color: #111111;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -61,7 +62,7 @@
             top: 0; left: 0;
             transform: translate(-50%, -50%);
             border-radius: 50%;
-            z-index: 9999;
+            z-index: 99999;
             pointer-events: none;
         }
         .cursor-dot {
@@ -73,46 +74,36 @@
             border: 1px solid rgba(230, 0, 0, 0.5);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
-        body:has(a:hover) .cursor-outline, body:has(button:hover) .cursor-outline {
-            width: 60px; height: 60px;
-            background-color: rgba(230, 0, 0, 0.15); 
-            border-color: #E60000;
+        
+        /* FIX: Wrap hover state in media query so iOS/Mobile doesn't trap the first tap! */
+        @media (hover: hover) and (pointer: fine) {
+            body:has(a:hover) .cursor-outline, body:has(button:hover) .cursor-outline {
+                width: 60px; height: 60px;
+                background-color: rgba(230, 0, 0, 0.15); 
+                border-color: #E60000;
+            }
         }
-
-        /* Marquee Animation */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        ::selection {
-            background-color: #E60000;
-            color: white;
-        }
-
-        /* Nav Headline Transition */
-        #nav-headline {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
-        }
-        .nav-hidden { opacity: 0; transform: translateY(100%); }
-        .nav-visible { opacity: 1; transform: translateY(0); }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .gsap-reveal { visibility: hidden; }
-        .hero-fade { visibility: hidden; }
+        /* FIX: Marquee Animation CSS added back in */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            will-change: transform;
+        }
 
-        /* Initial Background state for GSAP */
-        #fixed-background { opacity: 0; background-color: #ffffff; }
+        .gsap-reveal { visibility: hidden; }
+
+        /* Modal specific body state */
+        body.modal-open { cursor: auto !important; }
+        body.modal-open .cursor-dot, body.modal-open .cursor-outline { display: none !important; }
     </style>
 </head>
 <body class="selection:bg-seb-red selection:text-white">
@@ -134,7 +125,7 @@
 
         <div id="nav-headline" class="absolute left-1/2 -translate-x-1/2 nav-hidden hidden md:flex items-center gap-1 p-1 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg pointer-events-none">
             <!-- Removed 'uppercase' from the main span, manually applied to the second half so the name stays lowercase -->
-            <span class="px-5 py-1.5 rounded-full text-xs font-bold tracking-widest text-white">Anass Biyguise <span class="uppercase">— Visual Problem Solver</span></span>
+            <span class="px-5 py-1.5 rounded-full text-xs font-bold tracking-widest text-white">Anass Biyguise <span class="uppercase">— Visual Experience Builder</span></span>
         </div>
 
         <a href="#work-section" onclick="lenis.scrollTo('#work-section', {offset: 0})" class="px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
@@ -165,8 +156,8 @@
         <!-- MATCHED SIZE: text-[15vw] on mobile, scaling to text-[11vw] on desktop -->
         <h1 id="fixed-title-text" class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-white mix-blend-difference text-center uppercase">
             Visual<br>
-            Problem<br>
-            Solver
+            Experience<br>
+            Builder
         </h1>
     </div>
 
@@ -189,8 +180,8 @@
                 <!-- THE SPACER -->
                 <h1 class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-center uppercase opacity-0 select-none pointer-events-none my-0">
                     Visual<br>
-                    Problem<br>
-                    Solver
+                    Experience<br>
+                    Builder
                 </h1>
 
                 <!-- BOTTOM ABSOLUTE: Description & Arrow -->
@@ -244,214 +235,344 @@
                         
                         <!-- Minimalist text indicator for scrolling -->
                         <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">
-                            (SCROLL)
+                            (SCROLL/SWIPE)
                         </div>
                     </div>
                 </div>
 
                 <!-- Horizontal Slider Wrapper -->
-                <div class="pl-6 md:pl-10 w-full overflow-visible mt-10">
-                    <div id="work-slider" class="flex flex-row flex-nowrap gap-10 md:gap-16 w-max items-center pb-10 pt-10">
+                <div id="slider-wrapper" class="w-full overflow-x-auto md:overflow-visible mt-10 no-scrollbar snap-x snap-mandatory touch-pan-x pl-0 md:pl-10">
+                    <div id="work-slider" class="flex flex-row flex-nowrap gap-6 md:gap-16 w-max items-center pb-10 pt-10 px-6 md:px-0">
 
-                        <!-- Project 1: Treino Wod -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="armani/armani.html" class="card-inner block group relative w-full h-full">
+                        <!-- 1. Armani -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="armani/armani.html" class="absolute inset-0 z-50 block" aria-label="View Armani"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="armani/armani.png" 
-                                             alt="Armani" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="armani/armani.png" alt="Armani" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-1" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-1" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • UI/UX DESIGN • 2025 • UI/UX DESIGN • 2025 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-armani" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-armani" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Armani</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Armani</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
 
-                        <!-- Project 2: Visual Engine -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="visual-engine/project.html" class="card-inner block group relative w-full h-full">
+                        <!-- 2. CAF -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="caf/caf.html" class="absolute inset-0 z-50 block" aria-label="View CAF"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="visual-engine/project.png" 
-                                             alt="Visual Engine" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="caf/caf.png" alt="CAF" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-2" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-2" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • 3D RENDERING • 2025 • 3D RENDERING • 2025 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-caf" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-caf" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • BRANDING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Visual Engine</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">CAF</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
 
-                        <!-- Project 3: Neon Interface -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+                        <!-- 3. ICE -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="ice/ice.html" class="absolute inset-0 z-50 block" aria-label="View ICE"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="neon-interface/project.png" 
-                                             alt="Neon Interface" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="ice/ice.png" alt="ICE" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • BRANDING • 2026 • BRANDING • 2026 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-ice" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-ice" textLength="213" lengthAdjust="spacingAndGlyphs">• UI/UX DESIGN • 2026 • UI/UX DESIGN • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Neon Interface</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">ICE</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
 
-                        <!-- Project 4: Mono Clay -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="mono-clay/project.html" class="card-inner block group relative w-full h-full">
+                        <!-- 4. AXA -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="axa/axa.html" class="absolute inset-0 z-50 block" aria-label="View AXA"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="mono-clay/project.png" 
-                                             alt="Mono Clay" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="axa/axa.png" alt="AXA" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-4" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-4" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • ART DIRECTION • 2024 • ART DIRECTION • 2024 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-axa" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-axa" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D RENDERING • 2026 • 3D RENDERING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Mono® Clay</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">AXA</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Project 3: Neon Interface -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+
+                        <!-- 5. LRP -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="lrp/lrp.html" class="absolute inset-0 z-50 block" aria-label="View LRP"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="neon-interface/project.png" 
-                                             alt="Neon Interface" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="lrp/lrp.png" alt="LRP" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • BRANDING • 2026 • BRANDING • 2026 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-lrp" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-lrp" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION GRAPHICS • 2026 • MOTION GRAPHICS • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">p4</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">LRP</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Project 3: Neon Interface -->
-                        <div class="w-[75vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card">
-                            <!-- Updated link path -->
-                            <a href="neon-interface/project.html" class="card-inner block group relative w-full h-full">
+
+                        <!-- 6. Vichy -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="vichy/vichy.html" class="absolute inset-0 z-50 block" aria-label="View Vichy"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <!-- Updated image path -->
-                                        <img src="neon-interface/project.png" 
-                                             alt="Neon Interface" 
-                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                                        <img src="vichy/vichy.png" alt="Vichy" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 group-hover:scale-110 shadow-2xl rounded-full">
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible">
-                                                <path id="path-proj-3" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" />
-                                                <text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5">
-                                                    <textPath href="#path-proj-3" textLength="213" lengthAdjust="spacingAndGlyphs">
-                                                        • BRANDING • 2026 • BRANDING • 2026 
-                                                    </textPath>
-                                                </text>
-                                            </svg>
-                                            <div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-vichy" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-vichy" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">p5</h3>
-                                    <span class="text-xl md:text-2xl text-seb-red leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Vichy</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
-                        <!-- Extra padding element to ensure we can scroll fully past the last slide so it hits the focus zone -->
-                        <!-- Reduced from 60vw to 40vw to shorten the dead-space at the end of the scroll -->
-                        <div class="w-[40vw] flex-shrink-0"></div>
+
+                        <!-- 7. Clarre -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="clarre/clarre.html" class="absolute inset-0 z-50 block" aria-label="View Clarre"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="clarre/clarre.png" alt="Clarre" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-clarre" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-clarre" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • BRANDING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Clarre</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. Mahindra -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="mahindra/mahindra.html" class="absolute inset-0 z-50 block" aria-label="View Mahindra"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="mahindra/mahindra.png" alt="Mahindra" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-mahindra" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-mahindra" textLength="213" lengthAdjust="spacingAndGlyphs">• UI/UX DESIGN • 2026 • UI/UX DESIGN • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Mahindra</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9. Taxi -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="taxi/taxi.html" class="absolute inset-0 z-50 block" aria-label="View Taxi"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="taxi/taxi.png" alt="Taxi" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-taxi" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-taxi" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D RENDERING • 2026 • 3D RENDERING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Taxi</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10. ALX -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="alx/alx.html" class="absolute inset-0 z-50 block" aria-label="View ALX"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="alx/alx.png" alt="ALX" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-alx" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-alx" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION GRAPHICS • 2026 • MOTION GRAPHICS • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">ALX</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 11. Revelation -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="revelation/revelation.html" class="absolute inset-0 z-50 block" aria-label="View Revelation"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="revelation/revelation.png" alt="Revelation" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-revelation" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-revelation" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Revelation</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12. Argan -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="argan/argan.html" class="absolute inset-0 z-50 block" aria-label="View Argan"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="argan/argan.png" alt="Argan" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-argan" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-argan" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • BRANDING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Argan</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 13. Stranger -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="stranger/stranger.html" class="absolute inset-0 z-50 block" aria-label="View Stranger"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="stranger/stranger.png" alt="Stranger" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-stranger" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-stranger" textLength="213" lengthAdjust="spacingAndGlyphs">• UI/UX DESIGN • 2026 • UI/UX DESIGN • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Stranger</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14. Sinia -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="sinia/sinia.html" class="absolute inset-0 z-50 block" aria-label="View Sinia"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="sinia/sinia.png" alt="Sinia" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-sinia" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-sinia" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D RENDERING • 2026 • 3D RENDERING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Sinia</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 15. Staunch -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="staunch/staunch.html" class="absolute inset-0 z-50 block" aria-label="View Staunch"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="staunch/staunch.png" alt="Staunch" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-staunch" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-staunch" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION GRAPHICS • 2026 • MOTION GRAPHICS • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Staunch</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 16. Sculptures -->
+                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer snap-center">
+                            <a href="sculptures/sculptures.html" class="absolute inset-0 z-50 block" aria-label="View Sculptures"></a>
+                            <div class="card-inner block w-full h-full select-none pointer-events-none">
+                                <div class="relative mb-6">
+                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
+                                        <img src="sculptures/sculptures.png" alt="Sculptures" draggable="false" class="w-full h-full object-cover transition-transform duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105">
+                                    </div>
+                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
+                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-sculptures" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-sculptures" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Sculptures</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Extra padding element -->
+                        <div class="hidden md:block w-[40vw] flex-shrink-0"></div>
 
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Minimal Spacer to reveal "Visual Problem Solver" cleanly before About section -->
+        <!-- Minimal Spacer to reveal "Visual Experience Builder" cleanly before About section -->
         <div class="h-[5vh] w-full pointer-events-none bg-transparent"></div>
 
         <!-- Smaller About Section without glass frame -->
@@ -488,7 +609,7 @@
                             <h2 class="text-sm font-bold uppercase tracking-widest text-black">About</h2>
                         </div>
                         <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-4">
-                            I am a visual problem solver based in Casablanca, specializing in 3D rendering, brand identity, and motion design. My approach is rooted in functional aesthetics and brutalist simplicity.
+                            I am a visual experience builder based in Casablanca, specializing in 3D rendering, brand identity, and motion design. My approach is rooted in functional aesthetics and brutalist simplicity.
                         </p>
                         <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-10">
                             I partner with forward-thinking brands to create digital experiences that are not only visually striking but also deeply engaging and intuitive.
@@ -533,7 +654,7 @@
             </div>
         </section>
 
-        <!-- Reduced Spacer to reveal "Visual Problem Solver" in light background before footer -->
+        <!-- Reduced Spacer to reveal "Visual Experience Builder" in light background before footer -->
         <div class="h-[15vh] md:h-[20vh] w-full pointer-events-none bg-transparent"></div>
 
         <!-- Footer -->
@@ -777,7 +898,7 @@
                 }
             }
         }, "-=0.6")
-        // 4. "Visual Problem Solver" text fades in
+        // 4. "Visual Experience Builder" text fades in
         .from("#fixed-title-text", {
             duration: 1.5,
             scale: 0.9,
@@ -822,44 +943,68 @@
         // it so GSAP calculates the trigger start positions correctly.
         // =========================================================
 
-        // B. Horizontal Scroll For "Selected Works"
+        // B. Responsive Horizontal Scroll Logic (GSAP on Desktop, Native Swipe on Mobile)
         let workSlider = document.getElementById("work-slider");
-        
-        let scrollTween = gsap.to(workSlider, {
-            x: () => -(workSlider.scrollWidth - window.innerWidth),
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#work-section",
-                pin: true,
-                start: "top top",
-                end: () => "+=" + workSlider.scrollWidth,
-                scrub: 1,
-                invalidateOnRefresh: true
-            }
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 768px)", () => {
+            // DESKTOP: Pin the section and scrub horizontally based on vertical scroll
+            let scrollTween = gsap.to(workSlider, {
+                x: () => -(workSlider.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#work-section",
+                    pin: true,
+                    start: "top top",
+                    end: () => "+=" + workSlider.scrollWidth,
+                    scrub: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            // Desktop Focus effect (Scale up as it enters from the right)
+            gsap.utils.toArray(".project-card").forEach((card) => {
+                const inner = card.querySelector('.card-inner');
+                gsap.fromTo(inner, 
+                    { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
+                    {
+                        opacity: 1, 
+                        scale: 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: card,
+                            containerAnimation: scrollTween,
+                            start: "left 85%",
+                            end: "left 10%",
+                            scrub: true,
+                        }
+                    }
+                );
+            });
         });
 
-        // Focus effect for project cards inside the horizontal scroll
-        gsap.utils.toArray(".project-card").forEach((card) => {
-            // Target the INNER wrapper so we don't mess with the flex container's layout size
-            const inner = card.querySelector('.card-inner');
-            
-            // Enter from right small and faded, grow to full size on the left
-            // CHANGED: transformOrigin to "left center" so alignment stays mathematically perfect on the left edge
-            gsap.fromTo(inner, 
-                { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
-                {
-                    opacity: 1, 
-                    scale: 1,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: card, // The static parent remains the trigger point
-                        containerAnimation: scrollTween,
-                        start: "left 85%", // Start scaling when entering from the right
-                        end: "left 10%",   // Finish scaling when locked into the focus area on the left
-                        scrub: true,
+        mm.add("(max-width: 767px)", () => {
+            // MOBILE: Release the pin, allow native touch swiping horizontally!
+            // Add a subtle focus effect driven by the native horizontal scroll wrapper
+            gsap.utils.toArray(".project-card").forEach((card) => {
+                const inner = card.querySelector('.card-inner');
+                gsap.fromTo(inner, 
+                    { opacity: 0.4, scale: 0.9 }, 
+                    {
+                        opacity: 1, 
+                        scale: 1,
+                        ease: "power1.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            scroller: "#slider-wrapper", // Listen to the native scrolling container
+                            horizontal: true,            // Tracks horizontal movement instead of vertical
+                            start: "left 85%",
+                            end: "center center",
+                            scrub: true,
+                        }
                     }
-                }
-            );
+                );
+            });
         });
 
         // A. Seamless Background Color Engine 
