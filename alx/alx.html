@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <!-- Lenis for Buttery Smooth Scrolling -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -30,10 +30,10 @@
                     },
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-                        script: ['"Alex Brush"', 'cursive'],
+                        script: ['"Alex Brush"', 'cursive']
                     },
                     cursor: {
-                        'none': 'none',
+                        'none': 'none'
                     }
                 }
             }
@@ -91,14 +91,14 @@
             border-bottom: 1px dotted rgba(17, 17, 17, 0.3);
         }
 
-        /* Modal specific body state */
+        /* Modal specific body state - Forces native cursor over everything! */
         body.modal-open { cursor: auto !important; }
         body.modal-open .cursor-dot, body.modal-open .cursor-outline { display: none !important; }
     </style>
 </head>
 <body class="selection:bg-seb-red selection:text-white">
 
-    <!-- Entrance Curtain (Black layer with centered logo) -->
+    <!-- Entrance Curtain -->
     <div id="entrance-curtain" class="fixed inset-0 w-full h-full z-[10000] bg-seb-black pointer-events-none flex items-center justify-center">
         <img id="entrance-logo" src="../logo.gif" alt="Loading Logo" class="w-24 md:w-32 object-contain opacity-0">
     </div>
@@ -106,8 +106,7 @@
     <div class="cursor-dot hidden md:block"></div>
     <div class="cursor-outline hidden md:block"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-50 pointer-events-none">
+    <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[100] pointer-events-none">
         <a href="javascript:history.back()" class="pointer-events-auto px-6 py-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-bold tracking-tight hover:bg-black/60 transition-all hover:scale-105 shadow-lg flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Back
@@ -137,30 +136,27 @@
 
     <main class="w-full relative">
 
-        <!-- Split Hero Section -->
         <section class="flex flex-col lg:flex-row w-full min-h-[100svh]">
             
-            <!-- Left Side: Image Gallery -->
             <div class="w-full lg:w-[60%] bg-[#e3e2de] flex flex-col lg:flex-row p-6 pt-32 lg:p-12 lg:pt-32 gap-6 lg:gap-8 relative lg:sticky lg:top-0 lg:h-[100svh]">
                 
                 <div class="proj-detail-anim flex flex-row lg:flex-col gap-4 w-full lg:w-24 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/76979871?title=0&byline=0&portrait=0', this)" class="thumb-btn relative w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
-                        <img src="alx-img1.png" class="w-full h-full object-cover">
+                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/76979871?title=0&byline=0&portrait=0', this)" class="thumb-btn group relative w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
+                        <img src="alx-img1.png" class="w-full h-full object-cover group-hover:grayscale-0">
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
                     
-                    <button onclick="changeMainMedia('image', 'alx-img2.png', this)" class="thumb-btn w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
-                        <img src="alx-img2.png" class="w-full h-full object-cover grayscale">
+                    <button onclick="changeMainMedia('image', 'alx-img2.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
+                        <img src="alx-img2.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
                     </button>
                     
-                    <button onclick="changeMainMedia('image', 'alx-img3.png', this)" class="thumb-btn w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
-                        <img src="alx-img3.png" class="w-full h-full object-cover grayscale">
+                    <button onclick="changeMainMedia('image', 'alx-img3.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
+                        <img src="alx-img3.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
                     </button>
                 </div>
 
-                <!-- Main Featured Media -->
                 <div class="proj-detail-anim flex-1 flex items-center justify-center relative w-full h-[50vh] lg:h-full pb-10 lg:pb-0">
                     <img id="main-image" src="" alt="pro" class="hidden max-w-[85%] max-h-[85%] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105">
                     <div id="main-video-wrapper" class="w-[90%] md:w-[85%] aspect-video relative drop-shadow-2xl">
@@ -169,7 +165,6 @@
                 </div>
             </div>
 
-            <!-- Right Side: Project Details (Treino Wod) -->
             <div class="w-full lg:w-[40%] bg-[#f7f7f7] flex flex-col justify-center px-8 py-20 lg:p-16 xl:p-24 min-h-[100svh]">
                 <div class="max-w-md mx-auto w-full flex flex-col items-center lg:items-center text-center">
                     
@@ -206,8 +201,6 @@
             </div>
         </section>
 
-
-        <!-- Horizontal Scroll Projects Section -->
         <section id="work-section" class="relative w-full z-10 bg-transparent overflow-hidden">
             <div id="work-pin-container" class="h-[100svh] flex flex-col justify-center w-full relative">
                 
@@ -215,14 +208,10 @@
                     <div class="flex items-center gsap-reveal w-full pr-6 md:pr-10">
                         <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
                         <h2 class="text-sm font-bold uppercase tracking-widest text-seb-black">More Selected Work</h2>
-                        
-                        <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">
-                            (SCROLL)
-                        </div>
+                        <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">(SCROLL)</div>
                     </div>
                 </div>
 
-                <!-- Unified GSAP Slider Wrapper -->
                 <div id="slider-wrapper" class="w-full overflow-visible mt-10 pl-6 md:pl-10">
                     <div id="work-slider" class="flex flex-row flex-nowrap gap-6 md:gap-16 w-max items-center pb-10 pt-10 pr-10 md:px-0">
 
@@ -453,6 +442,9 @@
             </div>
         </section>
 
+        <!-- Reduced Spacer to reveal "Visual Experience Builder" in light background before footer -->
+        <div class="h-[15vh] md:h-[20vh] w-full pointer-events-none bg-transparent"></div>
+
         <!-- Footer -->
         <footer id="contact" class="px-6 md:px-10 py-16 md:py-24 min-h-[85vh] flex flex-col justify-between relative z-20 bg-[#0a0a0a] text-white overflow-hidden pointer-events-none">
             
@@ -460,7 +452,7 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start w-full relative z-10 pointer-events-auto">
                 
-                <div class="flex flex-col mb-16 md:mb-0" data-parallax="-40">
+                <div class="flex flex-col mb-16 md:mb-0">
                     <span class="uppercase tracking-widest text-[10px] md:text-xs font-bold mb-6 text-gray-500 pointer-events-none">Have an idea?</span>
                     <button onclick="openSocialModal()" class="group block text-[5.5rem] md:text-[6.5rem] leading-[0.8] font-black tracking-tighter uppercase hover:text-seb-red transition-colors duration-300 text-left cursor-pointer pointer-events-auto focus:outline-none">
                         <span class="block pointer-events-none">Let's</span>
@@ -471,7 +463,8 @@
                     </button>
                 </div>
 
-                <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12 pointer-events-auto" data-parallax="-20">
+                <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12 pointer-events-auto">
+                    <!-- FIX: Removed the "modal-link" class from these footer buttons so they don't disappear! -->
                     <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">MAIL</span>
@@ -504,49 +497,54 @@
 
     </main>
 
-    <!-- Back to Top Arrow -->
     <button id="back-to-top" class="fixed bottom-10 right-6 md:right-10 z-[50] p-4 md:p-5 bg-[#0a0a0a] text-white border border-white/20 rounded-full opacity-0 pointer-events-none transition-all duration-300 hover:bg-white hover:text-black shadow-2xl pointer-events-auto focus:outline-none">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 
     <!-- NEW SOCIAL OVERLAY MODAL -->
-    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none">
-        <div id="modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer transition-opacity"></div>
+    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         
-        <button id="modal-close" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-10 cursor-pointer focus:outline-none">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90">
+        <!-- Backdrop - FIXED: Removed pointer-events-auto so it becomes unclickable when the modal is closed -->
+        <div id="modal-backdrop" onclick="closeSocialModal()" class="absolute inset-0 bg-[#0a0a0a]/90 backdrop-blur-md cursor-pointer"></div>
+        
+        <!-- Close Button - FIXED: Removed pointer-events-auto -->
+        <button id="modal-close" onclick="closeSocialModal()" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-20 cursor-pointer focus:outline-none">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90 pointer-events-none">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
 
-        <div class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6">
-            <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">MAIL</span>
+        <!-- Container - FIXED: Removed pointer-events-none and added close action for clicking empty space -->
+        <div onclick="closeSocialModal()" class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6 cursor-pointer">
+            
+            <!-- Links - FIXED: Added stopPropagation so clicking the button doesn't trigger the container's close action, and removed pointer-events-auto -->
+            <a href="mailto:hello@example.com" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">MAIL</span>
             </a>
             
-            <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">PHONE</span>
+            <a href="tel:+123456789" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">PHONE</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">INSTAGRAM</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">LINKEDIN</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">EXPERIMENTAL</span>
             </a>
         </div>
     </div>
@@ -568,22 +566,18 @@
                 imgEl.classList.add('hidden');
             }
             
-            // 1. Reset ALL thumbnails to inactive (Dim opacity + Grayscale)
             const thumbs = document.querySelectorAll('.thumb-btn');
             thumbs.forEach(t => {
                 t.classList.add('opacity-60', 'border-transparent');
                 t.classList.remove('border-seb-black');
                 
-                // Force inactive images back to grayscale
                 const img = t.querySelector('img');
                 if(img) img.classList.add('grayscale');
             });
             
-            // 2. Set the CLICKED thumbnail to active (Full brightness + Full Color)
             btn.classList.remove('opacity-60', 'border-transparent');
             btn.classList.add('border-seb-black');
             
-            // Remove grayscale from the active clicked image
             const clickedImg = btn.querySelector('img');
             if(clickedImg) clickedImg.classList.remove('grayscale');
         }
@@ -591,18 +585,23 @@
         if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
-        const lenis = new Lenis({
-            duration: 1.8, 
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-            smoothWheel: true, 
-            wheelMultiplier: 1,
-            touchMultiplier: 2
-        });
+        // FIX: Wrapped Lenis in a try...catch block to prevent fatal script crashes!
+        try {
+            window.lenis = new Lenis({
+                duration: 1.8, 
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                smoothWheel: true, 
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+            });
 
-        lenis.stop();
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-        gsap.ticker.lagSmoothing(0, 0);
+            window.lenis.stop();
+            window.lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
+            gsap.ticker.lagSmoothing(0, 0);
+        } catch(error) {
+            console.warn("Lenis smooth scrolling failed to load. Defaulting to native scroll.", error);
+        }
 
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
@@ -622,16 +621,15 @@
             }
         });
         backToTopBtn.addEventListener('click', () => {
-            lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            if (window.lenis) window.lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
         });
 
         gsap.registerPlugin(ScrollTrigger);
 
-        // FIX: Start paused so it waits for the page to load, ensuring Lenis knows the page height!
         const masterTl = gsap.timeline({
             paused: true,
             onComplete: () => {
-                lenis.start(); 
+                if (window.lenis) window.lenis.start(); 
                 ScrollTrigger.refresh();
             }
         });
@@ -647,7 +645,6 @@
             { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=0.8"
         );
 
-        // FIX: Fire the animation only when the browser confirms the document is fully loaded
         window.addEventListener('load', () => {
             masterTl.play();
         });
@@ -752,41 +749,53 @@
         }
 
         const socialModal = document.getElementById('social-modal');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const modalCloseBtn = document.getElementById('modal-close');
-        const modalLinks = document.querySelectorAll('.modal-link');
+        
+        // FIX: specifically target ONLY the links inside the modal!
+        const modalLinks = socialModal ? socialModal.querySelectorAll('.modal-link') : []; 
 
         window.openSocialModal = function() {
-            lenis.stop(); 
-            document.body.classList.add('modal-open');
-            socialModal.classList.remove('pointer-events-none');
+            if(typeof lenis !== 'undefined' && window.lenis) window.lenis.stop(); 
+            document.body.classList.add('modal-open'); 
             
-            // Re-activate clicks when open
-            socialModal.classList.add('pointer-events-auto');
+            // Let the JS handle turning it clickable
+            if(socialModal) {
+                socialModal.classList.remove('pointer-events-none');
+                socialModal.classList.add('pointer-events-auto');
 
-            gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
-            gsap.fromTo(modalLinks, 
-                { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
-                { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
-            );
+                // NEW: Animate the navigation bar up and fade it out
+                gsap.to("nav", { yPercent: -100, opacity: 0, duration: 0.3, ease: "power2.inOut" });
+
+                gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
+                if(modalLinks.length) {
+                    gsap.fromTo(modalLinks, 
+                        { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
+                        { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
+                    );
+                }
+            }
         };
 
         window.closeSocialModal = function() {
-            document.body.classList.remove('modal-open');
-            gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
-            gsap.to(socialModal, { 
-                opacity: 0, duration: 0.2, delay: 0.1, ease: "power2.in", 
-                onComplete: () => {
-                    // Instantly block clicks when hidden
-                    socialModal.classList.add('pointer-events-none');
-                    socialModal.classList.remove('pointer-events-auto');
-                    lenis.start();
-                } 
-            });
-        };
+            document.body.classList.remove('modal-open'); 
+            
+            // NEW: Bring the navigation bar back down and fade it in
+            gsap.to("nav", { yPercent: 0, opacity: 1, duration: 0.3, ease: "power2.out", delay: 0.2 });
 
-        modalCloseBtn.addEventListener('click', closeSocialModal);
-        modalBackdrop.addEventListener('click', closeSocialModal);
+            if(modalLinks.length) {
+                gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
+            }
+            if(socialModal) {
+                gsap.to(socialModal, { 
+                    opacity: 0, duration: 0.2, delay: 0.1, ease: "power2.in", 
+                    onComplete: () => {
+                        // Turn it fully unclickable when hidden
+                        socialModal.classList.add('pointer-events-none');
+                        socialModal.classList.remove('pointer-events-auto');
+                        if(typeof lenis !== 'undefined' && window.lenis) window.lenis.start();
+                    } 
+                });
+            }
+        };
 
     </script>
 </body>

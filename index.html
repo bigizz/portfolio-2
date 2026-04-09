@@ -15,8 +15,8 @@
     <!-- GSAP Core & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
-    <!-- Lenis for Buttery Smooth Scrolling (FIXED CDN LINK) -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <!-- Lenis for Buttery Smooth Scrolling -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -30,10 +30,10 @@
                     },
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-                        script: ['"Alex Brush"', 'cursive'],
+                        script: ['"Alex Brush"', 'cursive']
                     },
                     cursor: {
-                        'none': 'none',
+                        'none': 'none'
                     }
                 }
             }
@@ -87,7 +87,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Marquee Animation CSS added back in */
+        /* Marquee Animation */
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -117,7 +117,7 @@
     <div class="cursor-outline hidden md:block"></div>
 
     <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[100] pointer-events-none">
-        <a href="#" onclick="event.preventDefault(); lenis.scrollTo(0, {duration: 1.5});" class="pointer-events-auto px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg">
+        <a href="#" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo(0, {duration: 1.5});" class="pointer-events-auto px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg">
             <img src="bigiz.gif" alt="Bigiz Logo" class="h-4 md:h-5 w-auto object-contain">
         </a>
 
@@ -125,18 +125,17 @@
             <span class="px-5 py-1.5 rounded-full text-xs font-bold tracking-widest text-white">Anass Biyguise <span class="uppercase">— Visual Experience Builder</span></span>
         </div>
 
-        <a href="#work-section" onclick="event.preventDefault(); lenis.scrollTo('#work-section');" class="pointer-events-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
+        <a href="#work-section" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo('#work-section');" class="pointer-events-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
             <div class="w-2 h-2 bg-seb-red rounded-full animate-pulse"></div> 
             Selected Works
         </a>
     </nav>
 
-    <!-- Faded Video Backdrop specifically for the Hero (Scrolls away as you move down) -->
+    <!-- Faded Video Backdrop specifically for the Hero -->
     <div class="absolute top-0 left-0 w-full h-[100svh] z-[-3] bg-black overflow-hidden pointer-events-none">
         <video 
             id="hero-video"
             src="hero.mp4" 
-            autoplay 
             loop 
             muted 
             playsinline
@@ -145,7 +144,7 @@
         <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
     </div>
 
-    <!-- Background Layer (Opacity & Color Controlled seamlessly by GSAP ScrollTrigger) -->
+    <!-- Background Layer -->
     <div id="fixed-background" class="fixed top-0 left-0 w-full h-full z-[-2]"></div>
 
     <div class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[-1] pointer-events-none">
@@ -159,20 +158,17 @@
     <main class="w-full relative">
 
         <section id="hero" class="min-h-[100svh] flex flex-col justify-center items-center px-6 md:px-10 text-center relative z-10 bg-transparent">
-            
             <div class="relative flex flex-col items-center justify-center w-full z-10">
                 <div class="absolute bottom-full w-[150vw] sm:w-max flex justify-center pb-6 md:pb-10 lg:pb-12 pointer-events-none">
-                    <video id="signature-anim" src="anass.webm" autoplay loop muted playsinline preload="auto" class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain relative z-10 -mb-2 md:-mb-6 lg:-mb-8 mix-blend-screen"></video>
+                    <video id="signature-anim" src="anass.webm" muted playsinline class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain relative z-10 -mb-2 md:-mb-6 lg:-mb-8 mix-blend-screen"></video>
                 </div>
                 
-                <!-- THE SPACER -->
                 <h1 class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-center uppercase opacity-0 select-none pointer-events-none my-0">
                     Visual<br>
                     Experience<br>
                     Builder
                 </h1>
 
-                <!-- BOTTOM ABSOLUTE: Description & Arrow -->
                 <div class="absolute top-full flex flex-col items-center w-[90vw] md:w-max pt-8 md:pt-12">
                     <h2 class="hero-fade text-[13px] sm:text-[14px] md:text-sm lg:text-base font-light tracking-[0.2em] uppercase text-seb-red max-w-2xl leading-relaxed mt-0">
                         Based in Casablanca<br>
@@ -180,8 +176,7 @@
                         and Motion Design
                     </h2>
 
-                    <!-- Clickable Animated Arrow -->
-                    <button onclick="lenis.scrollTo('#work-section', {offset: 0})" class="hero-fade mt-8 md:mt-12 animate-bounce cursor-pointer z-20 focus:outline-none group pointer-events-auto">
+                    <button onclick="if(window.lenis) window.lenis.scrollTo('#work-section', {offset: 0})" class="hero-fade mt-8 md:mt-12 animate-bounce cursor-pointer z-20 focus:outline-none group pointer-events-auto">
                         <div class="p-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white shadow-lg group-hover:bg-seb-red group-hover:border-seb-red transition-all group-hover:scale-110">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -198,7 +193,6 @@
             </div>
         </section>
 
-        <!-- Marquee Break -->
         <div class="gsap-reveal py-10 bg-seb-black text-white overflow-hidden z-20 relative pointer-events-none">
             <div class="marquee-container">
                 <div class="marquee-content text-4xl md:text-5xl font-black uppercase tracking-tighter">
@@ -207,25 +201,17 @@
             </div>
         </div>
 
-        <!-- Horizontal Scroll Projects Section -->
         <section id="work-section" class="relative w-full z-10 bg-transparent overflow-hidden">
-            <!-- Pinned Container -->
             <div id="work-pin-container" class="h-[100svh] flex flex-col justify-center w-full">
                 
-                <!-- Fixed Header for Works -->
                 <div class="w-full absolute top-[15%] left-0 px-6 md:px-10 z-20 pointer-events-none">
                     <div class="flex items-center gsap-reveal w-full pr-6 md:pr-10">
                         <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
                         <h2 class="text-sm font-bold uppercase tracking-widest text-black">Selected Work</h2>
-                        
-                        <!-- Fixed (SCROLL) text -->
-                        <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">
-                            (SCROLL)
-                        </div>
+                        <div class="ml-auto text-xs font-bold uppercase tracking-widest text-seb-red">(SCROLL)</div>
                     </div>
                 </div>
 
-                <!-- Unified GSAP Slider Wrapper -->
                 <div id="slider-wrapper" class="w-full overflow-visible mt-10 pl-6 md:pl-10">
                     <div id="work-slider" class="flex flex-row flex-nowrap gap-6 md:gap-16 w-max items-center pb-10 pt-10 pr-10 md:px-0">
 
@@ -463,9 +449,7 @@
         <section id="about" class="px-6 md:px-10 py-10 relative z-20 bg-transparent text-seb-black min-h-[80svh] flex flex-col justify-center pointer-events-none">
             <div class="container mx-auto max-w-[70rem] relative">
                 
-                <!-- Perfectly Centered Rotating Avatar (Resized) -->
                 <div class="absolute -top-10 right-0 md:-top-10 md:-right-4 w-28 h-28 md:w-40 md:h-40 z-30 flex items-center justify-center gsap-reveal pointer-events-none">
-                    <!-- Rotating Text Ring -->
                     <div class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite]">
                         <svg viewBox="0 0 100 100" class="w-full h-full text-seb-black overflow-visible opacity-80">
                             <path id="path-about-badge" d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="transparent" />
@@ -476,13 +460,11 @@
                             </text>
                         </svg>
                     </div>
-                    <!-- Transparent Logo Image -->
                     <div class="w-[80%] h-[80%] relative z-10 flex items-center justify-center">
                         <img src="logo.gif" alt="Bigiz Logo" class="w-full h-full object-contain transition-all duration-500">
                     </div>
                 </div>
 
-                <!-- Content -->
                 <div id="about-content" class="gsap-reveal flex flex-col justify-center max-w-3xl pt-16 md:pt-0 relative z-20 pointer-events-auto">
                     <div class="py-4 w-full">
                         <div class="flex items-center mb-6 pointer-events-none">
@@ -496,7 +478,6 @@
                             I partner with forward-thinking brands to create digital experiences that are not only visually striking but also deeply engaging and intuitive.
                         </p>
                         
-                        <!-- Experience Lines -->
                         <div id="experience-list" class="w-full mb-10 pointer-events-none">
                             <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Experience</h3>
                             <div class="flex flex-col w-full border-b border-black/10">
@@ -539,13 +520,10 @@
         <!-- Footer -->
         <footer id="contact" class="px-6 md:px-10 py-16 md:py-24 min-h-[85vh] flex flex-col justify-between relative z-20 bg-[#0a0a0a] text-white overflow-hidden pointer-events-none">
             
-            <!-- Hidden Interactive Grid (Logo Shapes) -->
             <div id="footer-grid" class="absolute inset-0 grid w-full h-full z-0 pointer-events-none"></div>
 
-            <!-- Main Footer Content -->
             <div class="flex flex-col md:flex-row justify-between items-start w-full relative z-10 pointer-events-auto">
                 
-                <!-- Left Side: Text -->
                 <div class="flex flex-col mb-16 md:mb-0">
                     <span class="uppercase tracking-widest text-[10px] md:text-xs font-bold mb-6 text-gray-500 pointer-events-none">Have an idea?</span>
                     <button onclick="openSocialModal()" class="group block text-[5.5rem] md:text-[6.5rem] leading-[0.8] font-black tracking-tighter uppercase hover:text-seb-red transition-colors duration-300 text-left cursor-pointer pointer-events-auto focus:outline-none">
@@ -557,29 +535,23 @@
                     </button>
                 </div>
 
-                <!-- Right Side: Social Buttons vertically aligned -->
                 <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12 pointer-events-auto">
-                    
                     <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">MAIL</span>
                     </a>
-                    
                     <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">PHONE</span>
                     </a>
-                    
                     <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
                     </a>
-                    
                     <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
                     </a>
-                    
                     <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
                         <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
@@ -592,139 +564,130 @@
                     <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-500">Made by me</span>
                 </div>
             </div>
-        </footer>
-
-    </main>
-
-    <!-- Back to Top Arrow -->
-    <button id="back-to-top" class="fixed bottom-10 right-6 md:right-10 z-[50] p-4 md:p-5 bg-[#0a0a0a] text-white border border-white/20 rounded-full opacity-0 pointer-events-none transition-all duration-300 hover:bg-white hover:text-black shadow-2xl pointer-events-auto focus:outline-none">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button id="back-to-top" class="fixed bottom-10 right-6 md:right-10 z-[50] p-4 md:p-5 bg-[#0a0a0a] text-white border border-white/20 rounded-full opacity-0 pointer-events-none transition-all duration-300 hover:bg-white hover:text-black shadow-2xl focus:outline-none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 
-    <!-- NEW SOCIAL OVERLAY MODAL (FIXED ALL POINTER EVENTS) -->
-    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none">
+    <!-- NEW SOCIAL OVERLAY MODAL -->
+    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
         
-        <!-- Backdrop (No hardcoded pointer-events) -->
-        <div id="modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer transition-opacity"></div>
+        <!-- Backdrop - FIXED: Removed pointer-events-auto so it becomes unclickable when the modal is closed -->
+        <div id="modal-backdrop" onclick="closeSocialModal()" class="absolute inset-0 bg-[#0a0a0a]/90 backdrop-blur-md cursor-pointer"></div>
         
-        <!-- Close Button -->
-        <button id="modal-close" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-10 cursor-pointer focus:outline-none">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90">
+        <!-- Close Button - FIXED: Removed pointer-events-auto -->
+        <button id="modal-close" onclick="closeSocialModal()" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-20 cursor-pointer focus:outline-none">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90 pointer-events-none">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
         </button>
 
-        <div class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6">
+        <!-- Container - FIXED: Removed pointer-events-none and added close action for clicking empty space -->
+        <div onclick="closeSocialModal()" class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6 cursor-pointer">
             
-            <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">MAIL</span>
+            <!-- Links - FIXED: Added stopPropagation so clicking the button doesn't trigger the container's close action, and removed pointer-events-auto -->
+            <a href="mailto:hello@example.com" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">MAIL</span>
             </a>
             
-            <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">PHONE</span>
+            <a href="tel:+123456789" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">PHONE</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">INSTAGRAM</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">LINKEDIN</span>
             </a>
             
-            <a href="#" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
+            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
+                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">EXPERIMENTAL</span>
             </a>
-
         </div>
     </div>
 
     <script>
-        // --- 0. Smooth Scrolling Setup (Lenis) ---
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
+        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
         window.scrollTo(0, 0);
 
-        const lenis = new Lenis({
-            duration: 1.5,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 0.8,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
-        });
+        try {
+            window.lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 0.8,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            });
 
-        lenis.stop();
+            window.lenis.stop();
+            window.lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
+            gsap.ticker.lagSmoothing(0, 0);
+        } catch(error) {
+            console.warn("Lenis smooth scrolling failed to load. Defaulting to native scroll.", error);
+        }
 
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-        gsap.ticker.lagSmoothing(0, 0);
-
-        // --- 1. Custom Cursor Logic ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
-        const isHoverable = window.matchMedia('(hover: hover)').matches;
-
-        if (isHoverable) {
+        if (window.matchMedia('(hover: hover)').matches) {
             window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+                const posX = e.clientX; const posY = e.clientY;
+                if(cursorDot) { cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`; }
+                if(cursorOutline) { cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" }); }
             });
         }
 
-        // --- 2. Nav Headline & Back-to-Top Observer Logic ---
         const navHeadline = document.getElementById('nav-headline');
         const heroSection = document.getElementById('hero');
         const backToTopBtn = document.getElementById('back-to-top');
 
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
-            const heroHeight = heroSection.offsetHeight;
+            const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
 
-            if (scrollPosition > (heroHeight * 0.6)) {
-                navHeadline.classList.remove('nav-hidden');
-                navHeadline.classList.add('nav-visible');
-            } else {
-                navHeadline.classList.add('nav-hidden');
-                navHeadline.classList.remove('nav-visible');
+            if (navHeadline) {
+                if (scrollPosition > (heroHeight * 0.6)) {
+                    navHeadline.classList.remove('nav-hidden'); navHeadline.classList.add('nav-visible');
+                } else {
+                    navHeadline.classList.add('nav-hidden'); navHeadline.classList.remove('nav-visible');
+                }
             }
 
-            if (scrollPosition > window.innerHeight * 1.5) {
-                backToTopBtn.style.opacity = '1';
-                backToTopBtn.style.pointerEvents = 'auto';
-            } else {
-                backToTopBtn.style.opacity = '0';
-                backToTopBtn.style.pointerEvents = 'none';
+            if (backToTopBtn) {
+                if (scrollPosition > window.innerHeight * 1.5) {
+                    backToTopBtn.style.opacity = '1'; backToTopBtn.style.pointerEvents = 'auto';
+                } else {
+                    backToTopBtn.style.opacity = '0'; backToTopBtn.style.pointerEvents = 'none';
+                }
             }
         });
 
-        backToTopBtn.addEventListener('click', () => {
-            lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-        });
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                if (window.lenis) window.lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            });
+        }
 
-        // --- 3. GSAP Master Animations ---
         gsap.registerPlugin(ScrollTrigger);
 
         const introTl = gsap.timeline({
             paused: true, 
             onComplete: () => {
-                lenis.start(); 
+                if (window.lenis) window.lenis.start(); 
                 ScrollTrigger.refresh(); 
             }
         });
@@ -751,8 +714,18 @@
             onStart: () => {
                 const sigVideo = document.getElementById('signature-anim');
                 if(sigVideo) {
-                    sigVideo.currentTime = 0; 
-                    sigVideo.play();
+                    try {
+                        sigVideo.muted = true;
+                        if (sigVideo.readyState > 0) {
+                            sigVideo.currentTime = 0; 
+                        }
+                        let playPromise = sigVideo.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => console.log("Signature video blocked/unsupported:", error));
+                        }
+                    } catch(err) {
+                        console.log("Signature video synchronous error caught:", err);
+                    }
                 }
             }
         }, "-=0.6")
@@ -778,210 +751,171 @@
             }
         }
 
+        setTimeout(startSiteAnimation, 1500);
+
         if (bgVideo) {
             bgVideo.addEventListener('playing', startSiteAnimation);
-            if (bgVideo.readyState >= 3) {
+            bgVideo.addEventListener('error', startSiteAnimation); 
+            bgVideo.addEventListener('loadeddata', startSiteAnimation);
+            
+            try {
+                const playPromise = bgVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch((error) => {
+                        console.warn("Background video blocked/unsupported:", error);
+                        startSiteAnimation();
+                    });
+                }
+            } catch(error) {
+                console.warn("Synchronous background video error caught:", error);
                 startSiteAnimation();
             }
+            
+            if (bgVideo.readyState >= 3) { startSiteAnimation(); }
         }
-        setTimeout(startSiteAnimation, 4000);
 
-        // B. Responsive Horizontal Scroll Logic
         let workSlider = document.getElementById("work-slider");
-        let scrollTween = gsap.to(workSlider, {
-            x: () => -(workSlider.scrollWidth - window.innerWidth),
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#work-section",
-                pin: true,
-                start: "top top",
-                end: () => "+=" + workSlider.scrollWidth,
-                scrub: 1,
-                invalidateOnRefresh: true
-            }
-        });
-
-        gsap.utils.toArray(".project-card").forEach((card) => {
-            const inner = card.querySelector('.card-inner');
-            gsap.fromTo(inner, 
-                { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
-                {
-                    opacity: 1, scale: 1, ease: "none",
-                    scrollTrigger: {
-                        trigger: card,
-                        containerAnimation: scrollTween,
-                        start: "left 85%",
-                        end: "left 10%",
-                        scrub: true,
-                    }
+        if (workSlider) {
+            let scrollTween = gsap.to(workSlider, {
+                x: () => -(workSlider.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#work-section",
+                    pin: true,
+                    start: "top top",
+                    end: () => "+=" + workSlider.scrollWidth,
+                    scrub: 1,
+                    invalidateOnRefresh: true
                 }
-            );
-        });
+            });
 
-        // A. Seamless Background Color Engine 
+            gsap.utils.toArray(".project-card").forEach((card) => {
+                const inner = card.querySelector('.card-inner');
+                gsap.fromTo(inner, 
+                    { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
+                    {
+                        opacity: 1, scale: 1, ease: "none",
+                        scrollTrigger: { trigger: card, containerAnimation: scrollTween, start: "left 85%", end: "left 10%", scrub: true }
+                    }
+                );
+            });
+        }
+
         gsap.to("#fixed-background", {
-            opacity: 1,
-            backgroundColor: "#e5e5e5",
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom center",
-                scrub: true
-            }
+            opacity: 1, backgroundColor: "#e5e5e5", ease: "none",
+            scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom center", scrub: true }
         });
 
-        // D. Scroll Triggered Storytelling 
         gsap.utils.toArray(".gsap-reveal").forEach(element => {
             gsap.fromTo(element, 
                 { autoAlpha: 0, y: 80, scale: 0.85 },
-                {
-                    autoAlpha: 1, y: 0, scale: 1, duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 95%", 
-                        end: "top 65%",   
-                        scrub: 1,         
-                        toggleActions: "play reverse play reverse" 
-                    }
-                }
+                { autoAlpha: 1, y: 0, scale: 1, duration: 1, ease: "power2.out", scrollTrigger: { trigger: element, start: "top 95%", end: "top 65%", scrub: 1, toggleActions: "play reverse play reverse" } }
             );
         });
 
-        // E. Experience List Animation
         gsap.fromTo(".exp-line", 
             { autoAlpha: 0, x: -30 }, 
-            { 
-                autoAlpha: 1, x: 0, stagger: 0.1, ease: "power2.out",
-                scrollTrigger: {
-                    trigger: "#about-content", 
-                    start: "top 95%",          
-                    end: "top 65%",            
-                    scrub: 1                   
-                }
-            }
+            { autoAlpha: 1, x: 0, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: "#about-content", start: "top 95%", end: "top 65%", scrub: 1 } }
         );
 
-        // --- 4. Footer Playful Grid Interaction ---
         const footerElement = document.getElementById('contact');
         const footerGrid = document.getElementById('footer-grid');
         
         if (footerElement && footerGrid) {
-            let footerGridCols = 0;
-            let footerGridRows = 0;
-            let footerCellArray = [];
+            let footerGridCols = 0; let footerGridRows = 0; let footerCellArray = [];
 
             function initFooterGrid() {
-                footerGrid.innerHTML = '';
-                footerCellArray = [];
+                footerGrid.innerHTML = ''; footerCellArray = [];
                 const cellSize = window.innerWidth < 768 ? 40 : 60; 
-                
                 footerGridCols = Math.ceil(footerElement.offsetWidth / cellSize);
                 footerGridRows = Math.ceil(footerElement.offsetHeight / cellSize);
-                
                 footerGrid.style.gridTemplateColumns = `repeat(${footerGridCols}, 1fr)`;
                 footerGrid.style.gridTemplateRows = `repeat(${footerGridRows}, 1fr)`;
-                
                 const totalCells = footerGridCols * footerGridRows;
                 
                 for (let i = 0; i < totalCells; i++) {
                     const cell = document.createElement('div');
                     cell.className = 'w-full h-full flex items-center justify-center';
-                    cell.innerHTML = `
-                        <svg viewBox="0 0 100 100" class="w-[50%] h-[50%] opacity-0 transform">
-                            <path fill="currentColor" d="M 0 0 L 100 0 A 50 50 0 0 1 0 0 Z M 0 100 L 100 100 A 50 50 0 0 0 0 100 Z" />
-                        </svg>
-                    `;
-                    footerGrid.appendChild(cell);
-                    footerCellArray.push(cell.querySelector('svg'));
+                    cell.innerHTML = `<svg viewBox="0 0 100 100" class="w-[50%] h-[50%] opacity-0 transform"><path fill="currentColor" d="M 0 0 L 100 0 A 50 50 0 0 1 0 0 Z M 0 100 L 100 100 A 50 50 0 0 0 0 100 Z" /></svg>`;
+                    footerGrid.appendChild(cell); footerCellArray.push(cell.querySelector('svg'));
                 }
             }
 
             footerElement.addEventListener('mousemove', (e) => {
                 const rect = footerElement.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
+                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
                 const actualCellWidth = footerElement.offsetWidth / footerGridCols;
                 const actualCellHeight = footerElement.offsetHeight / footerGridRows;
-                
-                const col = Math.floor(x / actualCellWidth);
-                const row = Math.floor(y / actualCellHeight);
-                
+                const col = Math.floor(x / actualCellWidth); const row = Math.floor(y / actualCellHeight);
                 const index = row * footerGridCols + col;
                 
                 if (index >= 0 && index < footerCellArray.length) {
                     const svg = footerCellArray[index];
-                    
                     if (!svg.dataset.animating) {
-                        svg.dataset.animating = "true";
-                        gsap.killTweensOf(svg);
-                        
+                        svg.dataset.animating = "true"; gsap.killTweensOf(svg);
                         gsap.fromTo(svg, 
                             { opacity: 1, scale: 0, rotation: gsap.utils.random([-90, 90]), color: "#E60000" },
                             { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }
                         );
-                        
                         gsap.to(svg, {
                             opacity: 0, scale: 0.2, rotation: gsap.utils.random([-180, 180]), color: "#333333", duration: 1, delay: 0.3, ease: "power2.inOut",
-                            onComplete: () => {
-                                svg.dataset.animating = "";
-                            }
+                            onComplete: () => { svg.dataset.animating = ""; }
                         });
                     }
                 }
             });
 
             window.addEventListener('resize', () => {
-                clearTimeout(window.resizeTimer);
-                window.resizeTimer = setTimeout(() => {
-                    initFooterGrid();
-                }, 300);
+                clearTimeout(window.resizeTimer); window.resizeTimer = setTimeout(() => { initFooterGrid(); }, 300);
             });
 
             initFooterGrid();
         }
 
-        // --- 6. Social Overlay Modal Logic ---
         const socialModal = document.getElementById('social-modal');
-        const modalLinks = document.querySelectorAll('.modal-link');
-        const modalBackdrop = document.getElementById('modal-backdrop');
-        const modalCloseBtn = document.getElementById('modal-close');
+        const modalLinks = socialModal ? socialModal.querySelectorAll('.modal-link') : []; 
 
         window.openSocialModal = function() {
-            lenis.stop(); 
+            if(typeof lenis !== 'undefined' && window.lenis) window.lenis.stop(); 
+            document.body.classList.add('modal-open'); 
             
-            // Re-activate clicks when open
-            socialModal.classList.remove('pointer-events-none');
-            socialModal.classList.add('pointer-events-auto');
+            if(socialModal) {
+                socialModal.classList.remove('pointer-events-none');
+                socialModal.classList.add('pointer-events-auto');
 
-            gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
-            gsap.fromTo(modalLinks, 
-                { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
-                { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
-            );
+                // NEW: Animate the navigation bar up and fade it out
+                gsap.to("nav", { yPercent: -100, opacity: 0, duration: 0.3, ease: "power2.inOut" });
+
+                gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
+                if(modalLinks.length) {
+                    gsap.fromTo(modalLinks, 
+                        { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
+                        { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
+                    );
+                }
+            }
         };
 
         window.closeSocialModal = function() {
-            gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
-            gsap.to(socialModal, { 
-                opacity: 0, 
-                duration: 0.2, 
-                delay: 0.1, 
-                ease: "power2.in", 
-                onComplete: () => {
-                    // Instantly block clicks when hidden
-                    socialModal.classList.add('pointer-events-none');
-                    socialModal.classList.remove('pointer-events-auto');
-                    lenis.start();
-                } 
-            });
+            document.body.classList.remove('modal-open'); 
+
+            // NEW: Bring the navigation bar back down and fade it in
+            gsap.to("nav", { yPercent: 0, opacity: 1, duration: 0.3, ease: "power2.out", delay: 0.2 });
+
+            if(modalLinks.length) {
+                gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
+            }
+            if(socialModal) {
+                gsap.to(socialModal, { 
+                    opacity: 0, duration: 0.2, delay: 0.1, ease: "power2.in", 
+                    onComplete: () => {
+                        socialModal.classList.add('pointer-events-none');
+                        socialModal.classList.remove('pointer-events-auto');
+                        if(typeof lenis !== 'undefined' && window.lenis) window.lenis.start();
+                    } 
+                });
+            }
         };
-
-        modalCloseBtn.addEventListener('click', closeSocialModal);
-        modalBackdrop.addEventListener('click', closeSocialModal);
-
     </script>
 </body>
 </html>
