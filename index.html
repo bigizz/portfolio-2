@@ -716,6 +716,8 @@
                 if(sigVideo) {
                     try {
                         sigVideo.muted = true;
+                        sigVideo.loop = false; // FIX: Explicitly force the video to stop at the end and never loop
+                        
                         if (sigVideo.readyState > 0) {
                             sigVideo.currentTime = 0; 
                         }
