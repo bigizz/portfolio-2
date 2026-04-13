@@ -143,12 +143,12 @@
                 <div class="proj-detail-anim flex flex-row lg:flex-col gap-4 w-full lg:w-24 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
                     
                     
-                    <button onclick="changeMainMedia('image', 'caf-img2.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
-                        <img src="caf-img2.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
+                    <button onclick="changeMainMedia('image', 'caf-img2.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
+                        <img src="caf-img2.png" class="w-full h-full object-cover group-hover:grayscale-0">
                     </button>
-                    
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1180949504?fl=pl&fe=sh', this)" class="thumb-btn group relative w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
-                        <img src="caf-img1.png" class="w-full h-full object-cover group-hover:grayscale-0">
+
+                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1180949504?fl=pl&fe=sh', this)" class="thumb-btn group relative w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
+                        <img src="caf-img1.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
@@ -158,8 +158,8 @@
                 </div>
 
                 <div class="proj-detail-anim flex-1 flex items-center justify-center relative w-full h-[50vh] lg:h-full pb-10 lg:pb-0">
-                    <img id="main-image" src="" alt="pro" class="hidden max-w-[85%] max-h-[85%] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105">
-                    <div id="main-video-wrapper" class="w-[90%] md:w-[85%] aspect-video relative drop-shadow-2xl">
+                    <img id="main-image" src="caf-img2.png" alt="pro" class="max-w-[85%] max-h-[85%] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105">
+                    <div id="main-video-wrapper" class="w-[90%] md:w-[85%] aspect-video relative drop-shadow-2xl hidden">
                         <iframe id="main-video" src="https://player.vimeo.com/video/1180949504?fl=pl&fe=sh" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
                     </div>
                 </div>
