@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Bigiz — Visual Experience Builder</title>
     
     <!-- Google Fonts: Inter for UI, Ballet for the authentic signature style -->
@@ -101,6 +101,63 @@
 
         .gsap-reveal { visibility: hidden; }
 
+/* Ensure touch targets are minimum 48x48px for accessibility */
+@media (pointer: coarse) {
+    .touch-target {
+        min-height: 48px;
+        min-width: 48px;
+    }
+}
+
+/* Prevent excessive scaling on mobile */
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    /* Adjust hero text size for mobile */
+    #fixed-title-text,
+    .hero-fade h1 {
+        font-size: calc(1.5rem + 3vw) !important;
+    }
+
+    /* Adjust section padding for mobile */
+    .px-6 {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    .px-10 {
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+
+    /* Adjust work section cards for mobile */
+    .project-card {
+        width: 80vw !important;
+        max-width: 90vw !important;
+    }
+
+    /* Adjust nav headline for mobile */
+    #nav-headline {
+        gap: 0.5rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+
+    #nav-headline span {
+        font-size: 0.75rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+
+    /* Adjust footer links for mobile */
+    footer a {
+        width: 100% !important;
+        max-width: none !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+/* Modal specific body state */
         /* Modal specific body state */
         body.modal-open { cursor: auto !important; }
         body.modal-open .cursor-dot, body.modal-open .cursor-outline { display: none !important; }
