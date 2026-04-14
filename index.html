@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bigiz — Visual Experience Builder</title>
     
     <!-- Google Fonts: Inter for UI, Ballet for the authentic signature style -->
@@ -101,63 +101,6 @@
 
         .gsap-reveal { visibility: hidden; }
 
-/* Ensure touch targets are minimum 48x48px for accessibility */
-@media (pointer: coarse) {
-    .touch-target {
-        min-height: 48px;
-        min-width: 48px;
-    }
-}
-
-/* Prevent excessive scaling on mobile */
-@media screen and (max-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-
-    /* Adjust hero text size for mobile */
-    #fixed-title-text,
-    .hero-fade h1 {
-        font-size: calc(1.5rem + 3vw) !important;
-    }
-
-    /* Adjust section padding for mobile */
-    .px-6 {
-        padding-left: 1.5rem !important;
-        padding-right: 1.5rem !important;
-    }
-
-    .px-10 {
-        padding-left: 2.5rem !important;
-        padding-right: 2.5rem !important;
-    }
-
-    /* Adjust work section cards for mobile */
-    .project-card {
-        width: 80vw !important;
-        max-width: 90vw !important;
-    }
-
-    /* Adjust nav headline for mobile */
-    #nav-headline {
-        gap: 0.5rem !important;
-        padding: 0.5rem 1rem !important;
-    }
-
-    #nav-headline span {
-        font-size: 0.75rem !important;
-        padding: 0.25rem 0.5rem !important;
-    }
-
-    /* Adjust footer links for mobile */
-    footer a {
-        width: 100% !important;
-        max-width: none !important;
-        margin-bottom: 1rem !important;
-    }
-}
-
-/* Modal specific body state */
         /* Modal specific body state */
         body.modal-open { cursor: auto !important; }
         body.modal-open .cursor-dot, body.modal-open .cursor-outline { display: none !important; }
@@ -284,12 +227,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-armani" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-armani" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-armani" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-armani" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024 • CGI • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Armani</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Giorgio Armani</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -304,12 +247,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-caf" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-caf" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • BRANDING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-caf" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-caf" textLength="213" lengthAdjust="spacingAndGlyphs">• PRINT • 2026 • PRINT • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">CAF</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">AFCON 2025</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -324,7 +267,7 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-ice" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-ice" textLength="213" lengthAdjust="spacingAndGlyphs">• UI/UX DESIGN • 2026 • UI/UX DESIGN • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-ice" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-ice" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • 3D ANIMATION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -344,7 +287,7 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-axa" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-axa" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D RENDERING • 2026 • 3D RENDERING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-axa" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-axa" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION • ONGOING • BRANDING • ONGOING </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -364,12 +307,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-lrp" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-lrp" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION GRAPHICS • 2026 • MOTION GRAPHICS • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-lrp" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-lrp" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024 • CGI • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">LRP</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">LA ROCHE-POSAY</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -384,12 +327,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-vichy" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-vichy" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-vichy" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-vichy" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2024 • 3D ANIMATION • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Vichy</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">VICHY</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -404,12 +347,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-clarre" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-clarre" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • BRANDING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-clarre" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-clarre" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2025 • 3D ANIMATION • 2025 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Clarre</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">CLARRE VEGAN</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -424,12 +367,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-mahindra" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-mahindra" textLength="213" lengthAdjust="spacingAndGlyphs">• UI/UX DESIGN • 2026 • UI/UX DESIGN • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-mahindra" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-mahindra" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2024-2025 • BRANDING • 2024-2025 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Mahindra</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">MAHINDRA</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -444,12 +387,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-taxi" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-taxi" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D RENDERING • 2026 • 3D RENDERING • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-taxi" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-taxi" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2024 • 3D ANIMATION • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Taxi</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">TAXI INZEGAN</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -464,7 +407,7 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-alx" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-alx" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION GRAPHICS • 2026 • MOTION GRAPHICS • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-alx" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-alx" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024-2026 • MOTION • BRANDING • 2024-2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -484,12 +427,12 @@
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-sculptures" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-sculptures" textLength="213" lengthAdjust="spacingAndGlyphs">• ART DIRECTION • 2026 • ART DIRECTION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
+                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-sculptures" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-sculptures" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D • ONGOING • MOTION • BRANDING • ONGOING </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Sculptures</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
+                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">SCULPTURES</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
                         </div>
@@ -531,35 +474,47 @@
                             <h2 class="text-sm font-bold uppercase tracking-widest text-black">About</h2>
                         </div>
                         <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-4 pointer-events-none">
-                            I am a visual experience builder based in Casablanca, specializing in 3D rendering, brand identity, and motion design. My approach is rooted in functional aesthetics and brutalist simplicity.
-                        </p>
+I’m a graphic designer based in Casablanca, specializing in crafting identities and visuals that make an impact, helping brands connect with their audiences through thoughtful design and creative direction.                        </p>
                         <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-10 pointer-events-none">
-                            I partner with forward-thinking brands to create digital experiences that are not only visually striking but also deeply engaging and intuitive.
-                        </p>
+Outside of work, you’ll find me exploring new media art scene, sketching new ideas.                        </p>
                         
                         <div id="experience-list" class="w-full mb-10 pointer-events-none">
                             <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Experience</h3>
                             <div class="flex flex-col w-full border-b border-black/10">
                                 <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
                                     <div class="flex flex-col pointer-events-none">
-                                        <span class="text-base font-bold text-seb-black">Senior 3D Artist</span>
-                                        <span class="text-xs text-gray-600 mt-1">Creative Studio Agency</span>
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Publicis WBC</span>
                                     </div>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2024 — Pres</span>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2024 — Present</span>
                                 </div>
                                 <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
                                     <div class="flex flex-col pointer-events-none">
-                                        <span class="text-base font-bold text-seb-black">Art Director</span>
-                                        <span class="text-xs text-gray-600 mt-1">Mono® Brands</span>
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Disruptia</span>
                                     </div>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2021 — 2024</span>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2024</span>
                                 </div>
                                 <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
                                     <div class="flex flex-col pointer-events-none">
                                         <span class="text-base font-bold text-seb-black">Motion Designer</span>
-                                        <span class="text-xs text-gray-600 mt-1">Visual Engine</span>
+                                        <span class="text-xs text-gray-600 mt-1">Artcoustic</span>
                                     </div>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2018 — 2021</span>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2023</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Neomotion</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2023</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Licence Design Graphique</span>
+                                        <span class="text-xs text-gray-600 mt-1">Art'Com Sup</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2020 — 2023</span>
                                 </div>
                             </div>
                         </div>
@@ -595,25 +550,26 @@
                 </div>
 
                 <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12 pointer-events-auto">
-                    <a href="mailto:hello@example.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                    <!-- FIX: Removed the "modal-link" class from these footer buttons so they don't disappear! -->
+                    <a href="mailto:bekiz.me@gmail.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5 pointer-events-none">MAIL</span>
+                        <span class="font-bold tracking-widest mt-0.5">MAIL</span>
                     </a>
-                    <a href="tel:+123456789" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                    <a href="tel:+212693087105" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5 pointer-events-none">PHONE</span>
+                        <span class="font-bold tracking-widest mt-0.5">PHONE</span>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                    <a href="https://www.instagram.com/bigiz_4d/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5 pointer-events-none">INSTAGRAM</span>
+                        <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                    <a href="https://www.linkedin.com/in/anassbiyguise/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5 pointer-events-none">LINKEDIN</span>
+                        <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+                    <a href="https://bigizz.github.io/bigiz/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5 pointer-events-none">EXPERIMENTAL</span>
+                        <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
                     </a>
                 </div>
             </div>
@@ -648,27 +604,27 @@
 
         <div onclick="closeSocialModal()" class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6 cursor-pointer">
             
-            <a href="mailto:hello@example.com" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+            <a href="mailto:bekiz.me@gmail.com" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                 <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 <span class="font-bold tracking-widest mt-0.5 pointer-events-none">MAIL</span>
             </a>
             
-            <a href="tel:+123456789" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+            <a href="tel:+212693087105" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                 <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 <span class="font-bold tracking-widest mt-0.5 pointer-events-none">PHONE</span>
             </a>
             
-            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+            <a href="https://www.instagram.com/bigiz_4d/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                 <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 <span class="font-bold tracking-widest mt-0.5 pointer-events-none">INSTAGRAM</span>
             </a>
             
-            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+            <a href="https://www.linkedin.com/in/anassbiyguise/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                 <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 <span class="font-bold tracking-widest mt-0.5 pointer-events-none">LINKEDIN</span>
             </a>
             
-            <a href="#" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
+            <a href="https://bigizz.github.io/bigiz/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
                 <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
                 <span class="font-bold tracking-widest mt-0.5 pointer-events-none">EXPERIMENTAL</span>
             </a>
