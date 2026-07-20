@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AXA</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Google Fonts: Inter for UI, Alex Brush for signature style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,7 +101,7 @@
 <body class="selection:bg-seb-red selection:text-white">
 
     <!-- Entrance Curtain -->
-    <div id="entrance-curtain" class="fixed inset-0 w-full h-full z-[10000] bg-seb-black pointer-events-none flex items-center justify-center">
+    <div id="entrance-curtain" class="hidden fixed inset-0 w-full h-full z-[10000] bg-seb-black pointer-events-none flex items-center justify-center">
         <img id="entrance-logo" src="../logo.gif" alt="Loading Logo" class="w-24 md:w-32 object-contain opacity-0">
     </div>
 
@@ -107,7 +109,7 @@
     <div class="cursor-outline hidden md:block"></div>
 
     <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[100] pointer-events-none">
-        <a href="javascript:history.back()" class="pointer-events-auto px-6 py-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-bold tracking-tight hover:bg-black/60 transition-all hover:scale-105 shadow-lg flex items-center gap-2">
+        <a href="../index.html" class="pointer-events-auto px-6 py-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-bold tracking-tight hover:bg-black/60 transition-all hover:scale-105 shadow-lg flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
             Back
         </a>
@@ -142,18 +144,18 @@
                 
                 <div class="proj-detail-anim flex flex-row lg:flex-col gap-4 w-full lg:w-24 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1097831551?fl=pl&fe=sh', this)" class="thumb-btn group relative w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
-                        <img src="axa-img1.png" class="w-full h-full object-cover group-hover:grayscale-0">
+                        <img src="axa-img1.jpg" loading="lazy" class="w-full h-full object-cover group-hover:grayscale-0">
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
                     
-                    <button onclick="changeMainMedia('image', 'axa-img2.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
-                        <img src="axa-img2.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
+                    <button onclick="changeMainMedia('image', 'axa-img2.jpg', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
+                        <img src="axa-img2.jpg" loading="lazy" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
                     </button>
                     
-                    <button onclick="changeMainMedia('image', 'axa-img3.png', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
-                        <img src="axa-img3.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
+                    <button onclick="changeMainMedia('image', 'axa-img3.jpg', this)" class="thumb-btn group w-20 lg:w-full aspect-square bg-white border-2 border-transparent p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none opacity-60 hover:opacity-100">
+                        <img src="axa-img3.jpg" loading="lazy" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
                     </button>
                 </div>
 
@@ -217,11 +219,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 1. Armani -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../armani/armani.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Armani"></a>
+                            <a href="../armani/armani.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Armani"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../armani/armani.png" alt="Armani" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../armani/armani.jpg" alt="Armani" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -237,11 +239,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 2. CAF -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../caf/caf.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View CAF"></a>
+                            <a href="../caf/caf.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View CAF"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../caf/caf.png" alt="CAF" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../caf/caf.jpg" alt="CAF" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -257,11 +259,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 3. ICE -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../ice/ice.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ICE"></a>
+                            <a href="../ice/ice.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ICE"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../ice/ice.png" alt="ICE" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../ice/ice.jpg" alt="ICE" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -277,11 +279,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 4. AXA -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../axa/axa.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View AXA"></a>
+                            <a href="../axa/axa.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View AXA"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../axa/axa.png" alt="AXA" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../axa/axa.jpg" alt="AXA" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -297,11 +299,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 5. LRP -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../lrp/lrp.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View LRP"></a>
+                            <a href="../lrp/lrp.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View LRP"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../lrp/lrp.png" alt="LRP" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../lrp/lrp.jpg" alt="LRP" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -317,11 +319,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 6. Vichy -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../vichy/vichy.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Vichy"></a>
+                            <a href="../vichy/vichy.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Vichy"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../vichy/vichy.png" alt="Vichy" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../vichy/vichy.jpg" alt="Vichy" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -337,11 +339,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 7. Clarre -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../clarre/clarre.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Clarre"></a>
+                            <a href="../clarre/clarre.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Clarre"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../clarre/clarre.png" alt="Clarre" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../clarre/clarre.jpg" alt="Clarre" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -357,11 +359,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 8. Mahindra -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../mahindra/mahindra.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Mahindra"></a>
+                            <a href="../mahindra/mahindra.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Mahindra"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../mahindra/mahindra.png" alt="Mahindra" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../mahindra/mahindra.jpg" alt="Mahindra" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -377,11 +379,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 9. Taxi -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../taxi/taxi.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Taxi"></a>
+                            <a href="../taxi/taxi.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Taxi"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../taxi/taxi.png" alt="Taxi" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../taxi/taxi.jpg" alt="Taxi" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -397,11 +399,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 10. ALX -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../alx/alx.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ALX"></a>
+                            <a href="../alx/alx.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ALX"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../alx/alx.png" alt="ALX" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../alx/alx.jpg" alt="ALX" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -417,11 +419,11 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <!-- 11. Sculptures -->
                         <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../sculptures/sculptures.html" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Sculptures"></a>
+                            <a href="../sculptures/sculptures.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Sculptures"></a>
                             <div class="card-inner block w-full h-full select-none pointer-events-none">
                                 <div class="relative mb-6">
                                     <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../sculptures/sculptures.png" alt="Sculptures" draggable="false" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                                        <img src="../sculptures/sculptures.jpg" alt="Sculptures" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
                                     </div>
                                     <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
                                         <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
@@ -437,6 +439,90 @@ My ongoing work with AXA encompasses a variety of professional design services. 
 
                         <div class="hidden md:block w-[40vw] flex-shrink-0"></div>
 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minimal Spacer to reveal "Visual Experience Builder" cleanly before About section -->
+        <div class="h-[5vh] w-full pointer-events-none bg-transparent"></div>
+
+        <!-- Smaller About Section without glass frame -->
+        <section id="about" class="px-6 md:px-10 py-10 relative z-20 bg-transparent text-seb-black min-h-[80svh] flex flex-col justify-center pointer-events-none">
+            <div class="container mx-auto max-w-[70rem] relative">
+                
+                <div class="absolute -top-10 right-0 md:-top-10 md:-right-4 w-28 h-28 md:w-40 md:h-40 z-30 flex items-center justify-center gsap-reveal pointer-events-none">
+                    <div class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite]">
+                        <svg viewBox="0 0 100 100" class="w-full h-full text-seb-black overflow-visible opacity-80">
+                            <path id="path-about-badge" d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="transparent" />
+                            <text fill="currentColor" font-size="8.5" font-weight="bold" font-family="sans-serif" letter-spacing="2">
+                                <textPath href="#path-about-badge" textLength="260" lengthAdjust="spacingAndGlyphs">
+                                    ANASS BIYGUISE • GRAPHIC DESIGNER •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <div class="w-[80%] h-[80%] relative z-10 flex items-center justify-center">
+                        <img src="../logo.gif" alt="Bigiz Logo" class="w-full h-full object-contain transition-all duration-500">
+                    </div>
+                </div>
+
+                <div id="about-content" class="gsap-reveal flex flex-col justify-center max-w-3xl pt-16 md:pt-0 relative z-20 pointer-events-auto">
+                    <div class="py-4 w-full">
+                        <div class="flex items-center mb-6 pointer-events-none">
+                            <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
+                            <h2 class="text-sm font-bold uppercase tracking-widest text-black">About</h2>
+                        </div>
+                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-4 pointer-events-none">
+Anass Biyguise is a graphic designer specializing in crafting identities and visuals that make an impact, helping brands connect with their audiences through thoughtful design and creative direction.                        </p>
+                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-10 pointer-events-none">
+Outside of work, you’ll find me exploring new media art scene, and sketching new ideas.                        </p>
+                        
+                        <div id="experience-list" class="w-full mb-10 pointer-events-none">
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Experience</h3>
+                            <div class="flex flex-col w-full border-b border-black/10">
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Publicis WBC</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2024 — Present</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Disruptia</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2024</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Motion Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Artcoustic</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2023</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Graphic Designer</span>
+                                        <span class="text-xs text-gray-600 mt-1">Neomotion</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2023</span>
+                                </div>
+                                <div class="exp-line flex justify-between items-center py-4 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
+                                    <div class="flex flex-col pointer-events-none">
+                                        <span class="text-base font-bold text-seb-black">Licence Design Graphique</span>
+                                        <span class="text-xs text-gray-600 mt-1">Art'Com Sup</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-seb-red pointer-events-none">2020 — 2023</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex flex-wrap gap-4">
+                           <button onclick="openSocialModal()" class="px-6 py-3 bg-seb-red text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-black hover:text-white transition-all duration-300 hover:scale-105 shadow-lg pointer-events-auto focus:outline-none">Let's Collaborate</button>
+                           <a href="../cv.pdf" download="cv.pdf" target="_blank" class="px-6 py-3 bg-seb-black text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-red hover:text-white transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-lg pointer-events-auto focus:outline-none">Download CV</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -646,7 +732,18 @@ My ongoing work with AXA encompasses a variety of professional design services. 
         );
 
         window.addEventListener('load', () => {
-            masterTl.play();
+            const curtain = document.getElementById('entrance-curtain');
+            if (curtain) curtain.style.display = 'none';
+            if (window.lenis) window.lenis.start();
+            ScrollTrigger.refresh();
+            gsap.fromTo(["main", "nav", "#fixed-title-text", ".absolute.top-0"],
+                { y: 80 },
+                { y: 0, duration: 1.4, ease: "expo.out", clearProps: "transform", onComplete: () => ScrollTrigger.refresh() }
+            );
+            gsap.fromTo(".proj-detail-anim",
+                { autoAlpha: 0, y: 40 },
+                { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" }
+            );
         });
 
         let workSlider = document.getElementById("work-slider");
@@ -686,7 +783,12 @@ My ongoing work with AXA encompasses a variety of professional design services. 
             );
         });
 
-        gsap.utils.toArray("[data-parallax]").forEach(el => {
+        
+        gsap.fromTo(".exp-line", 
+            { autoAlpha: 0, x: -30 }, 
+            { autoAlpha: 1, x: 0, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: "#about-content", start: "top 95%", end: "top 65%", scrub: 1 } }
+        );
+gsap.utils.toArray("[data-parallax]").forEach(el => {
             const yValue = parseFloat(el.getAttribute("data-parallax"));
             gsap.fromTo(el, 
                 { y: yValue }, 
