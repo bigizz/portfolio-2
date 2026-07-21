@@ -125,17 +125,17 @@
     <div class="cursor-outline hidden md:block"></div>
 
     <nav id="main-nav" class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[100] pointer-events-none">
-        <a href="#" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo(0, {duration: 1.5});" class="pointer-events-auto px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg">
-            <img src="bigiz.gif" alt="Bigiz Logo" class="h-4 md:h-5 w-auto object-contain">
+        <a href="#" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo(0, {duration: 1.5});" class="pointer-events-auto w-40 md:w-44 py-2.5 px-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg text-xs font-bold tracking-widest text-white uppercase whitespace-nowrap">
+            ANASS BIYGUISE
         </a>
 
-        <div id="nav-headline" class="absolute left-1/2 -translate-x-1/2 nav-hidden hidden md:flex items-center gap-1 p-1 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg pointer-events-none">
-            <span class="px-5 py-1.5 rounded-full text-xs font-bold tracking-widest text-white">Anass Biyguise <span class="uppercase">— Visual Experience Builder</span></span>
-        </div>
+        <a href="#" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo(0, {duration: 1.5});" class="pointer-events-auto absolute left-1/2 -translate-x-1/2 w-10 h-10 md:w-11 md:h-11 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center hover:bg-black/60 transition-all hover:scale-105 shadow-lg">
+            <img src="bigiz.gif" alt="Bigiz Logo" class="h-6 md:h-7 w-auto object-contain">
+        </a>
 
-        <a href="#work-section" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo('#work-section');" class="pointer-events-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
+        <a href="#work-section" onclick="event.preventDefault(); if(window.lenis) window.lenis.scrollTo('#work-section');" class="pointer-events-auto flex items-center justify-center gap-2 w-40 md:w-44 py-2.5 px-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer whitespace-nowrap">
             <div class="w-2 h-2 bg-seb-red rounded-full animate-pulse"></div> 
-            Selected Works
+            Selected Work
         </a>
     </nav>
 
@@ -156,7 +156,7 @@
     <!-- Background Layer -->
     <div id="fixed-background" class="fixed top-0 left-0 w-full h-full z-[-2]"></div>
 
-    <div class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[-1] pointer-events-none">
+    <div class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[-1] pointer-events-none px-6 md:px-16">
         <h1 id="fixed-title-text" class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-white mix-blend-difference text-center uppercase">
             Visual<br>
             Experience<br>
@@ -166,13 +166,10 @@
 
     <main class="w-full relative">
 
-        <section id="hero" class="min-h-[100svh] flex flex-col justify-center items-center px-6 md:px-10 text-center relative z-10 bg-transparent">
+        <section id="hero" class="min-h-[100svh] flex flex-col justify-center items-center px-6 md:px-16 text-center relative z-10 bg-transparent">
             <div class="relative flex flex-col items-center justify-center w-full z-10">
                 
-                <!-- FIX: Swapped video tag for an img tag targeting the new GIF -->
-                <div class="absolute bottom-full w-[150vw] sm:w-max flex justify-center pb-6 md:pb-10 lg:pb-12 pointer-events-none">
-                    <img id="signature-anim" src="anass.gif" alt="Anass Biyguise Signature" fetchpriority="high" class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain relative z-10 -mb-2 md:-mb-6 lg:-mb-8 mix-blend-multiply">
-                </div>
+
                 
                 <h1 class="text-[15vw] lg:text-[11vw] leading-[0.8] font-black tracking-tighter text-center uppercase opacity-0 select-none pointer-events-none my-0">
                     Visual<br>
@@ -181,11 +178,7 @@
                 </h1>
 
                 <div class="absolute top-full flex flex-col items-center w-[90vw] md:w-max pt-8 md:pt-12">
-                    <h2 class="hero-fade text-[13px] sm:text-[14px] md:text-sm lg:text-base font-light tracking-[0.2em] uppercase text-seb-red max-w-2xl leading-relaxed mt-0">
-                        Based in Casablanca<br>
-                        Specializing in 3D, Branding<br>
-                        and Motion Design
-                    </h2>
+
 
                     <button onclick="if(window.lenis) window.lenis.scrollTo('#work-section', {offset: 0})" class="hero-fade mt-8 md:mt-12 animate-bounce cursor-pointer z-20 focus:outline-none group pointer-events-auto">
                         <div class="p-3 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white shadow-lg group-hover:bg-seb-red group-hover:border-seb-red transition-all group-hover:scale-110">
@@ -676,7 +669,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
             });
         }
 
-        const navHeadline = document.getElementById('nav-headline');
         const heroSection = document.getElementById('hero');
         const backToTopBtn = document.getElementById('back-to-top');
         const mainNav = document.getElementById('main-nav');
@@ -684,14 +676,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
             const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
-
-            if (navHeadline) {
-                if (scrollPosition > (heroHeight * 0.6)) {
-                    navHeadline.classList.remove('nav-hidden'); navHeadline.classList.add('nav-visible');
-                } else {
-                    navHeadline.classList.add('nav-hidden'); navHeadline.classList.remove('nav-visible');
-                }
-            }
 
             if (backToTopBtn) {
                 if (scrollPosition > window.innerHeight * 1.5) {
@@ -733,20 +717,7 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
             ease: "expo.out",
             clearProps: "transform" 
         }, "-=0.8")
-        .from("#signature-anim", {
-            autoAlpha: 0,
-            y: 20,
-            duration: 0.8,
-            ease: "power2.out",
-            onStart: () => {
-                const sigImg = document.getElementById('signature-anim');
-                if(sigImg) {
-                    // Force the GIF to restart from the beginning by appending a timestamp cache-buster
-                    const currentSrc = sigImg.src.split('?')[0];
-                    sigImg.src = currentSrc + '?' + new Date().getTime();
-                }
-            }
-        }, "-=0.6")
+
         .from("#fixed-title-text", {
             duration: 1.5,
             scale: 0.9,
@@ -769,10 +740,14 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
             });
         });
 
-        // Check if returning from a project page
+        // Check if returning from a project page or landing directly on the work section
         const returnScrollY = sessionStorage.getItem('returnScrollY');
-        if (returnScrollY !== null) {
-            sessionStorage.removeItem('returnScrollY');
+        const isScrollToWork = window.location.hash === '#work-section';
+
+        if (returnScrollY !== null || isScrollToWork) {
+            if (returnScrollY !== null) {
+                sessionStorage.removeItem('returnScrollY');
+            }
             sessionStorage.setItem('hasVisited', '1');
             // Hide preloader instantly, skip intro
             gsap.set('#preloader', { display: 'none' });
@@ -784,25 +759,46 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
 
             function restoreScroll() {
                 if (window.lenis) window.lenis.start();
-                const targetY = parseFloat(returnScrollY);
 
-                // Retry until ScrollTrigger has set up the pinned section properly
-                // (body needs enough scroll height for the target position to be valid)
-                let attempts = 0;
-                function tryScroll() {
-                    ScrollTrigger.refresh();
-                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                    if (maxScroll >= targetY || attempts > 20) {
-                        window.scrollTo(0, targetY);
-                        if (window.lenis) window.lenis.scrollTo(targetY, { immediate: true, force: true });
-                        // Final refresh after scroll is applied
-                        setTimeout(function() { ScrollTrigger.refresh(); }, 50);
-                    } else {
-                        attempts++;
-                        requestAnimationFrame(tryScroll);
+                if (returnScrollY !== null) {
+                    const targetY = parseFloat(returnScrollY);
+
+                    // Retry until ScrollTrigger has set up the pinned section properly
+                    // (body needs enough scroll height for the target position to be valid)
+                    let attempts = 0;
+                    function tryScroll() {
+                        ScrollTrigger.refresh();
+                        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                        if (maxScroll >= targetY || attempts > 20) {
+                            window.scrollTo(0, targetY);
+                            if (window.lenis) window.lenis.scrollTo(targetY, { immediate: true, force: true });
+                            // Final refresh after scroll is applied
+                            setTimeout(function() { ScrollTrigger.refresh(); }, 50);
+                        } else {
+                            attempts++;
+                            requestAnimationFrame(tryScroll);
+                        }
                     }
+                    requestAnimationFrame(tryScroll);
+                } else if (isScrollToWork) {
+                    let attempts = 0;
+                    function tryScrollToWork() {
+                        ScrollTrigger.refresh();
+                        const element = document.getElementById('work-section');
+                        if (element || attempts > 20) {
+                            if (window.lenis) {
+                                window.lenis.scrollTo('#work-section', { immediate: false, duration: 1.2 });
+                            } else if (element) {
+                                window.scrollTo({ top: element.offsetTop, behavior: 'smooth' });
+                            }
+                            setTimeout(function() { ScrollTrigger.refresh(); }, 50);
+                        } else {
+                            attempts++;
+                            requestAnimationFrame(tryScrollToWork);
+                        }
+                    }
+                    requestAnimationFrame(tryScrollToWork);
                 }
-                requestAnimationFrame(tryScroll);
             }
 
             // pageshow fires on both normal load AND bfcache restore
