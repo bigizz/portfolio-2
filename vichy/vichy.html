@@ -677,7 +677,7 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
                 touchMultiplier: 2,
             });
 
-            window.lenis.stop();
+            window.lenis.start();
             window.lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
             gsap.ticker.lagSmoothing(0, 0);

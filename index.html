@@ -751,7 +751,7 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
             if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
             // Only force to top on fresh visits - returning visitors restore their position below
             if (!sessionStorage.getItem('returnScrollY')) { window.scrollTo(0, 0); }
-            window.lenis.stop(); // stopped until intro finishes (or skipped on return)
+            window.lenis.start(); // Enable scroll immediately from the very beginning
 
             window.lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
@@ -797,6 +797,9 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
 
         const introTl = gsap.timeline({
             paused: true, 
+            onStart: () => {
+                if (window.lenis) window.lenis.start();
+            },
             onComplete: () => {
                 if (window.lenis) window.lenis.start(); 
                 ScrollTrigger.refresh();
@@ -806,29 +809,28 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
 
         introTl.to("#preloader", {
             yPercent: -100,
-            duration: 1.2,
-            ease: "expo.inOut",
-            delay: 0.5 
+            duration: 1.0,
+            ease: "expo.inOut"
         })
         .fromTo(["main", "#main-nav", "#fixed-title-text", ".absolute.top-0"], {
-            y: 80,
+            y: 60,
         }, {
             y: 0,
-            duration: 1.2,
+            duration: 1.0,
             ease: "expo.out",
             clearProps: "transform" 
-        }, "-=0.8")
+        }, "-=0.7")
 
         .from("#fixed-title-text", {
-            duration: 1.5,
-            scale: 0.9,
+            duration: 1.2,
+            scale: 0.95,
             opacity: 0,
             ease: "power4.out"
-        }, "-=1")
+        }, "-=0.8")
         .fromTo(".hero-fade", 
-            { autoAlpha: 0, y: 30 },
-            { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.2, ease: "power3.out" },
-            "-=1.2"
+            { autoAlpha: 0, y: 20 },
+            { autoAlpha: 1, y: 0, duration: 1.0, stagger: 0.15, ease: "power3.out" },
+            "-=0.9"
         );
 
         const bgVideo = document.getElementById('hero-video');
@@ -853,9 +855,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
             // Hide preloader instantly, skip intro
             gsap.set('#preloader', { display: 'none' });
             siteStarted = true;
-            // Jump the intro timeline to its end state so GSAP clears all
-            // transforms and opacity overrides it set on main, nav, hero, etc.
-            // Without this, position:fixed children (pinned work section) break.
             introTl.progress(1);
 
             function restoreScroll() {
@@ -864,8 +863,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
                 if (returnScrollY !== null) {
                     const targetY = parseFloat(returnScrollY);
 
-                    // Retry until ScrollTrigger has set up the pinned section properly
-                    // (body needs enough scroll height for the target position to be valid)
                     let attempts = 0;
                     function tryScroll() {
                         ScrollTrigger.refresh();
@@ -873,7 +870,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
                         if (maxScroll >= targetY || attempts > 20) {
                             window.scrollTo(0, targetY);
                             if (window.lenis) window.lenis.scrollTo(targetY, { immediate: true, force: true });
-                            // Final refresh after scroll is applied
                             setTimeout(function() { ScrollTrigger.refresh(); }, 50);
                         } else {
                             attempts++;
@@ -902,7 +898,6 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
                 }
             }
 
-            // pageshow fires on both normal load AND bfcache restore
             window.addEventListener('pageshow', restoreScroll);
             if (document.readyState === 'complete') restoreScroll();
         }
@@ -910,11 +905,18 @@ Outside of work, you’ll find me exploring new media art scene, and sketching n
         function startSiteAnimation() {
             if (!siteStarted) {
                 siteStarted = true;
+                if (window.lenis) window.lenis.start();
                 introTl.play();
             }
         }
 
-        setTimeout(startSiteAnimation, 1500);
+        // Start entrance animation immediately when page script executes / DOM ready
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            requestAnimationFrame(startSiteAnimation);
+        } else {
+            document.addEventListener('DOMContentLoaded', startSiteAnimation);
+        }
+        setTimeout(startSiteAnimation, 200);
 
         if (bgVideo) {
             bgVideo.addEventListener('playing', startSiteAnimation);
