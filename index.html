@@ -19,6 +19,7 @@
     <meta property="og:image" content="armani/armani.jpg">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preload" as="image" href="logo-hero-poster.webp" type="image/webp">
 
     <!-- Google Fonts: Inter for clean grotesque type, Space Mono for crisp editorial metadata -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -155,22 +156,22 @@
         /* Editorial Marquee */
         @keyframes ticker {
             0% {
-                transform: translateX(0);
+                transform: translate3d(0, 0, 0);
             }
 
             100% {
-                transform: translateX(-50%);
+                transform: translate3d(-50%, 0, 0);
             }
         }
 
         .animate-ticker {
             display: inline-flex;
             white-space: nowrap;
-            animation: ticker 32s linear infinite;
+            animation: ticker 26s linear infinite !important;
             will-change: transform;
         }
 
-        .ticker-wrap:hover .animate-ticker {
+        .ticker-wrap:active .animate-ticker {
             animation-play-state: paused;
         }
 
@@ -257,11 +258,6 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
-            }
-
-            .animate-ticker {
-                animation: none !important;
-                transform: none !important;
             }
 
             .gsap-fade-in {
@@ -419,7 +415,7 @@
                 <!-- Hero Logo & Centered Subtitle -->
                 <div class="w-full flex-1 min-h-0 flex flex-col items-center justify-center text-center py-0.5 sm:py-1">
                     <div id="hero-logo-wrapper" class="w-full flex-1 min-h-0 flex items-center justify-center">
-                        <video id="hero-logo-video" autoplay loop muted playsinline disablepictureinpicture disableremoteplayback
+                        <video id="hero-logo-video" autoplay loop muted playsinline preload="auto" disablepictureinpicture disableremoteplayback
                             poster="logo-hero-poster.webp"
                             class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none pointer-events-none"
                             aria-label="Anass Biyguise">
@@ -430,8 +426,8 @@
                     </div>
                     <script>
                         (function () {
-                            // Safari does not support alpha transparency in WebM (it paints a black background).
-                            // Detect Safari or iOS and use the crystal-clear transparent animated WebP.
+                            // Safari on iOS/macOS does not render alpha transparency in WebM (shows opaque black box).
+                            // Detect Safari and immediately use the optimized 564KB transparent animated WebP.
                             var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
                                 (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
                             var wrapper = document.getElementById('hero-logo-wrapper');
@@ -440,11 +436,11 @@
                             } else {
                                 var v = document.getElementById('hero-logo-video');
                                 if (v) {
-                                    v.play().catch(function () {
+                                    v.addEventListener('error', function () {
                                         if (wrapper && !wrapper.querySelector('img')) {
                                             wrapper.innerHTML = '<img src="logo-hero.webp" alt="Anass Biyguise" class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none">';
                                         }
-                                    });
+                                    }, true);
                                 }
                             }
                         })();
@@ -1009,8 +1005,11 @@
                 <div id="desktop-live-preview"
                     class="live-preview-box hidden lg:block fixed z-40 w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
                     aria-hidden="true">
-                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3">
-                        <img id="preview-image" src="armani/armani.jpg" alt="" class="w-full h-full object-cover">
+                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3 flex items-center justify-center">
+                        <img id="preview-image" src="" alt="" class="w-full h-full object-cover transition-opacity duration-200 opacity-0">
+                        <div id="preview-loading" class="hidden absolute inset-0 flex items-center justify-center bg-brand-surface-alt">
+                            <span class="w-5 h-5 rounded-full border-2 border-brand-accent border-t-transparent animate-spin"></span>
+                        </div>
                         <div
                             class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brand-dark/80 backdrop-blur-sm text-[10px] font-mono text-white">
                             <span id="preview-category">3D / CGI</span>
@@ -2083,14 +2082,26 @@
         // Live Desktop Hover Preview Tooltip (Heyefi style)
         const previewBox = document.getElementById('desktop-live-preview');
         const previewImg = document.getElementById('preview-image');
+        const previewLoading = document.getElementById('preview-loading');
         const previewCat = document.getElementById('preview-category');
         const previewTitle = document.getElementById('preview-title');
         const previewMeta = document.getElementById('preview-meta');
         const cursorIndicator = document.getElementById('cursor-indicator');
 
+        // Preload all 11 project thumbnails immediately into browser cache for 0ms instant display
+        const PROJECT_THUMBNAILS = [
+            'armani/armani.jpg', 'caf/caf.jpg', 'ice/ice.jpg', 'axa/axa.jpg',
+            'lrp/lrp.jpg', 'vichy/vichy.jpg', 'clarre/clarre.jpg', 'mahindra/mahindra.jpg',
+            'taxi/taxi.jpg', 'alx/alx.jpg', 'sculptures/sculptures.jpg'
+        ];
+        PROJECT_THUMBNAILS.forEach(url => {
+            const preloader = new Image();
+            preloader.src = url;
+        });
+
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             let mouseX = 0, mouseY = 0;
-            let targetX = 0, targetY = 0;
+            let currentTargetImage = '';
 
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
@@ -2134,10 +2145,36 @@
                     const year = row.getAttribute('data-year');
                     const deliverables = row.getAttribute('data-deliverables');
 
-                    if (previewImg) previewImg.src = img;
                     if (previewTitle) previewTitle.textContent = title;
                     if (previewMeta) previewMeta.textContent = `${client} // ${year}`;
                     if (previewCat) previewCat.textContent = deliverables;
+
+                    if (previewImg && img) {
+                        currentTargetImage = img;
+                        const loader = new Image();
+                        loader.src = img;
+
+                        if (loader.complete && loader.naturalWidth > 0) {
+                            previewImg.src = img;
+                            previewImg.classList.remove('opacity-0');
+                            previewImg.classList.add('opacity-100');
+                            if (previewLoading) previewLoading.classList.add('hidden');
+                        } else {
+                            // Don't show stale previous project image while loading
+                            previewImg.classList.remove('opacity-100');
+                            previewImg.classList.add('opacity-0');
+                            if (previewLoading) previewLoading.classList.remove('hidden');
+
+                            loader.onload = () => {
+                                if (currentTargetImage === img) {
+                                    previewImg.src = img;
+                                    previewImg.classList.remove('opacity-0');
+                                    previewImg.classList.add('opacity-100');
+                                    if (previewLoading) previewLoading.classList.add('hidden');
+                                }
+                            };
+                        }
+                    }
 
                     if (previewBox) previewBox.classList.add('is-visible');
                     if (cursorIndicator) cursorIndicator.classList.add('hovering');
