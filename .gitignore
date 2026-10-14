@@ -1,0 +1,7 @@
+# Master renders and large raw media (>100MB exceeds GitHub limits)
+*.mov
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+*.tmp

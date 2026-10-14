@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Roche-Posay</title>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <title>La Roche-Posay — Anass Biyguise</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <!-- Google Fonts: Inter for UI, Alex Brush for signature style -->
+
+    <!-- Google Fonts: Inter for UI, Space Mono for crisp editorial metadata -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
+    <!-- CDNs -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- GSAP Core & ScrollTrigger -->
@@ -25,27 +29,46 @@
             theme: {
                 extend: {
                     colors: {
-                        'seb-red': '#E60000', 
-                        'seb-black': '#111111',
-                        'seb-gray': '#e5e5e5',
-                        'seb-light': '#f4f4f4'
+                        'brand-bg': '#F5F4F0',
+                        'brand-card': '#FFFFFF',
+                        'brand-dark': '#111111',
+                        'brand-charcoal': '#1C1B19',
+                        'brand-muted': '#5E5D59',
+                        'brand-subtle': '#8A8882',
+                        'brand-border': 'rgba(17, 17, 17, 0.12)',
+                        'brand-accent': '#FF3E13',
+                        'brand-accent-hover': '#E02E05',
+                        'brand-surface-alt': '#ECEAE4',
                     },
                     fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-                        script: ['"Alex Brush"', 'cursive']
+                        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                        mono: ['"Space Mono"', '"JetBrains Mono"', 'Menlo', 'Consolas', 'monospace']
                     },
-                    cursor: {
-                        'none': 'none'
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.18em'
                     }
                 }
             }
         }
     </script>
     <style>
+        :root {
+            --color-bg: #F5F4F0;
+            --color-text: #111111;
+            --color-accent: #FF3E13;
+            --color-border: rgba(17, 17, 17, 0.12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            cursor: none; 
-            background-color: #ffffff; 
-            color: #111111;
+            cursor: default; 
+            background-color: var(--color-bg); 
+            color: var(--color-text);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -58,900 +81,1152 @@
         .lenis.lenis-stopped { overflow: hidden; }
         .lenis.lenis-scrolling iframe { pointer-events: none; }
 
-        /* Custom Cursor */
-        .cursor-dot, .cursor-outline {
-            position: fixed;
-            top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 99999; 
+        /* Custom Interactive Cursor (Desktop) */
+        @media (hover: hover) and (pointer: fine) {
+            .custom-cursor {
+                position: fixed;
+                top: 0; left: 0;
+                width: 20px; height: 20px;
+                border-radius: 50%;
+                background-color: rgba(255, 62, 19, 0.2);
+                border: 1px solid rgba(255, 62, 19, 0.8);
+                pointer-events: none;
+                z-index: 99999;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+                opacity: 0;
+            }
+            .custom-cursor.active { opacity: 1; }
+            .custom-cursor.hovering {
+                width: 48px; height: 48px;
+                background-color: rgba(255, 62, 19, 0.15);
+                border-color: #FF3E13;
+            }
+        }
+
+        /* Live Hover Preview Tooltip (Desktop) */
+        .live-preview-box {
             pointer-events: none;
+            opacity: 0;
+            transform: translateY(12px) scale(0.96);
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: #E60000;
+        .live-preview-box.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 1px solid rgba(230, 0, 0, 0.5);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
+
+        /* Filter Tab Active State */
+        .tab-btn[aria-selected="true"] {
+            background-color: #111111;
+            color: #FFFFFF;
+            border-color: #111111;
         }
-        body:has(a:hover) .cursor-outline, body:has(button:hover) .cursor-outline {
-            width: 60px; height: 60px;
-            background-color: rgba(230, 0, 0, 0.15); 
-            border-color: #E60000;
+        .tab-btn[aria-selected="true"] .tab-count {
+            background-color: #FF3E13;
+            color: #FFFFFF;
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        .gsap-reveal { visibility: hidden; }
-        .proj-detail-anim { visibility: hidden; opacity: 0; }
 
-        /* Custom dotted border for accordion mimicking the reference */
-        .border-dotted-custom {
-            border-bottom: 1px dotted rgba(17, 17, 17, 0.3);
-        }
-
-        /* Modal specific body state - Forces native cursor over everything! */
-        body.modal-open { cursor: auto !important; }
-        body.modal-open .cursor-dot, body.modal-open .cursor-outline { display: none !important; }
+        body.modal-open { overflow: hidden; }
     </style>
 </head>
-<body class="selection:bg-seb-red selection:text-white">
+<body class="selection:bg-brand-accent selection:text-white font-sans antialiased bg-brand-bg text-brand-dark min-h-screen flex flex-col">
 
-    <!-- Entrance Curtain -->
-    <div id="entrance-curtain" class="hidden fixed inset-0 w-full h-full z-[10000] bg-seb-black pointer-events-none flex items-center justify-center">
-        <img id="entrance-logo" src="../logo.gif" alt="Loading Logo" class="w-24 md:w-32 object-contain opacity-0">
-    </div>
+    <div id="cursor-indicator" class="custom-cursor hidden md:block"></div>
 
-    <div class="cursor-dot hidden md:block"></div>
-    <div class="cursor-outline hidden md:block"></div>
-
-    <nav class="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-[100] pointer-events-none">
-        <a href="../index.html#work-section" class="pointer-events-auto px-6 py-2 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-bold tracking-tight hover:bg-black/60 transition-all hover:scale-105 shadow-lg flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Back
-        </a>
-
-        <a href="../index.html" class="pointer-events-auto absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center w-10 h-10 md:w-11 md:h-11 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
-            <img src="../bigiz.gif" alt="Bigiz Home" class="h-6 md:h-7 w-auto object-contain">
-        </a>
-
-        <a href="#work-section" onclick="event.preventDefault(); lenis.scrollTo('#work-section');" class="pointer-events-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-black/60 transition-all hover:scale-105 cursor-pointer">
-            <div class="w-2 h-2 bg-seb-red rounded-full animate-pulse pointer-events-none"></div> 
-            <span class="pointer-events-none">Selected Work</span>
-        </a>
-    </nav>
-
-    <!-- Background Layer for Works Section -->
-    <div id="fixed-background" class="fixed top-0 left-0 w-full h-full z-[-2] bg-[#e5e5e5]"></div>
-
-    <!-- Fixed Text Layer behind everything -->
-    <div class="fixed top-0 left-0 w-full h-screen flex justify-center items-center z-[-1] pointer-events-none">
-        <h1 id="fixed-title-text" class="text-[14vw] leading-[0.85] font-black tracking-tighter text-white mix-blend-difference text-center uppercase">
-            Visual<br>
-            Experience<br>
-            Builder
-        </h1>
-    </div>
-
-    <main class="w-full relative">
-
-        <section class="flex flex-col lg:flex-row w-full min-h-[100svh]">
+    <!-- ========================================================================= -->
+    <!-- TOP STICKY NAVIGATION BAR (Matching Homepage Editorial Design) -->
+    <!-- ========================================================================= -->
+    <header class="sticky top-0 z-50 w-full bg-brand-bg/90 backdrop-blur-md border-b border-brand-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
             
-            <div class="w-full lg:w-[60%] bg-[#e3e2de] flex flex-col lg:flex-row p-6 pt-32 lg:p-12 lg:pt-32 gap-6 lg:gap-8 relative lg:sticky lg:top-0 lg:h-[100svh]">
+            <!-- Left: Identity & Live Availability -->
+            <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+                <a href="../index.html" class="group flex items-center gap-2.5 focus:outline-none" aria-label="Anass Biyguise - Back to homepage">
+                    <img src="../logo.gif" alt="Anass Biyguise Monogram"
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-contain bg-brand-dark transition-transform group-hover:scale-105">
+                    <div class="flex flex-col">
+                        <span class="text-xs sm:text-sm font-black tracking-tight uppercase leading-none">Anass Biyguise</span>
+                        <span class="text-[10px] sm:text-[11px] font-mono text-brand-muted tracking-tight flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+                            <span>Available</span>
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Center: Breadcrumb / Back Link to Selected Works -->
+            <div class="flex items-center gap-2">
+                <a href="../index.html#work-section"
+                    class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono font-bold uppercase tracking-wider text-brand-dark hover:border-brand-accent hover:text-brand-accent transition-all shadow-sm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back to Index</span>
+                </a>
+                <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-mono text-brand-muted">
+                    <span>/</span>
+                    <span class="text-brand-dark font-bold uppercase">La Roche-Posay</span>
+                </span>
+            </div>
+
+            <!-- Right: Action Pills -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <a href="#about" onclick="event.preventDefault(); scrollToSection('#about');"
+                    class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase text-brand-dark hover:text-brand-accent transition-colors">
+                    (About)
+                </a>
+
+                <button type="button" onclick="openContactModal()"
+                    class="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-wider uppercase hover:bg-brand-accent transition-all duration-200 shadow-sm focus:outline-none"
+                    aria-label="Open contact information">
+                    <span class="w-2 h-2 rounded-full bg-brand-accent" aria-hidden="true"></span>
+                    <span>Say Hey ↗</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- ========================================================================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================================================================= -->
+    <main class="w-full relative flex-grow">
+
+        <!-- ========================================================================= -->
+        <!-- PROJECT STAGE (Editorial Split View) -->
+        <!-- ========================================================================= -->
+        <section class="flex flex-col lg:flex-row w-full min-h-[calc(100svh-4rem)] sm:min-h-[calc(100svh-5rem)] border-b border-brand-border">
+            
+            <!-- Left: Media Viewer Stage -->
+            <div class="w-full lg:w-[60%] bg-brand-surface-alt flex flex-col lg:flex-row p-6 pt-8 lg:p-12 lg:pt-12 gap-6 lg:gap-8 relative lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] border-b lg:border-b-0 lg:border-r border-brand-border">
                 
-                <div class="proj-detail-anim flex flex-row lg:flex-col gap-4 w-full lg:w-24 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1005604517?fl=pl&fe=sh', this)" class="thumb-btn group relative w-20 lg:w-full aspect-square bg-white border-2 border-seb-black p-1 hover:border-seb-red transition-all flex-shrink-0 focus:outline-none">
-                        <img src="lrp-img1.jpg" loading="lazy" class="w-full h-full object-cover group-hover:grayscale-0">
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <!-- Thumbnails Switcher -->
+                <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
+
+                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1005604517?fl=pl&fe=sh', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
+                        <img src="lrp-img1.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
-                    
-                
                 </div>
 
-                <div class="proj-detail-anim flex-1 flex items-center justify-center relative w-full h-[50vh] lg:h-full pb-10 lg:pb-0">
-                    <img id="main-image" src="" alt="pro" class="hidden max-w-[85%] max-h-[85%] object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-105">
-                    <div id="main-video-wrapper" class="w-[90%] md:w-[85%] aspect-video relative drop-shadow-2xl">
+                <!-- Main Active Media -->
+                <div class="flex-1 flex items-center justify-center relative w-full h-[45vh] lg:h-full pb-6 lg:pb-0">
+                    <img id="main-image" src="" alt="La Roche-Posay visual preview" class="hidden max-w-[90%] max-h-[90%] object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-105 border border-brand-border">
+                    <div id="main-video-wrapper" class=" w-[95%] md:w-[90%] aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border">
                         <iframe id="main-video" src="https://player.vimeo.com/video/1005604517?fl=pl&fe=sh" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
                     </div>
                 </div>
             </div>
 
-            <div class="w-full lg:w-[40%] bg-[#f7f7f7] flex flex-col justify-center px-8 py-20 lg:p-16 xl:p-24 min-h-[100svh]">
-                <div class="max-w-md mx-auto w-full flex flex-col items-center lg:items-center text-center">
+            <!-- Right: Editorial Project Info & Metadata -->
+            <div class="w-full lg:w-[40%] bg-brand-bg flex flex-col justify-center px-6 py-12 sm:px-10 lg:p-14 xl:p-16">
+                <div class="max-w-lg mx-auto w-full flex flex-col items-start text-left">
                     
-                    <div data-parallax="60" class="w-full">
-                        <h1 class="proj-detail-anim text-5xl md:text-[4rem] xl:text-[5rem] leading-[0.85] font-black uppercase tracking-tighter mb-8 text-seb-black">
-                            La Roche-Posay<br>
+                    <!-- Discipline Badge -->
+                    <div class="mb-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
+                            <span>3D / CGI Packshot</span>
+                        </div>
+                    </div>
+
+                    <!-- Project Title -->
+                    <div class="w-full">
+                        <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
+                            La Roche-Posay
                         </h1>
                     </div>
                     
-                    <div data-parallax="35" class="w-full">
-                        <p class="proj-detail-anim text-gray-600 font-light text-sm md:text-base leading-relaxed mb-12">
-                            
-I produced a captivating summer CGI teaser for La Roche-Posay's sun protection line. This project focused on visually highlighting the benefits and essence of their sun products                    </div>
+                    <!-- Project Story -->
+                    <div class="w-full">
+                        <p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">
+                            I produced a captivating summer CGI teaser for La Roche-Posay's sun protection line. This project focused on visually highlighting the benefits and essence of their sun products through photorealistic product renders, high-speed fluid dynamics, and clinical lighting precision.
+                        </p>
+                    </div>
 
-                    <div data-parallax="15" class="w-full border-t border-dotted border-gray-400 mb-10 text-left">
-                        <div class="proj-detail-anim py-5 border-dotted-custom flex justify-between items-center group cursor-default hover:pl-2 transition-all">
-                            <span class="text-xs font-bold uppercase tracking-widest text-seb-black">Client</span>
-                            <span class="text-xs font-medium text-gray-500 group-hover:text-seb-red transition-colors">La Roche-Posay</span>
+                    <!-- Metadata Table -->
+                    <div class="w-full border-t border-brand-border mb-8 text-left">
+                        <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
+                            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Client</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">La Roche-Posay</span>
                         </div>
                         
-                        <div class="proj-detail-anim py-5 border-dotted-custom flex justify-between items-center group cursor-default hover:pl-2 transition-all">
-                            <span class="text-xs font-bold uppercase tracking-widest text-seb-black">Year</span>
-                            <span class="text-xs font-medium text-gray-500 group-hover:text-seb-red transition-colors">2024</span>
+                        <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
+                            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Year</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">2024</span>
                         </div>
 
-                        <div class="proj-detail-anim py-5 border-dotted-custom flex justify-between items-center group cursor-default hover:pl-2 transition-all">
-                            <span class="text-xs font-bold uppercase tracking-widest text-seb-black">Deliverables</span>
-                            <span class="text-xs font-medium text-gray-500 group-hover:text-seb-red transition-colors text-right">CGI</span>
+                        <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
+                            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Deliverables</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">CGI Video & Luxury Packshot</span>
                         </div>
+                    </div>
+
+                    <!-- Action Trigger: Smooth Scroll into In-Page Work Section & Inquire Modal -->
+                    <div class="flex flex-wrap items-center gap-3 w-full">
+                        <a href="#work-section" onclick="event.preventDefault(); scrollToSection('#work-section');"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase tracking-wider hover:bg-brand-accent transition-all duration-200">
+                            <span>Explore All Works</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                        </a>
+                        <button type="button" onclick="openContactModal()"
+                            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-brand-border text-brand-dark text-xs font-mono font-bold uppercase tracking-wider hover:border-brand-accent hover:text-brand-accent transition-all duration-200">
+                            <span>Inquire Project</span>
+                            <span>↗</span>
+                        </button>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <section id="work-section" class="relative w-full z-10 bg-transparent overflow-hidden">
-            <div id="work-pin-container" class="h-[100svh] flex flex-col justify-center w-full relative">
-                
-                <div class="w-full absolute top-14 sm:top-20 md:top-[10%] left-0 px-4 sm:px-6 md:px-10 z-20 pointer-events-none">
-                    <div class="flex items-center justify-between gsap-reveal w-full">
-                        <div class="flex items-center min-w-0">
-                            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-seb-red rounded-full mr-2 sm:mr-3 animate-pulse flex-shrink-0"></div>
-                            <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider sm:tracking-widest text-seb-black truncate">More Selected Work</h2>
-                        </div>
-                        <div class="text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest text-seb-red flex-shrink-0 ml-2">(SCROLL)</div>
+        <!-- ========================================================================= -->
+        <!-- WORK SECTION: Interactive Filter + Selected Work Index (Identical to Homepage) -->
+        <!-- ========================================================================= -->
+        <section id="work-section" class="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Section Header & Controls Bar -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 sm:pb-8 border-b border-brand-border">
+
+                <div>
+                    <div class="flex items-center gap-2.5 mb-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
+                        <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-brand-dark">
+                            Selected Work Index
+                        </h2>
+                    </div>
+                    <p class="text-sm sm:text-base text-brand-muted">
+                        Browse by discipline or explore the full interactive project index below.
+                    </p>
+                </div>
+
+                <!-- Controls: Discipline Tabs -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div role="tablist" aria-label="Filter works by discipline"
+                        class="flex items-center gap-1.5 p-1 bg-brand-surface-alt rounded-full border border-brand-border overflow-x-auto no-scrollbar max-w-full">
+                        <button type="button" role="tab" id="tab-all" aria-selected="true"
+                            onclick="setDisciplineFilter('all')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>All</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">11</span>
+                        </button>
+                        <button type="button" role="tab" id="tab-branding" aria-selected="false"
+                            onclick="setDisciplineFilter('branding')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>Branding</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">4</span>
+                        </button>
+                        <button type="button" role="tab" id="tab-motion" aria-selected="false"
+                            onclick="setDisciplineFilter('motion')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>Motion</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">5</span>
+                        </button>
+                        <button type="button" role="tab" id="tab-3d" aria-selected="false"
+                            onclick="setDisciplineFilter('3d')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>3D</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">7</span>
+                        </button>
+                        <button type="button" role="tab" id="tab-print" aria-selected="false"
+                            onclick="setDisciplineFilter('print')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>Print</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">3</span>
+                        </button>
+                        <button type="button" role="tab" id="tab-editing" aria-selected="false"
+                            onclick="setDisciplineFilter('editing')"
+                            class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
+                            <span>Editing</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">5</span>
+                        </button>
                     </div>
                 </div>
 
-                <div id="slider-wrapper" class="w-full overflow-visible mt-12 sm:mt-16 md:mt-10 pl-4 sm:pl-6 md:pl-10 select-none touch-pan-y">
-                    <div id="work-slider" class="flex flex-row flex-nowrap gap-4 sm:gap-6 md:gap-16 w-max items-center pb-6 pt-4 sm:pb-8 sm:pt-6 md:pb-10 md:pt-10 pr-6 sm:pr-10 md:px-0">
+            </div>
 
-                        <!-- 1. Armani -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../armani/armani.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Armani"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../armani/armani.jpg" alt="Armani" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+            <!-- List View with Hover Tooltip Preview -->
+            <div id="work-list-view" class="mt-8 transition-opacity duration-300 relative">
+                <div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">
+
+                    <!-- 01. Giorgio Armani -->
+                    <article data-category="3d editing" data-image="../armani/armani.jpg" data-title="Giorgio Armani"
+                        data-client="Giorgio Armani" data-year="2024" data-deliverables="CGI Luxury Packshot, Lighting"
+                        data-url="../armani/armani.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../armani/armani.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">01.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Giorgio Armani
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D / CGI</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-armani" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-armani" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024 • CGI • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Giorgio Armani</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D / CGI</span>
+                                <span class="text-brand-muted">Giorgio Armani // 2024</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 2. CAF -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../caf/caf.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View CAF"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../caf/caf.jpg" alt="CAF" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 02. AFCON 2025 (CAF) -->
+                    <article data-category="print editing" data-image="../caf/caf.jpg" data-title="AFCON 2025 (CAF)"
+                        data-client="TotalEnergies CAF" data-year="2026" data-deliverables="Official Print Identity, Stadium Collateral"
+                        data-url="../caf/caf.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../caf/caf.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">02.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        AFCON 2025 (CAF)
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Print Collateral</span>
+                                        <span class="text-xs font-mono text-brand-muted">2026</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-caf" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-caf" textLength="213" lengthAdjust="spacingAndGlyphs">• PRINT • 2026 • PRINT • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">AFCON 2025</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Print Collateral</span>
+                                <span class="text-brand-muted">TotalEnergies CAF // 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 3. ICE -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../ice/ice.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ICE"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../ice/ice.jpg" alt="ICE" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 03. ICE -->
+                    <article data-category="branding 3d" data-image="../ice/ice.jpg" data-title="ICE"
+                        data-client="Personal Studio" data-year="2026" data-deliverables="Branding, 3D Typography, Spatial Art"
+                        data-url="../ice/ice.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../ice/ice.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">03.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        ICE
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Branding / 3D</span>
+                                        <span class="text-xs font-mono text-brand-muted">2026</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-ice" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-ice" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2026 • 3D ANIMATION • 2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">ICE</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Branding / 3D</span>
+                                <span class="text-brand-muted">Personal Studio // 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 4. AXA -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../axa/axa.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View AXA"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../axa/axa.jpg" alt="AXA" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 04. AXA -->
+                    <article data-category="branding motion" data-image="../axa/axa.jpg" data-title="AXA"
+                        data-client="AXA Global" data-year="Ongoing" data-deliverables="Motion Identity, Digital Guidelines"
+                        data-url="../axa/axa.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../axa/axa.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">04.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        AXA
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Motion Design</span>
+                                        <span class="text-xs font-mono text-brand-muted">Ongoing</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-axa" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-axa" textLength="213" lengthAdjust="spacingAndGlyphs">• MOTION • ONGOING • BRANDING • ONGOING </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">AXA</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Motion Design</span>
+                                <span class="text-brand-muted">AXA Global // Ongoing</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 5. LRP -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../lrp/lrp.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View LRP"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../lrp/lrp.jpg" alt="LRP" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 05. La Roche-Posay -->
+                    <article data-category="3d" data-image="../lrp/lrp.jpg" data-title="La Roche-Posay"
+                        data-client="La Roche-Posay" data-year="2024" data-deliverables="Precision CGI Packshots, Shading"
+                        data-url="../lrp/lrp.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../lrp/lrp.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">05.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        La Roche-Posay
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">CGI Packshot</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-lrp" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-lrp" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024 • CGI • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">LA ROCHE-POSAY</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">CGI Packshot</span>
+                                <span class="text-brand-muted">La Roche-Posay // 2024</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 6. Vichy -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../vichy/vichy.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Vichy"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../vichy/vichy.jpg" alt="Vichy" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 06. VICHY -->
+                    <article data-category="3d motion" data-image="../vichy/vichy.jpg" data-title="VICHY"
+                        data-client="VICHY" data-year="2024" data-deliverables="3D Fluid Simulation, Cosmetic Motion"
+                        data-url="../vichy/vichy.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../vichy/vichy.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        VICHY
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-vichy" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-vichy" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2024 • 3D ANIMATION • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">VICHY</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
+                                <span class="text-brand-muted">VICHY // 2024</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 7. Clarre -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../clarre/clarre.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Clarre"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../clarre/clarre.jpg" alt="Clarre" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 07. Clarre Vegan -->
+                    <article data-category="3d motion" data-image="../clarre/clarre.jpg" data-title="Clarre Vegan"
+                        data-client="Clarre Vegan" data-year="2025" data-deliverables="3D Animation, Kinetic Packshots"
+                        data-url="../clarre/clarre.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../clarre/clarre.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Clarre Vegan
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-clarre" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-clarre" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2025 • 3D ANIMATION • 2025 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">CLARRE VEGAN</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
+                                <span class="text-brand-muted">Clarre Vegan // 2025</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 8. Mahindra -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../mahindra/mahindra.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Mahindra"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../mahindra/mahindra.jpg" alt="Mahindra" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 08. Mahindra -->
+                    <article data-category="branding print" data-image="../mahindra/mahindra.jpg" data-title="Mahindra"
+                        data-client="Mahindra" data-year="2024-2025" data-deliverables="Social Identity, Print Publication"
+                        data-url="../mahindra/mahindra.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../mahindra/mahindra.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Mahindra
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Branding</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024-2025</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-mahindra" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-mahindra" textLength="213" lengthAdjust="spacingAndGlyphs">• BRANDING • 2024-2025 • BRANDING • 2024-2025 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">MAHINDRA</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Branding</span>
+                                <span class="text-brand-muted">Mahindra // 2024-2025</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 9. Taxi -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../taxi/taxi.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Taxi"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../taxi/taxi.jpg" alt="Taxi" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 09. Taxi Inzegan -->
+                    <article data-category="3d motion" data-image="../taxi/taxi.jpg" data-title="Taxi Inzegan"
+                        data-client="Personal" data-year="2024" data-deliverables="Stylized 3D CGI, Environmental Modeling"
+                        data-url="../taxi/taxi.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../taxi/taxi.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Taxi Inzegan
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-taxi" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-taxi" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D ANIMATION • 2024 • 3D ANIMATION • 2024 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">TAXI INZEGAN</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
+                                <span class="text-brand-muted">Personal // 2024</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 10. ALX -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../alx/alx.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View ALX"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../alx/alx.jpg" alt="ALX" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 10. ALX Africa -->
+                    <article data-category="branding motion editing print" data-image="../alx/alx.jpg" data-title="ALX Africa"
+                        data-client="ALX Africa" data-year="2024-2026" data-deliverables="Commercial Video Edit, Kinetic Branding"
+                        data-url="../alx/alx.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../alx/alx.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        ALX Africa
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Editing & Motion</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024-2026</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-alx" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-alx" textLength="213" lengthAdjust="spacingAndGlyphs">• CGI • 2024-2026 • MOTION • BRANDING • 2024-2026 </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">ALX</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
-                        </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Editing & Motion</span>
+                                <span class="text-brand-muted">ALX Africa // 2024-2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
 
-                        <!-- 11. Sculptures -->
-                        <div class="w-[85vw] md:w-[35vw] lg:w-[25vw] flex-shrink-0 project-card relative group cursor-pointer">
-                            <a href="../sculptures/sculptures.html" target="_blank" rel="noopener" class="absolute inset-0 z-50 block pointer-events-auto" aria-label="View Sculptures"></a>
-                            <div class="card-inner block w-full h-full select-none pointer-events-none">
-                                <div class="relative mb-6">
-                                    <div class="overflow-hidden rounded-2xl aspect-[4/5] relative z-10 bg-gray-200 shadow-2xl">
-                                        <img src="../sculptures/sculptures.jpg" alt="Sculptures" draggable="false" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105">
+                    <!-- 11. Sculptures Series -->
+                    <article data-category="3d motion editing" data-image="../sculptures/sculptures.jpg" data-title="Sculptures Series"
+                        data-client="Personal" data-year="Ongoing" data-deliverables="Procedural 3D Form, Sound Sync Montage"
+                        data-url="../sculptures/sculptures.html"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="../sculptures/sculptures.html"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">11.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Sculptures Series
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D & Motion Art</span>
+                                        <span class="text-xs font-mono text-brand-muted">Ongoing</span>
                                     </div>
-                                    <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 w-20 h-20 md:w-28 md:h-28 z-20 transition-transform duration-500 md:group-hover:scale-110 shadow-2xl rounded-full">
-                                        <div class="w-full h-full bg-seb-red/90 backdrop-blur-sm rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
-                                            <svg viewBox="0 0 100 100" class="w-full h-full text-white overflow-visible"><path id="path-sculptures" d="M 50, 50 m -34, 0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" fill="transparent" /><text fill="currentColor" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1.5"><textPath href="#path-sculptures" textLength="213" lengthAdjust="spacingAndGlyphs">• 3D • ONGOING • MOTION • BRANDING • ONGOING </textPath></text></svg><div class="absolute w-1.5 h-1.5 bg-white rounded-full"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center border-b border-black pb-3 pl-2">
-                                    <h3 class="text-2xl md:text-3xl font-black tracking-tight uppercase">SCULPTURES</h3><span class="text-xl md:text-2xl text-seb-red leading-none transition-transform md:group-hover:translate-x-1 md:group-hover:-translate-y-1">↗</span>
                                 </div>
                             </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D & Motion Art</span>
+                                <span class="text-brand-muted">Personal // Ongoing</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+
+                <!-- Floating Live Desktop Preview Tooltip (Heyefi style) -->
+                <div id="desktop-live-preview"
+                    class="live-preview-box hidden lg:block fixed z-40 w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
+                    aria-hidden="true">
+                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3">
+                        <img id="preview-image" src="../armani/armani.jpg" alt="" class="w-full h-full object-cover">
+                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brand-dark/80 backdrop-blur-sm text-[10px] font-mono text-white">
+                            <span id="preview-category">3D / CGI</span>
                         </div>
-
-                        <div class="hidden md:block w-[40vw] flex-shrink-0"></div>
-
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 id="preview-title" class="text-sm font-black uppercase tracking-tight text-brand-dark leading-tight">
+                                Project Title
+                            </h4>
+                            <p id="preview-meta" class="text-[11px] font-mono text-brand-muted mt-0.5">
+                                Client // Year
+                            </p>
+                        </div>
+                        <span class="text-brand-accent font-mono text-xs">VIEW ↗</span>
                     </div>
                 </div>
             </div>
+
         </section>
 
-        <!-- Minimal Spacer to reveal "Visual Experience Builder" cleanly before About section -->
-        <div class="h-[5vh] w-full pointer-events-none bg-transparent"></div>
 
-        <!-- Smaller About Section without glass frame -->
-        <section id="about" class="px-6 md:px-10 py-10 relative z-20 bg-transparent text-seb-black min-h-[80svh] flex flex-col justify-center pointer-events-none">
-            <div class="container mx-auto max-w-[70rem] relative">
-                
-                <div class="absolute -top-10 right-0 md:-top-10 md:-right-4 w-28 h-28 md:w-40 md:h-40 z-30 flex items-center justify-center gsap-reveal pointer-events-none">
-                    <div class="absolute inset-0 w-full h-full animate-[spin_15s_linear_infinite]">
-                        <svg viewBox="0 0 100 100" class="w-full h-full text-seb-black overflow-visible opacity-80">
-                            <path id="path-about-badge" d="M 50, 50 m -42, 0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" fill="transparent" />
-                            <text fill="currentColor" font-size="8.5" font-weight="bold" font-family="sans-serif" letter-spacing="2">
-                                <textPath href="#path-about-badge" textLength="260" lengthAdjust="spacingAndGlyphs">
-                                    ANASS BIYGUISE • GRAPHIC DESIGNER •
-                                </textPath>
-                            </text>
-                        </svg>
-                    </div>
-                    <div class="w-[80%] h-[80%] relative z-10 flex items-center justify-center">
-                        <img src="../logo.gif" alt="Bigiz Logo" class="w-full h-full object-contain transition-all duration-500">
-                    </div>
-                </div>
 
-                <div id="about-content" class="gsap-reveal flex flex-col justify-center max-w-3xl pt-16 md:pt-0 relative z-20 pointer-events-auto">
-                    <div class="py-4 w-full">
-                        <div class="flex items-center mb-6 pointer-events-none">
-                            <div class="w-3 h-3 bg-seb-red rounded-full mr-4 animate-pulse"></div>
-                            <h2 class="text-sm font-bold uppercase tracking-widest text-black">About</h2>
+        <!-- ========================================================================= -->
+        <!-- ABOUT & CREDENTIALS SECTION (Identical to Homepage) -->
+        <!-- ========================================================================= -->
+        <section id="about" class="py-16 sm:py-24 border-t border-brand-border bg-brand-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+                    <!-- Bio & Monogram Column -->
+                    <div class="lg:col-span-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
+                                <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-brand-dark">
+                                    About the Designer
+                                </h2>
+                            </div>
+
+                            <h3 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase leading-[0.95] text-brand-dark mb-6">
+                                Crafting Identities for presence
+                            </h3>
+
+                            <p class="text-sm sm:text-base text-brand-muted leading-relaxed mb-4">
+                                I am Anass Biyguise, a multidisciplinary graphic designer and art director specializing in branding, motion design, photorealistic 3D, and editorial print.
+                            </p>
+
+                            <p class="text-sm sm:text-base text-brand-muted leading-relaxed mb-8">
+                                With a background spanning top agencies and creative studios, I bridge strategic conceptual thinking with sharp execution.
+                            </p>
                         </div>
-                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-4 pointer-events-none">
-Anass Biyguise is a graphic designer specializing in crafting identities and visuals that make an impact, helping brands connect with their audiences through thoughtful design and creative direction.                        </p>
-                        <p class="text-base md:text-lg text-gray-700 font-light leading-relaxed mb-10 pointer-events-none">
-Outside of work, you’ll find me exploring new media art scene, and sketching new ideas.                        </p>
-                        
-                        <div id="experience-list" class="w-full mb-10 pointer-events-none">
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Experience</h3>
-                            <div class="flex flex-col w-full border-b border-black/10">
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Publicis-WBC</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">03/2024 — Present</span>
+
+                        <!-- Action Pills -->
+                        <div class="flex flex-wrap items-center gap-3 pt-6 border-t border-brand-border">
+                            <button type="button" onclick="openContactModal()"
+                                class="px-5 py-2.5 rounded-full bg-brand-accent text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-brand-dark transition-colors focus:outline-none">
+                                Let's Collaborate
+                            </button>
+                            <a href="../cv.pdf" download="cv.pdf" target="_blank"
+                                class="px-5 py-2.5 rounded-full bg-white border border-brand-border text-brand-dark font-mono text-xs font-bold uppercase tracking-wider hover:border-brand-accent hover:text-brand-accent transition-colors">
+                                Download CV (PDF) ↗
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Career & Experience Column -->
+                    <div class="lg:col-span-7 flex flex-col gap-10">
+
+                        <!-- Experience Table -->
+                        <div>
+                            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                                // EXPERIENCE
+                            </span>
+                            <div class="border-t border-brand-border flex flex-col">
+                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Publicis-WBC</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Graphic Designer</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-brand-accent font-bold">03/2024 — Present</span>
                                 </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Disruptia</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">12/2023 — 02/2024</span>
+                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Disruptia</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Motion & Brand Designer</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-brand-accent font-bold">12/2023 — 02/2024</span>
                                 </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Artcoustic</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">10/2023 — 12/2023</span>
+                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Artcoustic</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Motion Designer</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-brand-accent font-bold">10/2023 — 12/2023</span>
                                 </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Neomotion</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">08/2023 — 10/2023</span>
+                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Neomotion</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Graphic Designer</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-brand-accent font-bold">08/2023 — 10/2023</span>
                                 </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Nassim Azarzar</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">02/2023 — 08/2023</span>
+                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Nassim Azarzar</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Design Apprentice</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-brand-accent font-bold">02/2023 — 08/2023</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="education-list" class="w-full mb-10 pointer-events-none">
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Education</h3>
-                            <div class="flex flex-col w-full border-b border-black/10">
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Art'Com Sup Rabat</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">Licence Design Graphique</span>
-                                </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">School of Motion</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">Animation & 3D Bootcamps</span>
-                                </div>
-                                <div class="exp-line flex justify-between items-center py-3.5 border-t border-black/10 hover:pl-4 transition-all duration-300 cursor-default pointer-events-auto">
-                                    <span class="text-sm md:text-base font-bold text-seb-black pointer-events-none">Lycée Ibn Sina</span>
-                                    <span class="text-xs font-mono text-seb-red pointer-events-none">Baccalauréat Sciences Physiques</span>
-                                </div>
+                        <!-- Education & Competencies -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div>
+                                <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                                    // EDUCATION
+                                </span>
+                                <ul class="flex flex-col gap-3 text-xs font-mono border-t border-brand-border pt-4">
+                                    <li class="pb-2 border-b border-brand-border/60">
+                                        <strong class="text-brand-dark block">Art'Com Sup Rabat</strong>
+                                        <span class="text-brand-muted">Licence Design Graphique</span>
+                                    </li>
+                                    <li class="pb-2 border-b border-brand-border/60">
+                                        <strong class="text-brand-dark block">School of Motion</strong>
+                                        <span class="text-brand-muted">Advanced 3D & Animation</span>
+                                    </li>
+                                    <li>
+                                        <strong class="text-brand-dark block">Lycée Ibn Sina</strong>
+                                        <span class="text-brand-muted">Baccalauréat Sciences Physiques</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                                    // EXPERTISE
+                                </span>
+                                <ul class="flex flex-col gap-2 text-xs font-mono text-brand-dark border-t border-brand-border pt-4">
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> Brand Identity &amp; Visual Design
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> Motion Graphics &amp; Animation
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> AI-Assisted Content Generation
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> Agentic AI Workflows
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> 3D Design &amp; CGI
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> UI/UX &amp; Prototyping
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> Creative Development
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-brand-accent">▸</span> Interactive Media
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
-                        <div class="mt-6 flex flex-wrap gap-4">
-                           <button onclick="openSocialModal()" class="px-6 py-3 bg-seb-red text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-black hover:text-white transition-all duration-300 hover:scale-105 shadow-lg pointer-events-auto focus:outline-none">Let's Collaborate</button>
-                           <a href="../cv.pdf" download="cv.pdf" target="_blank" class="px-6 py-3 bg-seb-black text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-seb-red hover:text-white transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-lg pointer-events-auto focus:outline-none">Download CV</a>
-                        </div>
                     </div>
+
                 </div>
+
             </div>
         </section>
 
-        <!-- Reduced Spacer to reveal "Visual Experience Builder" in light background before footer -->
-        <div class="h-[15vh] md:h-[20vh] w-full pointer-events-none bg-transparent"></div>
+    </main>
 
-        <!-- Footer -->
-        <footer id="contact" class="px-6 md:px-10 py-16 md:py-24 min-h-[85vh] flex flex-col justify-between relative z-20 bg-[#0a0a0a] text-white overflow-hidden pointer-events-none">
-            
-            <div id="footer-grid" class="absolute inset-0 grid w-full h-full z-0 pointer-events-none"></div>
+    <!-- ========================================================================= -->
+    <!-- FOOTER (Identical to Homepage, High-impact, Direct Contact) -->
+    <!-- ========================================================================= -->
+    <footer id="contact" class="bg-brand-dark text-white pt-16 sm:pt-24 pb-12 border-t border-brand-dark overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="flex flex-col md:flex-row justify-between items-start w-full relative z-10 pointer-events-auto">
-                
-                <div class="flex flex-col mb-16 md:mb-0">
-                    <span class="uppercase tracking-widest text-[10px] md:text-xs font-bold mb-6 text-gray-500 pointer-events-none">Have an idea?</span>
-                    <button onclick="openSocialModal()" class="group block text-[5.5rem] md:text-[6.5rem] leading-[0.8] font-black tracking-tighter uppercase hover:text-seb-red transition-colors duration-300 text-left cursor-pointer pointer-events-auto focus:outline-none">
-                        <span class="block pointer-events-none">Let's</span>
-                        <span class="block ml-16 md:ml-20 group-hover:ml-24 md:group-hover:ml-28 transition-all duration-500 pointer-events-none">
+            <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16 sm:mb-20">
+
+                <!-- Giant "Let's Talk" Call to Action -->
+                <div class="max-w-2xl">
+                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-subtle block mb-4">
+                        // NEXT COLLABORATION
+                    </span>
+                    <button type="button" onclick="openContactModal()"
+                        class="group text-left text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] hover:text-brand-accent transition-colors duration-300 focus:outline-none">
+                        Let's<br>
+                        <span class="inline-flex items-center gap-4 sm:gap-6 group-hover:translate-x-3 transition-transform duration-300">
                             Talk
-                            <span class="inline-block text-[0.4em] align-top text-seb-red opacity-0 group-hover:opacity-100 transition-opacity duration-500">↗</span>
+                            <span class="text-3xl sm:text-5xl md:text-6xl text-brand-accent">↗</span>
                         </span>
                     </button>
                 </div>
 
-                <div class="flex flex-col items-end gap-3 md:gap-4 w-full md:w-auto z-20 md:mt-12 pointer-events-auto">
-                    <!-- FIX: Removed the "modal-link" class from these footer buttons so they don't disappear! -->
-                    <a href="mailto:bekiz.me@gmail.com" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5">MAIL</span>
+                <!-- Direct Contact Capsule Grid -->
+                <div class="flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-col gap-3 w-full lg:w-72">
+
+                    <a href="mailto:bekiz.me@gmail.com" target="_blank" rel="noopener noreferrer"
+                        class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
+                        <div class="flex items-center gap-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            <span class="font-bold tracking-wider">EMAIL</span>
+                        </div>
+                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
-                    <a href="tel:+212693087105" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5">PHONE</span>
+
+                    <a href="tel:+212693087105" target="_blank" rel="noopener noreferrer"
+                        class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
+                        <div class="flex items-center gap-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span class="font-bold tracking-wider">PHONE</span>
+                        </div>
+                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
-                    <a href="https://www.instagram.com/bigiz_4d/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5">INSTAGRAM</span>
+
+                    <a href="https://www.instagram.com/bigiz_4d/" target="_blank" rel="noopener noreferrer"
+                        class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
+                        <div class="flex items-center gap-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                            <span class="font-bold tracking-wider">INSTAGRAM</span>
+                        </div>
+                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/anassbiyguise/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5">LINKEDIN</span>
+
+                    <a href="https://www.linkedin.com/in/anassbiyguise/" target="_blank" rel="noopener noreferrer"
+                        class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
+                        <div class="flex items-center gap-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            <span class="font-bold tracking-wider">LINKEDIN</span>
+                        </div>
+                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
-                    <a href="https://bigizz.github.io/bigiz/" target="_blank" rel="noopener noreferrer" class="w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 pointer-events-auto flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
-                        <span class="font-bold tracking-widest mt-0.5">EXPERIMENTAL</span>
+
+                    <a href="https://bigizz.github.io/bigiz/" target="_blank" rel="noopener noreferrer"
+                        class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
+                        <div class="flex items-center gap-3">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"></path></svg>
+                            <span class="font-bold tracking-wider">EXPERIMENTAL</span>
+                        </div>
+                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
+
                 </div>
+
             </div>
 
-            <div class="flex flex-row justify-between items-end w-full mt-20 md:mt-32 relative z-10 pointer-events-auto">
-                <div class="flex flex-col pointer-events-auto">
-                    <span class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-500">Made by me</span>
+            <!-- Bottom Metadata & Back to Top -->
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-400">
+                <div class="flex items-center gap-4">
+                    <span>© 2026 Anass Biyguise</span>
+                    <span class="text-white/20">/</span>
+                    <span>All rights reserved</span>
                 </div>
+
+                <button type="button" onclick="scrollToTop()"
+                    class="flex items-center gap-2 hover:text-white transition-colors focus:outline-none"
+                    aria-label="Scroll back to top of page">
+                    <span>Back to Top</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                </button>
             </div>
-        </footer>
 
-    </main>
+        </div>
+    </footer>
 
-    <button id="back-to-top" class="fixed bottom-10 right-6 md:right-10 z-[50] p-4 md:p-5 bg-[#0a0a0a] text-white border border-white/20 rounded-full opacity-0 pointer-events-none transition-all duration-300 hover:bg-white hover:text-black shadow-2xl pointer-events-auto focus:outline-none">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pointer-events-none">
+    <!-- ========================================================================= -->
+    <!-- CONTACT MODAL (Accessible Dialog) -->
+    <!-- ========================================================================= -->
+    <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title"
+        class="fixed inset-0 z-[100000] hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+        <div class="relative w-full max-w-lg bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border shadow-2xl">
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-border">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                    <h3 id="contact-modal-title" class="text-xs font-mono font-bold uppercase tracking-widest text-brand-dark">
+                        Say Hey / Direct Contact
+                    </h3>
+                </div>
+                <button type="button" onclick="closeContactModal()"
+                    class="p-1 rounded-full text-brand-muted hover:text-brand-dark focus:outline-none" aria-label="Close dialog">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <p class="text-xs sm:text-sm text-brand-muted mb-6 leading-relaxed">
+                Reach out directly for project inquiries, art direction consultations, or creative collaborations.
+            </p>
+
+            <div class="flex flex-col gap-2.5 font-mono text-xs">
+                <a href="mailto:bekiz.me@gmail.com"
+                    class="p-3.5 rounded-xl border border-brand-border hover:border-brand-dark bg-brand-bg flex items-center justify-between font-bold hover:bg-white transition-all">
+                    <span>Email: bekiz.me@gmail.com</span>
+                    <span>↗</span>
+                </a>
+                <a href="tel:+212693087105"
+                    class="p-3.5 rounded-xl border border-brand-border hover:border-brand-dark bg-brand-bg flex items-center justify-between font-bold hover:bg-white transition-all">
+                    <span>Phone: +212 693 087 105</span>
+                    <span>↗</span>
+                </a>
+                <a href="https://www.instagram.com/bigiz_4d/" target="_blank" rel="noopener"
+                    class="p-3.5 rounded-xl border border-brand-border hover:border-brand-dark bg-brand-bg flex items-center justify-between font-bold hover:bg-white transition-all">
+                    <span>Instagram: @bigiz_4d</span>
+                    <span>↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/anassbiyguise/" target="_blank" rel="noopener"
+                    class="p-3.5 rounded-xl border border-brand-border hover:border-brand-dark bg-brand-bg flex items-center justify-between font-bold hover:bg-white transition-all">
+                    <span>LinkedIn: anassbiyguise</span>
+                    <span>↗</span>
+                </a>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between text-[11px] font-mono text-brand-muted">
+                <span>Location: Casablanca, Morocco</span>
+                <span>GMT+1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Circular Back to Top Button -->
+    <button id="floating-back-to-top" type="button" onclick="scrollToTop()"
+        class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 w-12 h-12 rounded-full bg-brand-dark text-white border border-white/10 shadow-2xl flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-3 hover:bg-brand-accent hover:border-brand-accent focus:outline-none group cursor-pointer"
+        aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-y-0.5 transition-transform duration-200" aria-hidden="true">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 
-    <!-- NEW SOCIAL OVERLAY MODAL -->
-    <div id="social-modal" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-        
-        <!-- Backdrop - FIXED: Removed pointer-events-auto so it becomes unclickable when the modal is closed -->
-        <div id="modal-backdrop" onclick="closeSocialModal()" class="absolute inset-0 bg-[#0a0a0a]/90 backdrop-blur-md cursor-pointer"></div>
-        
-        <!-- Close Button - FIXED: Removed pointer-events-auto -->
-        <button id="modal-close" onclick="closeSocialModal()" class="absolute top-8 right-8 p-4 text-white hover:text-seb-red transition-colors duration-300 group z-20 cursor-pointer focus:outline-none">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-500 group-hover:rotate-90 pointer-events-none">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-
-        <!-- Container - FIXED: Removed pointer-events-none and added close action for clicking empty space -->
-        <div onclick="closeSocialModal()" class="relative z-10 flex flex-col items-center gap-3 md:gap-4 w-full px-6 cursor-pointer">
-            
-            <!-- Links - FIXED: Added stopPropagation so clicking the button doesn't trigger the container's close action, and removed pointer-events-auto -->
-            <a href="mailto:bekiz.me@gmail.com" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">MAIL</span>
-            </a>
-            
-            <a href="tel:+212693087105" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">PHONE</span>
-            </a>
-            
-            <a href="https://www.instagram.com/bigiz_4d/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">INSTAGRAM</span>
-            </a>
-            
-            <a href="https://www.linkedin.com/in/anassbiyguise/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">LINKEDIN</span>
-            </a>
-            
-            <a href="https://bigizz.github.io/bigiz/" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer" class="modal-link w-[220px] sm:w-[240px] md:w-[260px] px-6 py-4 text-[10px] md:text-xs bg-[#1a1a1a] text-white rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 flex items-center justify-start gap-4 shadow-lg focus:outline-none">
-                <svg class="pointer-events-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"/></svg>
-                <span class="font-bold tracking-widest mt-0.5 pointer-events-none">EXPERIMENTAL</span>
-            </a>
-        </div>
-    </div>
-
+    <!-- ========================================================================= -->
+    <!-- INTERACTION LOGIC & GSAP ANIMATIONS -->
+    <!-- ========================================================================= -->
     <script>
+        // Media Switcher Function
         function changeMainMedia(type, src, btn) {
-            const imgEl = document.getElementById('main-image');
-            const vidWrapper = document.getElementById('main-video-wrapper');
-            const vidEl = document.getElementById('main-video');
+            const mainImg = document.getElementById('main-image');
+            const videoWrapper = document.getElementById('main-video-wrapper');
+            const mainVideo = document.getElementById('main-video');
 
             if (type === 'image') {
-                imgEl.src = src;
-                imgEl.classList.remove('hidden');
-                vidWrapper.classList.add('hidden');
-                vidEl.src = ''; 
+                if(videoWrapper) videoWrapper.classList.add('hidden');
+                if(mainVideo) mainVideo.src = "";
+                if(mainImg) {
+                    mainImg.src = src;
+                    mainImg.classList.remove('hidden');
+                }
             } else if (type === 'vimeo') {
-                vidEl.src = src;
-                vidWrapper.classList.remove('hidden');
-                imgEl.classList.add('hidden');
+                if(mainImg) mainImg.classList.add('hidden');
+                if(videoWrapper) videoWrapper.classList.remove('hidden');
+                if(mainVideo) mainVideo.src = src;
             }
-            
-            const thumbs = document.querySelectorAll('.thumb-btn');
-            thumbs.forEach(t => {
-                t.classList.add('opacity-60', 'border-transparent');
-                t.classList.remove('border-seb-black');
-                
-                const img = t.querySelector('img');
+
+            // Update thumb borders
+            const allBtns = document.querySelectorAll('.thumb-btn');
+            allBtns.forEach(b => {
+                b.classList.remove('border-brand-dark');
+                b.classList.add('border-transparent', 'opacity-60');
+                const img = b.querySelector('img');
                 if(img) img.classList.add('grayscale');
             });
-            
-            btn.classList.remove('opacity-60', 'border-transparent');
-            btn.classList.add('border-seb-black');
-            
-            const clickedImg = btn.querySelector('img');
-            if(clickedImg) clickedImg.classList.remove('grayscale');
+
+            btn.classList.add('border-brand-dark');
+            btn.classList.remove('border-transparent', 'opacity-60');
+            const activeImg = btn.querySelector('img');
+            if(activeImg) activeImg.classList.remove('grayscale');
         }
 
-        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-        window.scrollTo(0, 0);
+        // Lenis Smooth Scroll
+        let lenisInstance = null;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // FIX: Wrapped Lenis in a try...catch block to prevent fatal script crashes!
-        try {
-            window.lenis = new Lenis({
-                duration: 1.8, 
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                smoothWheel: true, 
-                wheelMultiplier: 1,
-                touchMultiplier: 2,
-            });
-
-            window.lenis.start();
-            window.lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => { window.lenis.raf(time * 1000); });
-            gsap.ticker.lagSmoothing(0, 0);
-        } catch(error) {
-            console.warn("Lenis smooth scrolling failed to load. Defaulting to native scroll.", error);
-        }
-
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        if (window.matchMedia('(hover: hover)').matches) {
-            window.addEventListener('mousemove', (e) => {
-                if(cursorDot) { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; }
-                if(cursorOutline) { cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" }); }
-            });
-        }
-
-        const backToTopBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > window.innerHeight) {
-                backToTopBtn.style.opacity = '1'; backToTopBtn.style.pointerEvents = 'auto';
-            } else {
-                backToTopBtn.style.opacity = '0'; backToTopBtn.style.pointerEvents = 'none';
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            if (window.lenis) window.lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-        });
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        const masterTl = gsap.timeline({
-            paused: true,
-            onComplete: () => {
-                if (window.lenis) window.lenis.start(); 
-                ScrollTrigger.refresh();
-            }
-        });
-
-        masterTl.to("#entrance-logo", { opacity: 1, duration: 0.4, ease: "power2.out" })
-        .to("#entrance-curtain", { yPercent: -100, duration: 1.4, ease: "expo.inOut" }, "+=0.6")
-        .fromTo(["main", "nav", "#fixed-title-text", ".absolute.top-0"], 
-            { y: 80 }, 
-            { y: 0, duration: 1.4, ease: "expo.out", clearProps: "transform", onComplete: () => ScrollTrigger.refresh() }, "-=1.0"
-        )
-        .fromTo(".proj-detail-anim", 
-            { autoAlpha: 0, y: 40 }, 
-            { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=0.8"
-        );
-
-        window.addEventListener('load', () => {
-            const curtain = document.getElementById('entrance-curtain');
-            if (curtain) curtain.style.display = 'none';
-            if (window.lenis) window.lenis.start();
-            ScrollTrigger.refresh();
-            gsap.fromTo(["main", "nav", "#fixed-title-text", ".absolute.top-0"],
-                { y: 80 },
-                { y: 0, duration: 1.4, ease: "expo.out", clearProps: "transform", onComplete: () => ScrollTrigger.refresh() }
-            );
-            gsap.fromTo(".proj-detail-anim",
-                { autoAlpha: 0, y: 40 },
-                { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1, ease: "power3.out" }
-            );
-        });
-
-        let workSlider = document.getElementById("work-slider");
-        let workScrollTrigger;
-        if (workSlider) {
-            let scrollTween = gsap.to(workSlider, {
-                x: () => -(workSlider.scrollWidth - window.innerWidth),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#work-section",
-                    pin: true,
-                    start: "top top",
-                    end: () => "+=" + workSlider.scrollWidth,
-                    scrub: 1,
-                    invalidateOnRefresh: true
-                }
-            });
-
-            workScrollTrigger = scrollTween.scrollTrigger;
-
-            gsap.utils.toArray(".project-card").forEach((card) => {
-                const inner = card.querySelector('.card-inner');
-                gsap.fromTo(inner, 
-                    { opacity: 0.3, scale: 0.75, transformOrigin: "left center" }, 
-                    {
-                        opacity: 1, scale: 1, ease: "none",
-                        scrollTrigger: { trigger: card, containerAnimation: scrollTween, start: "left 85%", end: "left 10%", scrub: true }
-                    }
-                );
-            });
-
-            // Horizontal Touch Drag / Swipe for Mobile (finger movement left <-> right & down <-> up)
-            const sliderWrapper = document.getElementById('slider-wrapper');
-            if (sliderWrapper) {
-                let startX = 0;
-                let startY = 0;
-                let initialScrollY = 0;
-                let isHorizontalSwipe = false;
-
-                sliderWrapper.addEventListener('touchstart', (e) => {
-                    if (e.touches.length !== 1) return;
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    initialScrollY = window.scrollY;
-                    isHorizontalSwipe = false;
-                }, { passive: true });
-
-                sliderWrapper.addEventListener('touchmove', (e) => {
-                    if (e.touches.length !== 1) return;
-                    const currentX = e.touches[0].clientX;
-                    const currentY = e.touches[0].clientY;
-                    const diffX = startX - currentX;
-                    const diffY = startY - currentY;
-
-                    if (!isHorizontalSwipe) {
-                        if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
-                            isHorizontalSwipe = true;
-                        }
-                    }
-
-                    if (isHorizontalSwipe) {
-                        if (e.cancelable) e.preventDefault();
-
-                        const scrollFactor = 1.4;
-                        let targetScroll = initialScrollY + diffX * scrollFactor;
-
-                        if (workScrollTrigger) {
-                            targetScroll = Math.max(workScrollTrigger.start, Math.min(workScrollTrigger.end, targetScroll));
-                        }
-
-                        if (window.lenis) {
-                            window.lenis.scrollTo(targetScroll, { immediate: true });
-                        } else {
-                            window.scrollTo(0, targetScroll);
-                        }
-                    }
-                }, { passive: false });
-
-                sliderWrapper.addEventListener('touchend', () => {
-                    isHorizontalSwipe = false;
-                }, { passive: true });
-            }
-        }
-
-        gsap.utils.toArray(".gsap-reveal").forEach(element => {
-            gsap.fromTo(element, 
-                { autoAlpha: 0, y: 80, scale: 0.85 },
-                {
-                    autoAlpha: 1, y: 0, scale: 1, duration: 1, ease: "power2.out",
-                    scrollTrigger: { trigger: element, start: "top 95%", end: "top 65%", scrub: 1, toggleActions: "play reverse play reverse" }
-                }
-            );
-        });
-
-        
-        gsap.fromTo(".exp-line", 
-            { autoAlpha: 0, x: -30 }, 
-            { autoAlpha: 1, x: 0, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: "#about-content", start: "top 95%", end: "top 65%", scrub: 1 } }
-        );
-gsap.utils.toArray("[data-parallax]").forEach(el => {
-            const yValue = parseFloat(el.getAttribute("data-parallax"));
-            gsap.fromTo(el, 
-                { y: yValue }, 
-                { y: -yValue, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 1.5 } }
-            );
-        });
-
-        const footerElement = document.getElementById('contact');
-        const footerGrid = document.getElementById('footer-grid');
-        
-        if (footerElement && footerGrid) {
-            let footerGridCols = 0; let footerGridRows = 0; let footerCellArray = [];
-
-            function initFooterGrid() {
-                footerGrid.innerHTML = ''; footerCellArray = [];
-                const cellSize = window.innerWidth < 768 ? 40 : 60; 
-                footerGridCols = Math.ceil(footerElement.offsetWidth / cellSize);
-                footerGridRows = Math.ceil(footerElement.offsetHeight / cellSize);
-                footerGrid.style.gridTemplateColumns = `repeat(${footerGridCols}, 1fr)`;
-                footerGrid.style.gridTemplateRows = `repeat(${footerGridRows}, 1fr)`;
-                const totalCells = footerGridCols * footerGridRows;
-                
-                for (let i = 0; i < totalCells; i++) {
-                    const cell = document.createElement('div');
-                    cell.className = 'w-full h-full flex items-center justify-center';
-                    cell.innerHTML = `<svg viewBox="0 0 100 100" class="w-[50%] h-[50%] opacity-0 transform"><path fill="currentColor" d="M 0 0 L 100 0 A 50 50 0 0 1 0 0 Z M 0 100 L 100 100 A 50 50 0 0 0 0 100 Z" /></svg>`;
-                    footerGrid.appendChild(cell); footerCellArray.push(cell.querySelector('svg'));
-                }
-            }
-
-            footerElement.addEventListener('mousemove', (e) => {
-                const rect = footerElement.getBoundingClientRect();
-                const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                const actualCellWidth = footerElement.offsetWidth / footerGridCols;
-                const actualCellHeight = footerElement.offsetHeight / footerGridRows;
-                const col = Math.floor(x / actualCellWidth); const row = Math.floor(y / actualCellHeight);
-                const index = row * footerGridCols + col;
-                
-                if (index >= 0 && index < footerCellArray.length) {
-                    const svg = footerCellArray[index];
-                    if (!svg.dataset.animating) {
-                        svg.dataset.animating = "true"; gsap.killTweensOf(svg);
-                        gsap.fromTo(svg, 
-                            { opacity: 1, scale: 0, rotation: gsap.utils.random([-90, 90]), color: "#E60000" },
-                            { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2)" }
-                        );
-                        gsap.to(svg, {
-                            opacity: 0, scale: 0.2, rotation: gsap.utils.random([-180, 180]), color: "#333333", duration: 1, delay: 0.3, ease: "power2.inOut",
-                            onComplete: () => { svg.dataset.animating = ""; }
-                        });
-                    }
-                }
-            });
-
-            window.addEventListener('resize', () => {
-                clearTimeout(window.resizeTimer); window.resizeTimer = setTimeout(() => { initFooterGrid(); }, 300);
-            });
-
-            initFooterGrid();
-        }
-
-        const socialModal = document.getElementById('social-modal');
-        
-        // FIX: specifically target ONLY the links inside the modal!
-        const modalLinks = socialModal ? socialModal.querySelectorAll('.modal-link') : []; 
-
-        window.openSocialModal = function() {
-            if(typeof lenis !== 'undefined' && window.lenis) window.lenis.stop(); 
-            document.body.classList.add('modal-open'); 
-            
-            // Let the JS handle turning it clickable
-            if(socialModal) {
-                socialModal.classList.remove('pointer-events-none');
-                socialModal.classList.add('pointer-events-auto');
-
-                // NEW: Animate the navigation bar up and fade it out
-                gsap.to("nav", { yPercent: -100, opacity: 0, duration: 0.3, ease: "power2.inOut" });
-
-                gsap.to(socialModal, { opacity: 1, duration: 0.2, ease: "power2.out" });
-                if(modalLinks.length) {
-                    gsap.fromTo(modalLinks, 
-                        { y: window.innerHeight, opacity: 0, scale: 0.8 }, 
-                        { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.03, ease: "expo.out", delay: 0 }
-                    );
-                }
-            }
-        };
-
-        window.closeSocialModal = function() {
-            document.body.classList.remove('modal-open'); 
-            
-            // NEW: Bring the navigation bar back down and fade it in
-            gsap.to("nav", { yPercent: 0, opacity: 1, duration: 0.3, ease: "power2.out", delay: 0.2 });
-
-            if(modalLinks.length) {
-                gsap.to(modalLinks, { y: 100, opacity: 0, duration: 0.2, stagger: 0.02, ease: "power2.in" });
-            }
-            if(socialModal) {
-                gsap.to(socialModal, { 
-                    opacity: 0, duration: 0.2, delay: 0.1, ease: "power2.in", 
-                    onComplete: () => {
-                        // Turn it fully unclickable when hidden
-                        socialModal.classList.add('pointer-events-none');
-                        socialModal.classList.remove('pointer-events-auto');
-                        if(typeof lenis !== 'undefined' && window.lenis) window.lenis.start();
-                    } 
+        if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            try {
+                lenisInstance = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    direction: 'vertical',
+                    smooth: true,
+                    smoothTouch: false
                 });
-            }
-        };
 
+                function raf(time) {
+                    lenisInstance.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+                window.lenis = lenisInstance;
+            } catch (e) {
+                console.warn("Lenis initialization error:", e);
+            }
+        }
+
+        // Smooth Scroll To Section (In-Page)
+        function scrollToSection(selector) {
+            const target = document.querySelector(selector);
+            if (!target) return;
+            const offset = 90;
+            if (lenisInstance) {
+                lenisInstance.scrollTo(target, { offset: -offset, duration: 1.2 });
+            } else {
+                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        }
+
+        function filterByDiscipline(discipline) {
+            setDisciplineFilter(discipline);
+            scrollToSection('#work-section');
+        }
+
+        function scrollToTop() {
+            if (lenisInstance) {
+                lenisInstance.scrollTo(0, { duration: 1.2 });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Discipline Filter Engine
+        function setDisciplineFilter(discipline) {
+            const allTabs = document.querySelectorAll('.tab-btn');
+            allTabs.forEach(tab => {
+                const isSelected = tab.id === `tab-${discipline}`;
+                tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+            });
+
+            const listItems = document.querySelectorAll('#project-list-wrapper .project-row');
+            listItems.forEach(item => {
+                const cats = item.getAttribute('data-category') || '';
+                if (discipline === 'all' || cats.includes(discipline)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Live Desktop Hover Preview Tooltip
+        const previewBox = document.getElementById('desktop-live-preview');
+        const previewImg = document.getElementById('preview-image');
+        const previewCat = document.getElementById('preview-category');
+        const previewTitle = document.getElementById('preview-title');
+        const previewMeta = document.getElementById('preview-meta');
+        const cursorIndicator = document.getElementById('cursor-indicator');
+
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            let mouseX = 0, mouseY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                if (cursorIndicator) {
+                    cursorIndicator.classList.add('active');
+                    cursorIndicator.style.left = `${mouseX}px`;
+                    cursorIndicator.style.top = `${mouseY}px`;
+                }
+
+                if (previewBox && previewBox.classList.contains('is-visible')) {
+                    const offset = 24;
+                    let posX = mouseX + offset;
+                    let posY = mouseY - 120;
+
+                    const boxWidth = 320;
+                    const boxHeight = 280;
+                    if (posX + boxWidth > window.innerWidth) {
+                        posX = mouseX - boxWidth - offset;
+                    }
+                    if (posY < 80) posY = 80;
+                    if (posY + boxHeight > window.innerHeight) {
+                        posY = window.innerHeight - boxHeight - 20;
+                    }
+
+                    previewBox.style.left = `${posX}px`;
+                    previewBox.style.top = `${posY}px`;
+                }
+            });
+
+            const rows = document.querySelectorAll('#project-list-wrapper .project-row');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    const img = row.getAttribute('data-image');
+                    const title = row.getAttribute('data-title');
+                    const client = row.getAttribute('data-client');
+                    const year = row.getAttribute('data-year');
+                    const deliverables = row.getAttribute('data-deliverables');
+
+                    if (previewImg) previewImg.src = img;
+                    if (previewTitle) previewTitle.textContent = title;
+                    if (previewMeta) previewMeta.textContent = `${client} // ${year}`;
+                    if (previewCat) previewCat.textContent = deliverables;
+
+                    if (previewBox) previewBox.classList.add('is-visible');
+                    if (cursorIndicator) cursorIndicator.classList.add('hovering');
+                });
+
+                row.addEventListener('mouseleave', () => {
+                    if (previewBox) previewBox.classList.remove('is-visible');
+                    if (cursorIndicator) cursorIndicator.classList.remove('hovering');
+                });
+            });
+
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (cursorIndicator) cursorIndicator.classList.add('hovering');
+                });
+                el.addEventListener('mouseleave', () => {
+                    if (cursorIndicator) cursorIndicator.classList.remove('hovering');
+                });
+            });
+        }
+
+        // Contact Modal Logic
+        const contactModal = document.getElementById('contact-modal');
+        function openContactModal() {
+            if (contactModal) {
+                contactModal.classList.remove('hidden');
+                contactModal.classList.add('flex');
+                document.body.classList.add('modal-open');
+            }
+        }
+
+        function closeContactModal() {
+            if (contactModal) {
+                contactModal.classList.add('hidden');
+                contactModal.classList.remove('flex');
+                document.body.classList.remove('modal-open');
+            }
+        }
+
+        if (contactModal) {
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) closeContactModal();
+            });
+        }
+
+        // Floating Back-to-Top Visibility Tracker
+        function updateBackToTopVisibility(e) {
+            const btn = document.getElementById('floating-back-to-top');
+            if (!btn) return;
+            const scrollY = (e && typeof e.scroll === 'number')
+                ? e.scroll
+                : (lenisInstance && typeof lenisInstance.scroll === 'number')
+                    ? lenisInstance.scroll
+                    : (window.pageYOffset || document.documentElement.scrollTop || 0);
+            if (scrollY > 20) {
+                btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+                btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+                btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            }
+        }
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        if (lenisInstance) {
+            lenisInstance.on('scroll', updateBackToTopVisibility);
+        }
     </script>
 </body>
 </html>
