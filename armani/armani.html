@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xml:lang="en" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giorgio Armani — Anass Biyguise</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
@@ -1036,11 +1038,10 @@
             if(activeImg) activeImg.classList.remove('grayscale');
         }
 
-        // Lenis Smooth Scroll
+        // Lenis Smooth Scroll (Cross-browser, including Microsoft Edge)
         let lenisInstance = null;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (typeof Lenis !== 'undefined') {
             try {
                 lenisInstance = new Lenis({
                     duration: 1.2,

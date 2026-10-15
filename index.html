@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" xml:lang="en" translate="no" class="notranslate">
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anass Biyguise — Visual Experience Builder & Art Director</title>
     <meta name="description"
@@ -39,8 +41,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
 
-    <!-- Lenis Smooth Scroll -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <!-- Lenis Smooth Scroll (Official Modern Package) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -82,9 +85,9 @@
         }
 
         html {
+            scroll-behavior: smooth;
             background-color: var(--color-bg);
             color: var(--color-text);
-            scroll-behavior: smooth;
         }
 
         body {
@@ -126,13 +129,14 @@
             top: 1rem;
         }
 
-        /* Lenis smooth scroll */
-        html.lenis {
+        /* Lenis smooth scroll styling for all browsers */
+        html.lenis,
+        html.lenis body {
             height: auto;
         }
 
         .lenis.lenis-smooth {
-            scroll-behavior: auto;
+            scroll-behavior: auto !important;
         }
 
         .lenis.lenis-smooth [data-lenis-prevent] {
@@ -140,7 +144,11 @@
         }
 
         .lenis.lenis-stopped {
-            overflow: hidden;
+            overflow: clip;
+        }
+
+        .lenis.lenis-smooth iframe {
+            pointer-events: none;
         }
 
         /* Hide scrollbars where needed */
@@ -418,29 +426,38 @@
                         <video id="hero-logo-video" autoplay loop muted playsinline preload="auto" disablepictureinpicture disableremoteplayback
                             poster="logo-hero-poster.webp"
                             class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none pointer-events-none"
-                            aria-label="Anass Biyguise">
-                            <source src="logo-hero.webm" type="video/webm">
-                            <img src="logo-hero.webp" alt="Anass Biyguise"
+                            aria-label="Anass Biyguise — Multiform Visual Designer">
+                            <source src="logo-hero.mp4?v=4" type="video/mp4">
+                            <img src="logo-hero-poster.webp" alt="Anass Biyguise — Multiform Visual Designer"
                                 class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none">
                         </video>
                     </div>
                     <script>
                         (function () {
-                            // Safari on iOS/macOS does not render alpha transparency in WebM (shows opaque black box).
-                            // Detect Safari and immediately use the optimized 564KB transparent animated WebP.
-                            var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
-                                (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
-                            var wrapper = document.getElementById('hero-logo-wrapper');
-                            if (isSafari && wrapper) {
-                                wrapper.innerHTML = '<img src="logo-hero.webp" alt="Anass Biyguise" class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none">';
-                            } else {
-                                var v = document.getElementById('hero-logo-video');
-                                if (v) {
-                                    v.addEventListener('error', function () {
-                                        if (wrapper && !wrapper.querySelector('img')) {
-                                            wrapper.innerHTML = '<img src="logo-hero.webp" alt="Anass Biyguise" class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none">';
-                                        }
-                                    }, true);
+                            var v = document.getElementById('hero-logo-video');
+                            if (v) {
+                                v.muted = true;
+
+                                // Remove poster as soon as video is playing so the browser never flashes the poster on loop
+                                var removePoster = function () {
+                                    v.removeAttribute('poster');
+                                    v.removeEventListener('playing', removePoster);
+                                    v.removeEventListener('timeupdate', removePoster);
+                                };
+                                v.addEventListener('playing', removePoster);
+                                v.addEventListener('timeupdate', removePoster);
+
+                                var playPromise = v.play();
+                                if (playPromise !== undefined) {
+                                    playPromise.catch(function () {
+                                        var resumePlay = function () {
+                                            v.play();
+                                            document.removeEventListener('click', resumePlay);
+                                            document.removeEventListener('touchstart', resumePlay);
+                                        };
+                                        document.addEventListener('click', resumePlay, { once: true });
+                                        document.addEventListener('touchstart', resumePlay, { once: true });
+                                    });
                                 }
                             }
                         })();
@@ -1956,29 +1973,66 @@
     <!-- JAVASCRIPT: Accessible Interactions, Filter Engine, Smooth Scrolling -->
     <!-- ========================================================================= -->
     <script>
-        // Initialize Lenis smooth scroll on non-touch devices
+        // Initialize Lenis smooth scroll for all web browsers & input types (including Microsoft Edge)
         let lenisInstance = null;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        if (typeof Lenis !== 'undefined') {
             try {
                 lenisInstance = new Lenis({
                     duration: 1.2,
                     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                    direction: 'vertical',
-                    smooth: true,
-                    smoothTouch: false
+                    orientation: 'vertical',
+                    gestureOrientation: 'vertical',
+                    smoothWheel: true,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.5,
+                    infinite: false
                 });
 
+                // Synchronize Lenis with GSAP ScrollTrigger
+                if (window.ScrollTrigger) {
+                    lenisInstance.on('scroll', ScrollTrigger.update);
+                }
+
+                // Render ticker animation frame loop for reliable cross-browser smoothness
                 function raf(time) {
                     lenisInstance.raf(time);
                     requestAnimationFrame(raf);
                 }
-                window.lenis = lenisInstance;
                 requestAnimationFrame(raf);
+
+                window.lenis = lenisInstance;
+
+                // Handle smooth scrolling for all anchor links (#work-section, #about, etc.)
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetId = this.getAttribute('href');
+                        if (targetId && targetId !== '#') {
+                            const targetEl = document.querySelector(targetId);
+                            if (targetEl) {
+                                e.preventDefault();
+                                lenisInstance.scrollTo(targetEl, { offset: 0, duration: 1.2 });
+                            }
+                        }
+                    });
+                });
             } catch (e) {
-                console.warn("Lenis initialization skipped:", e);
+                console.warn("Lenis initialization error:", e);
             }
+        } else {
+            // Native fallback for smooth scrolling anchor links if Lenis is absent
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const targetEl = document.querySelector(targetId);
+                        if (targetEl) {
+                            e.preventDefault();
+                            targetEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
         }
 
         function scrollToTop() {
@@ -2260,15 +2314,6 @@
             contactModal.addEventListener('click', (e) => {
                 if (e.target === contactModal) closeContactModal();
             });
-        }
-
-        // Smooth Scroll To Top
-        function scrollToTop() {
-            if (window.lenis) {
-                window.lenis.scrollTo(0, { duration: 1.2 });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         }
 
         // Floating Back-to-Top Visibility Tracker
