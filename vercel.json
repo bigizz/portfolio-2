@@ -1,0 +1,54 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/home",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/alx",
+      "destination": "/alx/index.html"
+    },
+    {
+      "source": "/armani",
+      "destination": "/armani/index.html"
+    },
+    {
+      "source": "/axa",
+      "destination": "/axa/index.html"
+    },
+    {
+      "source": "/caf",
+      "destination": "/caf/index.html"
+    },
+    {
+      "source": "/clarre",
+      "destination": "/clarre/index.html"
+    },
+    {
+      "source": "/ice",
+      "destination": "/ice/index.html"
+    },
+    {
+      "source": "/lrp",
+      "destination": "/lrp/index.html"
+    },
+    {
+      "source": "/mahindra",
+      "destination": "/mahindra/index.html"
+    },
+    {
+      "source": "/sculptures",
+      "destination": "/sculptures/index.html"
+    },
+    {
+      "source": "/taxi",
+      "destination": "/taxi/index.html"
+    },
+    {
+      "source": "/vichy",
+      "destination": "/vichy/index.html"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALX Africa — Anass Biyguise</title>
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Google Fonts: Inter for UI, Space Mono for crisp editorial metadata -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,6 +133,13 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         body.modal-open { overflow: hidden; }
+    
+        /* Lower line spacing for Let's Talk call-to-action on desktop */
+        @media (min-width: 1024px) {
+            #lets-talk-btn {
+                line-height: 0.8 !important;
+            }
+        }
     </style>
 </head>
 <body class="selection:bg-brand-accent selection:text-white font-sans antialiased bg-brand-bg text-brand-dark min-h-screen flex flex-col">
@@ -147,8 +154,8 @@
             
             <!-- Left: Identity & Live Availability -->
             <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-                <a href="../index.html" class="group flex items-center gap-2.5 focus:outline-none" aria-label="Anass Biyguise - Back to homepage">
-                    <img src="../logo.gif" alt="Anass Biyguise Monogram"
+                <a href="/home" class="group flex items-center gap-2.5 focus:outline-none" aria-label="Anass Biyguise - Back to homepage">
+                    <img src="/logo.gif" alt="Anass Biyguise Monogram"
                         class="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-contain bg-brand-dark transition-transform group-hover:scale-105">
                     <div class="flex flex-col">
                         <span class="text-xs sm:text-sm font-black tracking-tight uppercase leading-none">Anass Biyguise</span>
@@ -162,7 +169,7 @@
 
             <!-- Center: Breadcrumb / Back Link to Selected Works -->
             <div class="flex items-center gap-2">
-                <a href="../index.html#work-section"
+                <a href="/home#work-section"
                     class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono font-bold uppercase tracking-wider text-brand-dark hover:border-brand-accent hover:text-brand-accent transition-all shadow-sm">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -187,7 +194,7 @@
                     class="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-brand-dark text-white text-xs font-mono font-bold tracking-wider uppercase hover:bg-brand-accent transition-all duration-200 shadow-sm focus:outline-none"
                     aria-label="Open contact information">
                     <span class="w-2 h-2 rounded-full bg-brand-accent" aria-hidden="true"></span>
-                    <span>Say Hey ↗</span>
+                    <span>Say Hi ↗</span>
                 </button>
             </div>
         </div>
@@ -213,22 +220,22 @@
 
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1025241946?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
-                        <img src="alx-img1.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        <img src="/alx/alx-img1.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
                         
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
 
-                    <button onclick="changeMainMedia('image', 'alx-img2.jpg', this)"
+                    <button onclick="changeMainMedia('image', '/alx/alx-img2.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
-                        <img src="alx-img2.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/alx/alx-img2.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
 
-                    <button onclick="changeMainMedia('image', 'alx-img3.jpg', this)"
+                    <button onclick="changeMainMedia('image', '/alx/alx-img3.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
-                        <img src="alx-img3.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/alx/alx-img3.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
                 </div>
@@ -374,11 +381,11 @@
                 <div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">
 
                     <!-- 01. Giorgio Armani -->
-                    <article data-category="3d editing" data-image="../armani/armani.jpg" data-title="Giorgio Armani"
+                    <article data-category="3d editing" data-image="/armani/armani.jpg" data-title="Giorgio Armani"
                         data-client="Giorgio Armani" data-year="2024" data-deliverables="CGI Luxury Packshot, Lighting"
-                        data-url="../armani/armani.html"
+                        data-url="/armani"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../armani/armani.html"
+                        <a href="/armani"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">01.</span>
@@ -401,11 +408,11 @@
                     </article>
 
                     <!-- 02. AFCON 2025 (CAF) -->
-                    <article data-category="print editing" data-image="../caf/caf.jpg" data-title="AFCON 2025 (CAF)"
+                    <article data-category="print editing" data-image="/caf/caf.jpg" data-title="AFCON 2025 (CAF)"
                         data-client="TotalEnergies CAF" data-year="2026" data-deliverables="Official Print Identity, Stadium Collateral"
-                        data-url="../caf/caf.html"
+                        data-url="/caf"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../caf/caf.html"
+                        <a href="/caf"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">02.</span>
@@ -428,11 +435,11 @@
                     </article>
 
                     <!-- 03. ICE -->
-                    <article data-category="branding 3d" data-image="../ice/ice.jpg" data-title="ICE"
+                    <article data-category="branding 3d" data-image="/ice/ice.jpg" data-title="ICE"
                         data-client="Personal Studio" data-year="2026" data-deliverables="Branding, 3D Typography, Spatial Art"
-                        data-url="../ice/ice.html"
+                        data-url="/ice"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../ice/ice.html"
+                        <a href="/ice"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">03.</span>
@@ -455,11 +462,11 @@
                     </article>
 
                     <!-- 04. AXA -->
-                    <article data-category="branding motion" data-image="../axa/axa.jpg" data-title="AXA"
+                    <article data-category="branding motion" data-image="/axa/axa.jpg" data-title="AXA"
                         data-client="AXA Global" data-year="Ongoing" data-deliverables="Motion Identity, Digital Guidelines"
-                        data-url="../axa/axa.html"
+                        data-url="/axa"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../axa/axa.html"
+                        <a href="/axa"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">04.</span>
@@ -482,11 +489,11 @@
                     </article>
 
                     <!-- 05. La Roche-Posay -->
-                    <article data-category="3d" data-image="../lrp/lrp.jpg" data-title="La Roche-Posay"
+                    <article data-category="3d" data-image="/lrp/lrp.jpg" data-title="La Roche-Posay"
                         data-client="La Roche-Posay" data-year="2024" data-deliverables="Precision CGI Packshots, Shading"
-                        data-url="../lrp/lrp.html"
+                        data-url="/lrp"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../lrp/lrp.html"
+                        <a href="/lrp"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">05.</span>
@@ -509,11 +516,11 @@
                     </article>
 
                     <!-- 06. VICHY -->
-                    <article data-category="3d motion" data-image="../vichy/vichy.jpg" data-title="VICHY"
+                    <article data-category="3d motion" data-image="/vichy/vichy.jpg" data-title="VICHY"
                         data-client="VICHY" data-year="2024" data-deliverables="3D Fluid Simulation, Cosmetic Motion"
-                        data-url="../vichy/vichy.html"
+                        data-url="/vichy"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../vichy/vichy.html"
+                        <a href="/vichy"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
@@ -536,11 +543,11 @@
                     </article>
 
                     <!-- 07. Clarre Vegan -->
-                    <article data-category="3d motion" data-image="../clarre/clarre.jpg" data-title="Clarre Vegan"
+                    <article data-category="3d motion" data-image="/clarre/clarre.jpg" data-title="Clarre Vegan"
                         data-client="Clarre Vegan" data-year="2025" data-deliverables="3D Animation, Kinetic Packshots"
-                        data-url="../clarre/clarre.html"
+                        data-url="/clarre"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../clarre/clarre.html"
+                        <a href="/clarre"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
@@ -563,11 +570,11 @@
                     </article>
 
                     <!-- 08. Mahindra -->
-                    <article data-category="branding print" data-image="../mahindra/mahindra.jpg" data-title="Mahindra"
+                    <article data-category="branding print" data-image="/mahindra/mahindra.jpg" data-title="Mahindra"
                         data-client="Mahindra" data-year="2024-2025" data-deliverables="Social Identity, Print Publication"
-                        data-url="../mahindra/mahindra.html"
+                        data-url="/mahindra"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../mahindra/mahindra.html"
+                        <a href="/mahindra"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
@@ -590,11 +597,11 @@
                     </article>
 
                     <!-- 09. Taxi Inzegan -->
-                    <article data-category="3d motion" data-image="../taxi/taxi.jpg" data-title="Taxi Inzegan"
+                    <article data-category="3d motion" data-image="/taxi/taxi.jpg" data-title="Taxi Inzegan"
                         data-client="Personal" data-year="2024" data-deliverables="Stylized 3D CGI, Environmental Modeling"
-                        data-url="../taxi/taxi.html"
+                        data-url="/taxi"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../taxi/taxi.html"
+                        <a href="/taxi"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
@@ -617,11 +624,11 @@
                     </article>
 
                     <!-- 10. ALX Africa -->
-                    <article data-category="branding motion editing print" data-image="../alx/alx.jpg" data-title="ALX Africa"
+                    <article data-category="branding motion editing print" data-image="/alx/alx.jpg" data-title="ALX Africa"
                         data-client="ALX Africa" data-year="2024-2026" data-deliverables="Commercial Video Edit, Kinetic Branding"
-                        data-url="../alx/alx.html"
+                        data-url="/alx/"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../alx/alx.html"
+                        <a href="/alx/"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
@@ -644,11 +651,11 @@
                     </article>
 
                     <!-- 11. Sculptures Series -->
-                    <article data-category="3d motion editing" data-image="../sculptures/sculptures.jpg" data-title="Sculptures Series"
+                    <article data-category="3d motion editing" data-image="/sculptures/sculptures.jpg" data-title="Sculptures Series"
                         data-client="Personal" data-year="Ongoing" data-deliverables="Procedural 3D Form, Sound Sync Montage"
-                        data-url="../sculptures/sculptures.html"
+                        data-url="/sculptures"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="../sculptures/sculptures.html"
+                        <a href="/sculptures"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">11.</span>
@@ -736,7 +743,7 @@
                                 class="px-5 py-2.5 rounded-full bg-brand-accent text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-brand-dark transition-colors focus:outline-none">
                                 Let's Collaborate
                             </button>
-                            <a href="../cv.pdf" download="cv.pdf" target="_blank"
+                            <a href="/cv.pdf" download="cv.pdf" target="_blank"
                                 class="px-5 py-2.5 rounded-full bg-white border border-brand-border text-brand-dark font-mono text-xs font-bold uppercase tracking-wider hover:border-brand-accent hover:text-brand-accent transition-colors">
                                 Download CV (PDF) ↗
                             </a>
@@ -867,8 +874,8 @@
                     <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-subtle block mb-4">
                         // NEXT COLLABORATION
                     </span>
-                    <button type="button" onclick="openContactModal()"
-                        class="group text-left text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] hover:text-brand-accent transition-colors duration-300 focus:outline-none">
+                    <button type="button" id="lets-talk-btn" onclick="openContactModal()"
+                        class="group text-left text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] md:leading-[0.8] lg:leading-[0.75] hover:text-brand-accent transition-colors duration-300 focus:outline-none">
                         Let's<br>
                         <span class="inline-flex items-center gap-4 sm:gap-6 group-hover:translate-x-3 transition-transform duration-300">
                             Talk
@@ -958,7 +965,7 @@
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
                     <h3 id="contact-modal-title" class="text-xs font-mono font-bold uppercase tracking-widest text-brand-dark">
-                        Say Hey / Direct Contact
+                        Say Hi / Direct Contact
                     </h3>
                 </div>
                 <button type="button" onclick="closeContactModal()"
