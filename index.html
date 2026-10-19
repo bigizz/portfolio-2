@@ -280,6 +280,39 @@
                 transform: none !important;
             }
         }
+        /* Hero Logo Stack & Seamless Video Autoplay (Zero Native UI) */
+        .hero-logo-stack {
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-logo-stack > * {
+            grid-area: 1 / 1;
+        }
+
+        /* Suppress all native mobile/WebKit video controls, start-playback buttons, and overlays */
+        #hero-logo-video::-webkit-media-controls,
+        #hero-logo-video::-webkit-media-controls-start-playback-button,
+        #hero-logo-video::-webkit-media-controls-play-button,
+        #hero-logo-video::-webkit-media-controls-panel,
+        #hero-logo-video::-webkit-media-controls-enclosure,
+        #hero-logo-video::-webkit-media-controls-overlay-play-button {
+            display: none !important;
+            -webkit-appearance: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        #hero-logo-video::-moz-media-controls {
+            display: none !important;
+        }
+
+        #hero-logo-video::-internal-media-controls-overlay-cast-button {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -429,45 +462,89 @@
 
                 <!-- Hero Logo & Centered Subtitle -->
                 <div class="w-full flex-1 min-h-0 flex flex-col items-center justify-center text-center py-0.5 sm:py-1">
-                    <div id="hero-logo-wrapper" class="w-full flex-1 min-h-0 flex items-center justify-center">
-                        <video id="hero-logo-video" autoplay loop muted playsinline preload="auto"
-                            disablepictureinpicture disableremoteplayback poster="logo-hero-poster.webp"
-                            class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none pointer-events-none"
+                    <div id="hero-logo-wrapper" class="hero-logo-stack w-full flex-1 min-h-0 relative select-none pointer-events-none">
+                        <!-- Clean immediate poster image: zero media controls, guaranteed no play button on any mobile browser -->
+                        <img id="hero-logo-poster" src="logo-hero-poster.webp" alt="Anass Biyguise — Multiform Visual Designer"
+                            class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none pointer-events-none transition-opacity duration-300"
+                            loading="eager" fetchpriority="high">
+                        <!-- Video element: strictly headless/no poster to prevent mobile WebKit play overlay, playsinline & muted -->
+                        <video id="hero-logo-video" autoplay loop muted playsinline webkit-playsinline x5-playsinline preload="auto"
+                            disablepictureinpicture disableremoteplayback
+                            class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none pointer-events-none opacity-0 transition-opacity duration-300"
                             aria-label="Anass Biyguise — Multiform Visual Designer">
                             <source src="logo-hero.mp4?v=4" type="video/mp4">
-                            <img src="logo-hero-poster.webp" alt="Anass Biyguise — Multiform Visual Designer"
-                                class="w-auto h-full max-h-[52vh] sm:max-h-[58vh] md:max-h-[62vh] lg:max-h-[66vh] max-w-full object-contain select-none">
                         </video>
                     </div>
                     <script>
-                            (function () {
-                                var v = document.getElementById('hero-logo-video');
-                                if (v) {
-                                    v.muted = true;
+                        (function () {
+                            var v = document.getElementById('hero-logo-video');
+                            var p = document.getElementById('hero-logo-poster');
+                            if (!v) return;
 
-                                    // Remove poster as soon as video is playing so the browser never flashes the poster on loop
-                                    var removePoster = function () {
-                                        v.removeAttribute('poster');
-                                        v.removeEventListener('playing', removePoster);
-                                        v.removeEventListener('timeupdate', removePoster);
-                                    };
-                                    v.addEventListener('playing', removePoster);
-                                    v.addEventListener('timeupdate', removePoster);
+                            // Explicitly enforce muted, defaultMuted and inline playback for mobile WebKit & Blink
+                            v.muted = true;
+                            v.defaultMuted = true;
+                            v.playsInline = true;
+                            v.setAttribute('muted', '');
+                            v.setAttribute('playsinline', '');
+                            v.setAttribute('webkit-playsinline', '');
 
-                                    var playPromise = v.play();
-                                    if (playPromise !== undefined) {
-                                        playPromise.catch(function () {
-                                            var resumePlay = function () {
-                                                v.play();
-                                                document.removeEventListener('click', resumePlay);
-                                                document.removeEventListener('touchstart', resumePlay);
-                                            };
-                                            document.addEventListener('click', resumePlay, { once: true });
-                                            document.addEventListener('touchstart', resumePlay, { once: true });
-                                        });
-                                    }
+                            var isRevealed = false;
+                            var showVideo = function () {
+                                if (isRevealed) return;
+                                isRevealed = true;
+                                v.classList.remove('opacity-0');
+                                v.classList.add('opacity-100');
+                                if (p) {
+                                    p.classList.add('opacity-0');
                                 }
-                            })();
+                            };
+
+                            // Reveal video as soon as frames begin actively playing
+                            v.addEventListener('playing', showVideo);
+                            v.addEventListener('timeupdate', function () {
+                                if (v.currentTime > 0) showVideo();
+                            });
+
+                            if (v.currentTime > 0 && !v.paused) {
+                                showVideo();
+                            }
+
+                            var startPlayback = function () {
+                                var promise = v.play();
+                                if (promise !== undefined) {
+                                    promise.then(function () {
+                                        if (v.currentTime > 0) showVideo();
+                                    }).catch(function () {
+                                        // Autoplay policy restriction (e.g. iOS Low Power Mode)
+                                        // Silently start on first user interaction (touch/scroll) without ever displaying a UI or play button
+                                        var unlock = function () {
+                                            v.play().then(showVideo).catch(function () {});
+                                            ['touchstart', 'touchend', 'scroll', 'click'].forEach(function (evt) {
+                                                window.removeEventListener(evt, unlock, { capture: true });
+                                                document.removeEventListener(evt, unlock, { capture: true });
+                                            });
+                                        };
+                                        ['touchstart', 'touchend', 'scroll', 'click'].forEach(function (evt) {
+                                            window.addEventListener(evt, unlock, { capture: true, once: true, passive: true });
+                                            document.addEventListener(evt, unlock, { capture: true, once: true, passive: true });
+                                        });
+                                    });
+                                }
+                            };
+
+                            // Auto resume when returning from background tab / screen lock
+                            document.addEventListener('visibilitychange', function () {
+                                if (!document.hidden && v.paused) {
+                                    v.play().catch(function () {});
+                                }
+                            });
+
+                            startPlayback();
+                            if (document.readyState === 'loading') {
+                                document.addEventListener('DOMContentLoaded', startPlayback, { once: true });
+                            }
+                        })();
                     </script>
                     <p
                         class="text-xs sm:text-sm font-normal text-brand-muted leading-relaxed max-w-2xl text-center px-4 flex-shrink-0 mt-1">
