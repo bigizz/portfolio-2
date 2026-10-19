@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anass Biyguise — Curriculum Vitae</title>
+
+    <style>
+        /* =========================================================================
+           ATS-FRIENDLY & PORTFOLIO-ALIGNED STYLING (bigiz.me Aesthetic)
+           ========================================================================= */
+        :root {
+            --brand-bg: #FFFFFF;
+            --brand-paper: #F5F4F0;
+            --brand-dark: #111111;
+            --brand-charcoal: #1C1B19;
+            --brand-muted: #52504C;
+            --brand-subtle: #7A7873;
+            --brand-border: #E2E0D8;
+            --brand-border-dark: #111111;
+            --brand-accent: #FF3E13;
+            --brand-surface-alt: #ECEAE4;
+            --font-sans: Arial, "Helvetica Neue", Helvetica, "Segoe UI", sans-serif;
+            --font-mono: "Courier New", Courier, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 8mm 10mm 8mm 10mm;
+        }
+
+        body {
+            background-color: var(--brand-bg);
+            color: var(--brand-dark);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            line-height: 1.35;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0 auto;
+            max-width: 210mm;
+            padding: 4mm 6mm;
+        }
+
+        /* Printable optimization */
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            a {
+                color: inherit !important;
+                text-decoration: none !important;
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* -------------------------------------------------------------------------
+           HEADER
+           ------------------------------------------------------------------------- */
+        header {
+            border-bottom: 2px solid var(--brand-dark);
+            padding-bottom: 7px;
+            margin-bottom: 8px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .header-identity h1 {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.95;
+            color: var(--brand-dark);
+            margin-bottom: 3.5px;
+        }
+
+        .header-identity .subtitle {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+
+        .header-identity .subtitle .accent-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--brand-accent);
+            display: inline-block;
+        }
+
+        .header-contact {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--brand-muted);
+            line-height: 1.45;
+        }
+
+        .header-contact a {
+            color: var(--brand-dark);
+            font-weight: 700;
+            transition: color 0.15s;
+        }
+
+        .header-contact a:hover {
+            color: var(--brand-accent);
+        }
+
+        /* Profile photo slot on top right */
+        .header-photo {
+            flex-shrink: 0;
+        }
+
+        .profile-photo-frame {
+            width: 23mm;
+            height: 26mm;
+            border-radius: 4px;
+            border: 1.5px solid var(--brand-dark);
+            background-color: var(--brand-paper);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 2px 2px 0px var(--brand-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.32);
+            transform-origin: 48% 26%;
+            display: block;
+        }
+
+        .photo-placeholder {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--brand-paper);
+            color: var(--brand-muted);
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .photo-placeholder svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--brand-muted);
+        }
+
+        .disciplines-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+            padding-top: 5px;
+            border-top: 1px dashed var(--brand-border);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--brand-paper);
+            border: 1px solid var(--brand-border);
+            border-radius: 9999px;
+            padding: 1.5px 7px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+        }
+
+        .pill.accent {
+            background-color: var(--brand-dark);
+            color: #FFFFFF;
+            border-color: var(--brand-dark);
+        }
+
+        /* -------------------------------------------------------------------------
+           SECTION HEADINGS
+           ------------------------------------------------------------------------- */
+        section {
+            margin-bottom: 7px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--brand-dark);
+            padding-bottom: 2px;
+            margin-bottom: 5px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .section-title h2::before {
+            content: '//';
+            color: var(--brand-accent);
+            font-weight: 700;
+        }
+
+        .section-meta {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--brand-subtle);
+        }
+
+        /* -------------------------------------------------------------------------
+           SUMMARY
+           ------------------------------------------------------------------------- */
+        .summary-text {
+            font-size: 11px;
+            line-height: 1.36;
+            color: var(--brand-charcoal);
+            text-align: justify;
+        }
+
+        /* -------------------------------------------------------------------------
+           CORE SKILLS & EXPERTISE
+           ------------------------------------------------------------------------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3px;
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: baseline;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .skill-category {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+            min-width: 175px;
+            flex-shrink: 0;
+        }
+
+        .skill-items {
+            color: var(--brand-muted);
+            flex-grow: 1;
+        }
+
+        .skill-items strong {
+            color: var(--brand-dark);
+            font-weight: 600;
+        }
+
+        /* -------------------------------------------------------------------------
+           WORK EXPERIENCE
+           ------------------------------------------------------------------------- */
+        .experience-item {
+            margin-bottom: 5px;
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5px;
+        }
+
+        .company-role {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        .company-name {
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--brand-dark);
+        }
+
+        .role-title {
+            font-weight: 500;
+            color: var(--brand-muted);
+        }
+
+        .role-title::before {
+            content: ' / ';
+            color: var(--brand-subtle);
+            font-family: var(--font-mono);
+        }
+
+        .experience-date {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--brand-dark);
+            background-color: var(--brand-paper);
+            padding: 1px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--brand-border);
+            white-space: nowrap;
+        }
+
+        .experience-bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-bullets li {
+            position: relative;
+            padding-left: 11px;
+            font-size: 11px;
+            line-height: 1.32;
+            color: var(--brand-charcoal);
+            margin-bottom: 1.5px;
+        }
+
+        .experience-bullets li::before {
+            content: '›';
+            position: absolute;
+            left: 2px;
+            top: -0.5px;
+            color: var(--brand-accent);
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .experience-bullets strong {
+            color: var(--brand-dark);
+            font-weight: 600;
+        }
+
+        /* -------------------------------------------------------------------------
+           SELECTED PROJECTS
+           ------------------------------------------------------------------------- */
+        .project-item {
+            margin-bottom: 3.5px;
+            font-size: 11px;
+            line-height: 1.32;
+        }
+
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-title {
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        .project-badge {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: var(--brand-paper);
+            border: 1px solid var(--brand-border);
+            padding: 0.5px 5px;
+            border-radius: 3px;
+            color: var(--brand-muted);
+            margin: 0 4px;
+            display: inline-block;
+        }
+
+        .project-desc {
+            color: var(--brand-muted);
+        }
+
+        /* -------------------------------------------------------------------------
+           EDUCATION & CERTIFICATIONS (2-COLUMN GRID)
+           ------------------------------------------------------------------------- */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 14px;
+        }
+
+        .edu-item,
+        .cert-item {
+            margin-bottom: 3.5px;
+            font-size: 10px;
+            line-height: 1.3;
+        }
+
+        .edu-item:last-child,
+        .cert-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-main {
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        .item-sub {
+            color: var(--brand-muted);
+            font-size: 10px;
+        }
+
+        /* -------------------------------------------------------------------------
+           FOOTER (VERIFICATION & ATS STAMP)
+           ------------------------------------------------------------------------- */
+        footer {
+            margin-top: 6px;
+            padding-top: 5px;
+            border-top: 1px solid var(--brand-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--brand-subtle);
+            text-transform: uppercase;
+        }
+
+        footer a {
+            color: var(--brand-dark);
+            font-weight: 700;
+        }
+
+        footer a:hover {
+            color: var(--brand-accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================================================= -->
+    <!-- HEADER -->
+    <!-- ========================================================================= -->
+    <header>
+        <div class="header-top">
+            <div class="header-main">
+                <div class="header-identity">
+                    <h1>Anass Biyguise</h1>
+                    <div class="subtitle">
+                        <span class="accent-dot" aria-hidden="true"></span>
+                        <span>Visual Experience Builder &bull; Multidisciplinary Designer</span>
+                    </div>
+                </div>
+                <div class="header-contact">
+                    <div>Casablanca / Rabat, Morocco &bull; <a href="mailto:bekiz.me@gmail.com">bekiz.me@gmail.com</a>
+                        &bull; Phone: <a href="tel:+212693087105">+212 693 087 105</a></div>
+                    <div>Portfolio: <a href="https://bigiz.me" target="_blank">bigiz.me</a> / <a
+                            href="https://bigiz.vercel.app" target="_blank">bigiz.vercel.app</a></div>
+                </div>
+            </div>
+
+            <!-- Profile Photo Slot (Top Right) -->
+            <div class="header-photo" aria-label="Profile photo of Anass Biyguise">
+                <div class="profile-photo-frame">
+                    <img src="profile.jpg" alt="Anass Biyguise"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="photo-placeholder" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>PHOTO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="disciplines-bar">
+            <span class="pill accent">Brand Identity</span>
+            <span class="pill">3D &amp; CGI Design</span>
+            <span class="pill">Motion Graphics</span>
+            <span class="pill">CGI Packshots &amp; Simulation</span>
+            <span class="pill">Print &amp; Environmental OOH</span>
+            <span class="pill">UI/UX &amp; Web</span>
+            <span class="pill">Agentic AI Workflows</span>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- PROFESSIONAL SUMMARY -->
+    <!-- ========================================================================= -->
+    <section>
+        <div class="section-title">
+            <h2>Professional Summary</h2>
+            <span class="section-meta">Profile Overview</span>
+        </div>
+        <p class="summary-text">
+            Multidisciplinary Graphic Designer and Visual Experience Builder specializing in comprehensive brand
+            identity systems, 3D design &amp; CGI, dynamic motion graphics, and interactive digital experiences. Proven
+            track record directing high-impact visual campaigns, city-scale environmental takeovers (AFCON 2025
+            Tramway), and luxury 3D product animations for Tier-1 global brands including Giorgio Armani, La
+            Roche-Posay, AXA, and ALX. Adept at bridging creative direction, Swiss-editorial typography, and advanced 3D
+            pipelines with modern AI-assisted creative workflows.
+        </p>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- CORE EXPERTISE & TECHNICAL SKILLS -->
+    <!-- ========================================================================= -->
+    <section>
+        <div class="section-title">
+            <h2>Core Expertise &amp; Technical Skills</h2>
+            <span class="section-meta">Capabilities</span>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-row">
+                <span class="skill-category">Brand &amp; Visual Design:</span>
+                <span class="skill-items">Brand Identity Architectures, Creative Direction, Editorial Typography, Print
+                    Systems, Environmental &amp; OOH Wraps, Brand Guidelines.</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-category">3D, CGI &amp; Motion:</span>
+                <span class="skill-items"><strong>Blender, Cinema 4D, After Effects, Premiere Pro, Photoshop,
+                        Illustrator</strong>; CGI Product Visualizations, Shading, Physics Simulations, Broadcast Motion
+                    Packages.</span>
+            </div>
+            <div class="skill-row">
+                <span class="skill-category">Digital, Web &amp; AI:</span>
+                <span class="skill-items">UI/UX Prototyping, Responsive Web Layouts, HTML5/CSS3/JavaScript, Interactive
+                    Media, AI-Assisted Generative Assets &amp; Agentic Workflows.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- WORK EXPERIENCE -->
+    <!-- ========================================================================= -->
+    <section>
+        <div class="section-title">
+            <h2>Work Experience</h2>
+            <span class="section-meta">Career Trajectory</span>
+        </div>
+
+        <!-- Publicis-WBC -->
+        <article class="experience-item">
+            <div class="experience-header">
+                <div class="company-role">
+                    <span class="company-name">Publicis-WBC</span>
+                    <span class="role-title">Graphic Designer</span>
+                </div>
+                <span class="experience-date">03/2024 — Present</span>
+            </div>
+            <ul class="experience-bullets">
+                <li>Lead major multi-channel visual campaigns, brand identity rollouts, and large-scale environmental
+                    assets for Tier-1 multinational and corporate accounts.</li>
+                <li>Spearheaded the <strong>AFCON 2025 (CAF)</strong> visual identity adaptation and environmental print
+                    design for the Casablanca and Rabat Tramway Takeover.</li>
+                <li>Produced comprehensive branding systems, social media ecosystems, motion graphics, and 3D CGI
+                    simulations for <strong>AXA</strong> and <strong>ALX</strong> (2024–2026).</li>
+                <li>Created high-end CGI product renders, 3D animations, and campaign visuals for <strong>Giorgio
+                        Armani, La Roche-Posay, Vichy, L’Oréal, Garnier, Mahindra, Whirlpool, Nestlé, Kitea,
+                        CDM</strong>, and <strong>Germa</strong>.</li>
+            </ul>
+        </article>
+
+        <!-- Disruptia -->
+        <article class="experience-item">
+            <div class="experience-header">
+                <div class="company-role">
+                    <span class="company-name">Disruptia</span>
+                    <span class="role-title">Visual &amp; Motion Designer</span>
+                </div>
+                <span class="experience-date">12/2023 — 02/2024</span>
+            </div>
+            <ul class="experience-bullets">
+                <li>Designed responsive visual identities, modular design systems, and motion graphics packages for
+                    corporate finance leaders and tech startups including <strong>AttijariWafa Bank, ComptaCom</strong>,
+                    and <strong>La French Tech Maroc</strong>.</li>
+            </ul>
+        </article>
+
+        <!-- Artcoustic -->
+        <article class="experience-item">
+            <div class="experience-header">
+                <div class="company-role">
+                    <span class="company-name">Artcoustic</span>
+                    <span class="role-title">Motion &amp; Broadcast Designer</span>
+                </div>
+                <span class="experience-date">10/2023 — 12/2023</span>
+            </div>
+            <ul class="experience-bullets">
+                <li>Engineered dynamic motion sequences, broadcast packages, and corporate animations for prominent
+                    national media and institutional platforms including <strong>2M TV, MTCash, Casablanca Finance City
+                        (CFC)</strong>, and the <strong>DGI</strong>.</li>
+            </ul>
+        </article>
+
+        <!-- Neomotion -->
+        <article class="experience-item">
+            <div class="experience-header">
+                <div class="company-role">
+                    <span class="company-name">Neomotion</span>
+                    <span class="role-title">Visual &amp; 3D CGI Designer</span>
+                </div>
+                <span class="experience-date">08/2023 — 10/2023</span>
+            </div>
+            <ul class="experience-bullets">
+                <li>Developed visual concepts, 3D social media CGI visualizers, and brand style guides for e-commerce,
+                    pharmaceutical, and hospitality clients including <strong>Mobydick-Imoutchou, Diaphora Pharma,
+                        HelloEco</strong>, and <strong>Riad Zahra</strong>.</li>
+            </ul>
+        </article>
+
+        <!-- Nassim Azarzar Studio -->
+        <article class="experience-item">
+            <div class="experience-header">
+                <div class="company-role">
+                    <span class="company-name">Nassim Azarzar Studio</span>
+                    <span class="role-title">Graphic &amp; Cultural Designer</span>
+                </div>
+                <span class="experience-date">02/2023 — 08/2023</span>
+            </div>
+            <ul class="experience-bullets">
+                <li>Contributed to experimental cultural design, exhibition catalogs, and branding materials for
+                    high-profile contemporary art initiatives, including the <strong>School of Casablanca</strong> and
+                    the <strong>Youmayn Festival</strong>.</li>
+            </ul>
+        </article>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- SELECTED PROJECTS & PORTFOLIO HIGHLIGHTS -->
+    <!-- ========================================================================= -->
+    <section>
+        <div class="section-title">
+            <h2>Selected Projects &amp; Portfolio Highlights</h2>
+            <span class="section-meta">Key Case Studies</span>
+        </div>
+        <div class="project-item">
+            <span class="project-title">Giorgio Armani, La Roche-Posay &amp; Vichy</span>
+            <span class="project-badge">CGI &amp; 3D Animation &bull; 2024</span>
+            <span class="project-desc">&mdash; Directed photorealistic 3D product renders, optical lighting simulations,
+                and motion campaign visuals for luxury beauty and dermatological packshots.</span>
+        </div>
+        <div class="project-item">
+            <span class="project-title">AFCON 2025 (CAF)</span>
+            <span class="project-badge">Print &amp; Environmental &bull; 2025–2026</span>
+            <span class="project-desc">&mdash; Designed high-visibility transit wraps and urban environmental branding
+                across Casablanca and Rabat tramway networks.</span>
+        </div>
+        <div class="project-item">
+            <span class="project-title">ALX &amp; AXA</span>
+            <span class="project-badge">CGI &bull; Motion &bull; Branding &bull; 2024–2026</span>
+            <span class="project-desc">&mdash; Built multi-platform brand identity extensions, 3D animated social
+                assets, and cinematic motion identity guidelines.</span>
+        </div>
+        <div class="project-item">
+            <span class="project-title">ICE, Clarre Vegan &amp; Mahindra</span>
+            <span class="project-badge">Branding &bull; 3D Animation &bull; 2024–2026</span>
+            <span class="project-desc">&mdash; Crafted complete brand design systems and photorealistic 3D product
+                storytelling for consumer, automotive, and vegan lifestyle brands.</span>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- EDUCATION & CERTIFICATIONS (2-COLUMN BALANCED) -->
+    <!-- ========================================================================= -->
+    <section>
+        <div class="two-col-grid">
+            <!-- Education -->
+            <div>
+                <div class="section-title">
+                    <h2>Education</h2>
+                    <span class="section-meta">Academic</span>
+                </div>
+                <div class="edu-item">
+                    <div class="item-main">Art’Com Sup Rabat</div>
+                    <div class="item-sub">Licence en Design Graphique (Bachelor's in Graphic Design)</div>
+                </div>
+                <div class="edu-item">
+                    <div class="item-main">School of Motion</div>
+                    <div class="item-sub">Animation &amp; 3D Intensive Bootcamps</div>
+                </div>
+                <div class="edu-item">
+                    <div class="item-main">Lycée Ibn Sina</div>
+                    <div class="item-sub">Baccalauréat Sciences Physiques</div>
+                </div>
+            </div>
+
+            <!-- Certifications & Courses -->
+            <div>
+                <div class="section-title">
+                    <h2>Certifications &amp; Courses</h2>
+                    <span class="section-meta">Specialized</span>
+                </div>
+                <div class="cert-item">
+                    <div class="item-main">Graphic Design Specialization</div>
+                    <div class="item-sub">CalArts / Coursera</div>
+                </div>
+                <div class="cert-item">
+                    <div class="item-main">Advanced 3D Animation: Renders with Blender</div>
+                    <div class="item-sub">Skillshare</div>
+                </div>
+                <div class="cert-item">
+                    <div class="item-main">Illustration for Motion &amp; Typography That Works</div>
+                    <div class="item-sub">School of Motion</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================================================= -->
+    <footer>
+        <span>Anass Biyguise &bull; Curriculum Vitae &bull; 2026</span>
+        <span>Online Portfolio: <a href="https://bigiz.me" target="_blank">bigiz.me</a> &bull; Available
+            Worldwide</span>
+    </footer>
+
+</body>
+
+</html>

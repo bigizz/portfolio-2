@@ -7,6 +7,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/cv",
+      "destination": "/cv.html"
+    },
+    {
       "source": "/alx",
       "destination": "/alx/index.html"
     },
