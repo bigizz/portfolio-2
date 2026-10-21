@@ -44,51 +44,10 @@ function buildWorkSectionHtml() {
                     </article>`;
   }).join('\n\n');
 
-  // Grid cards
-  const cardsHtml = projects.map(p => {
-    return `                <!-- Card ${p.id}: ${p.title} -->
-                <article data-category="${p.category}"
-                    class="project-grid-item group bg-brand-card rounded-2xl border border-brand-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-brand-dark/40 flex flex-col">
-                    <a href="${p.url}"
-                        class="block relative aspect-[4/5] bg-brand-surface-alt overflow-hidden focus:outline-none">
-                        <img src="${p.image}" alt="${p.title}" loading="lazy"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
-                        <span
-                            class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-dark/85 backdrop-blur-md text-[10px] font-mono font-bold uppercase tracking-wider text-white">
-                            ${p.badgeText}
-                        </span>
-                        <div
-                            class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md text-brand-dark flex items-center justify-center text-sm shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-accent group-hover:text-white">
-                            ↗
-                        </div>
-                    </a>
-                    <div class="p-5 flex flex-col flex-grow justify-between bg-white border-t border-brand-border">
-                        <div>
-                            <span class="text-[11px] font-mono text-brand-muted">${p.client} • ${p.year}</span>
-                            <h3
-                                class="text-xl font-black uppercase tracking-tight mt-1 text-brand-dark group-hover:text-brand-accent transition-colors">
-                                ${p.title}
-                            </h3>
-                            <p class="text-xs text-brand-muted mt-2 line-clamp-2">
-                                ${p.description}
-                            </p>
-                        </div>
-                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between text-xs font-mono">
-                            <span class="text-brand-dark font-medium">${p.deliverables.split(',')[0]}</span>
-                            <a href="${p.url}"
-                                class="text-brand-accent font-bold hover:underline inline-flex items-center gap-1">
-                                <span>Case Study</span>
-                                <span>↗</span>
-                            </a>
-                        </div>
-                    </div>
-                </article>`;
-  }).join('\n\n');
-
-  return { counts, rowsHtml, cardsHtml };
+  return { counts, rowsHtml };
 }
 
-const { counts, rowsHtml, cardsHtml } = buildWorkSectionHtml();
+const { counts, rowsHtml } = buildWorkSectionHtml();
 
 function renderProjectPage(p) {
   // Build thumbnail buttons
@@ -119,23 +78,22 @@ function renderProjectPage(p) {
   // Arrows visibility: if only 1 media item, arrows and pill are hidden
   const hideControls = p.media.length <= 1 ? 'style="display: none;"' : '';
 
-  // Extract head, header, footer, modals, and interaction logic from baseHtml
   let html = baseHtml;
 
   // 1. Update Title and Meta
   html = html.replace(/<title>.*?<\/title>/, `<title>${p.title} — Anass Biyguise</title>`);
-  html = html.replace(/<span class="text-brand-dark font-bold uppercase">AXA Global<\/span>/g, `<span class="text-brand-dark font-bold uppercase">${p.title}</span>`);
+  html = html.replace(/(<span class="text-brand-dark font-bold uppercase">)[^<]*(<\/span>)/g, `$1${p.title}$2`);
 
   // 2. Update Discipline Badge in Stage
-  html = html.replace(/<span>Motion & Branding<\/span>/, `<span>${p.badgeText}</span>`);
+  html = html.replace(/(<!-- Discipline Badge -->[\s\S]*?<span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"><\/span>\s*<span>)[^<]*(<\/span>)/, `$1${p.badgeText}$2`);
 
   // 3. Update Project Title in Stage
-  html = html.replace(/<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">\s*AXA Global\s*<\/h1>/,
-    `<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">\n                            ${p.title}\n                        </h1>`);
+  html = html.replace(/(<!-- Project Title -->[\s\S]*?<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">)[\s\S]*?(<\/h1>)/,
+    `$1\n                            ${p.title}\n                        $2`);
 
   // 4. Update Project Description in Stage
-  html = html.replace(/<p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">\s*My ongoing work with AXA[\s\S]*?<\/p>/,
-    `<p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">\n                            ${p.description}\n                        </p>`);
+  html = html.replace(/(<!-- Project Story -->[\s\S]*?<p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">)[\s\S]*?(<\/p>)/,
+    `$1\n                            ${p.description}\n                        $2`);
 
   // 5. Update Metadata Table
   const metaTablePattern = /<!-- Metadata Table -->[\s\S]*?<!-- Action Trigger:/;
@@ -217,15 +175,25 @@ ${thumbBtns}
   html = html.replace(stageSectionPattern, newStageSection);
 
   // 7. Update Filter tab counts
-  html = html.replace(/<span class="tab-count text-\[10px\] px-1\.5 py-0\.2 rounded-full bg-brand-border text-brand-dark font-normal">11<\/span>/g,
-    `<span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">${counts.all}</span>`);
+  html = html.replace(/(<button[^>]*id="tab-all"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.all}$2`);
+  html = html.replace(/(<button[^>]*id="tab-branding"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.branding}$2`);
+  html = html.replace(/(<button[^>]*id="tab-motion"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.motion}$2`);
+  html = html.replace(/(<button[^>]*id="tab-3d"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts['3d']}$2`);
+  html = html.replace(/(<button[^>]*id="tab-print"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.print}$2`);
+  html = html.replace(/(<button[^>]*id="tab-editing"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.editing}$2`);
 
-  // 8. Replace Selected Work list and grid
-  const listWrapperPattern = /<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">[\s\S]*?<\/div>\s*<\/div>\s*<!-- Grid View/;
-  html = html.replace(listWrapperPattern, `<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">\n\n${rowsHtml}\n\n                </div>\n            </div>\n\n            <!-- Grid View`);
-
-  const gridWrapperPattern = /<div id="project-grid-wrapper"[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/;
-  html = html.replace(gridWrapperPattern, `<div id="project-grid-wrapper"\n                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">\n\n${cardsHtml}\n\n            </div>\n        </div>\n    </section>`);
+  // 8. Replace Selected Work list
+  const startListTag = '<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">';
+  const listStartIndex = html.indexOf(startListTag);
+  if (listStartIndex !== -1) {
+    const previewIndex = html.indexOf('id="desktop-live-preview"', listStartIndex);
+    if (previewIndex !== -1) {
+      const closingDivIndex = html.lastIndexOf('</div>', previewIndex);
+      if (closingDivIndex !== -1) {
+        html = html.substring(0, listStartIndex + startListTag.length) + '\n\n' + rowsHtml + '\n\n                ' + html.substring(closingDivIndex);
+      }
+    }
+  }
 
   return html;
 }

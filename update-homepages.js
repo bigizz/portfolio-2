@@ -54,7 +54,7 @@ function generateWorkSection() {
                             ${p.badgeText}
                         </span>
                         <div
-                            class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md text-brand-dark flex items-center justify-center text-sm shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-brand-accent group-hover:text-white">
+                            class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-brand-accent text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             ↗
                         </div>
                     </a>
@@ -69,14 +69,11 @@ function generateWorkSection() {
                                 ${p.description}
                             </p>
                         </div>
-                        <div class="pt-4 mt-4 border-t border-brand-border flex items-center justify-between text-xs font-mono">
-                            <span class="text-brand-dark font-medium">${p.deliverables.split(',')[0]}</span>
-                            <a href="${p.url}"
-                                class="text-brand-accent font-bold hover:underline inline-flex items-center gap-1">
-                                <span>Case Study</span>
-                                <span>↗</span>
-                            </a>
-                        </div>
+                        <a href="${p.url}"
+                            class="mt-4 pt-3 border-t border-brand-border flex items-center justify-between text-xs font-mono font-bold uppercase text-brand-dark group-hover:text-brand-accent transition-colors">
+                            <span>Explore Project</span>
+                            <span>↗</span>
+                        </a>
                     </div>
                 </article>`;
   }).join('\n\n');
@@ -88,54 +85,66 @@ const { counts, rowsHtml, cardsHtml } = generateWorkSection();
 
 const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AFCON 2025 • CAF ]</span>
-                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ GIORGIO ARMANI ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AXA ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ NESTLÉ ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AXA GLOBAL ]</span>
-                    <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ SPEEDY AUTO ]</span>
+                    <span class="mx-4">[ ALX AFRICA ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MAHINDRA ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ YAMED PROMOTION ]</span>
+                    <span class="mx-4">[ YAMED ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ ICE ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ WAFA IMA ASSISTANCE ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ NESTLÉ NAN & NIDO ]</span>
+                    <span class="mx-4">[ CLARRE VEGAN ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ SPEEDY ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MOROCCAN OLIVE OIL ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ ALX AFRICA ]</span>
+                    <span class="mx-4">[ PERSONAL WORKS ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ BRANDING / MOTION / 3D / PRINT / EDITING ]</span>
                     <span class="text-brand-accent">★</span>
                     <!-- Loop repeat for smooth seamless marquee -->
                     <span class="mx-4">[ PUBLICIS-WBC ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AFCON 2025 • CAF ]</span>
-                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ GIORGIO ARMANI ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AXA ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ NESTLÉ ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AXA GLOBAL ]</span>
-                    <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ SPEEDY AUTO ]</span>
+                    <span class="mx-4">[ ALX AFRICA ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MAHINDRA ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ YAMED PROMOTION ]</span>
+                    <span class="mx-4">[ YAMED ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ ICE ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ WAFA IMA ASSISTANCE ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ NESTLÉ NAN & NIDO ]</span>
+                    <span class="mx-4">[ CLARRE VEGAN ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ SPEEDY ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MOROCCAN OLIVE OIL ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ ALX AFRICA ]</span>
+                    <span class="mx-4">[ PERSONAL WORKS ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ BRANDING / MOTION / 3D / PRINT / EDITING ]</span>
                     <span class="text-brand-accent">★</span>`;
@@ -148,17 +157,10 @@ const thumbnailsArrayStr = `const PROJECT_THUMBNAILS = [\n` +
   let content = fs.readFileSync(filename, 'utf8');
 
   // 1. Marquee
-  const marqueeRegex = /<!-- Seamless Animated Client & Capabilities Marquee -->[\s\S]*?<div class="marquee-content flex items-center whitespace-nowrap text-xs font-mono font-bold tracking-widest text-brand-dark py-3">([\s\S]*?)<\/div>\s*<\/aside>/;
-  content = content.replace(marqueeRegex, (match) => {
-    return `<!-- Seamless Animated Client & Capabilities Marquee -->
-            <aside aria-label="Selected client portfolio and core capabilities ticker"
-                class="overflow-hidden border-t border-b border-brand-border bg-brand-surface-alt/80">
-                <div
-                    class="marquee-content flex items-center whitespace-nowrap text-xs font-mono font-bold tracking-widest text-brand-dark py-3">
-${marqueeContent}
-                </div>
-            </aside>`;
-  });
+  const tickerRegex = /<div class="animate-ticker text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">[\s\S]*?<\/div>/;
+  if (tickerRegex.test(content)) {
+    content = content.replace(tickerRegex, `<div class="animate-ticker text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">\n${marqueeContent}\n                </div>`);
+  }
 
   // 2. Tab counts
   content = content.replace(/(<button[^>]*id="tab-all"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.all}$2`);
@@ -169,12 +171,31 @@ ${marqueeContent}
   content = content.replace(/(<button[^>]*id="tab-editing"[^>]*>[\s\S]*?<span[^>]*class="tab-count[^>]*>)\d+(<\/span>)/, `$1${counts.editing}$2`);
 
   // 3. List View
-  const listRegex = /<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">[\s\S]*?<\/div>\s*<\/div>\s*<!-- ================================================================= -->\s*<!-- VIEW MODE 2: VISUAL CARD GRID/;
-  content = content.replace(listRegex, `<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">\n\n${rowsHtml}\n\n                </div>\n            </div>\n\n            <!-- ================================================================= -->\n            <!-- VIEW MODE 2: VISUAL CARD GRID`);
+  const startListTag = '<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">';
+  const listStartIndex = content.indexOf(startListTag);
+  if (listStartIndex !== -1) {
+    const previewIndex = content.indexOf('id="desktop-live-preview"', listStartIndex);
+    if (previewIndex !== -1) {
+      const closingDivIndex = content.lastIndexOf('</div>', previewIndex);
+      if (closingDivIndex !== -1) {
+        content = content.substring(0, listStartIndex + startListTag.length) + '\n\n' + rowsHtml + '\n\n                ' + content.substring(closingDivIndex);
+      }
+    }
+  }
 
   // 4. Grid View
-  const gridRegex = /<div id="project-grid-wrapper"[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/;
-  content = content.replace(gridRegex, `<div id="project-grid-wrapper"\n                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">\n\n${cardsHtml}\n\n            </div>\n        </div>\n    </section>`);
+  const startGridTag = '<div id="work-grid-view" class="hidden mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">';
+  const gridStartIndex = content.indexOf(startGridTag);
+  if (gridStartIndex !== -1) {
+    const aboutIndex = content.indexOf('id="about"', gridStartIndex);
+    if (aboutIndex !== -1) {
+      const sectionCloseIndex = content.lastIndexOf('</section>', aboutIndex);
+      const gridCloseIndex = content.lastIndexOf('</div>', sectionCloseIndex);
+      if (gridCloseIndex !== -1) {
+        content = content.substring(0, gridStartIndex + startGridTag.length) + '\n\n' + cardsHtml + '\n\n            ' + content.substring(gridCloseIndex);
+      }
+    }
+  }
 
   // 5. Preload array
   const preloadRegex = /const PROJECT_THUMBNAILS = \[[\s\S]*?\];/;

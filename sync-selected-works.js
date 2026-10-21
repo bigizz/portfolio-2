@@ -81,57 +81,69 @@ const cardsHtml = projects.map(p => {
                 </article>`;
 }).join('\n\n');
 
-// 4. Marquee string
+// 4. Marquee string (ordered as requested)
 const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]</span>
-                    <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AFCON 2025 • CAF ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ GIORGIO ARMANI ]</span>
                     <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AXA ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ NESTLÉ ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AFCON 2025 ]</span>
+                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AXA GLOBAL ]</span>
-                    <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ SPEEDY AUTO ]</span>
+                    <span class="mx-4">[ ALX AFRICA ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MAHINDRA ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ YAMED PROMOTION ]</span>
+                    <span class="mx-4">[ YAMED ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ ICE ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ WAFA IMA ASSISTANCE ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ NESTLÉ NAN & NIDO ]</span>
+                    <span class="mx-4">[ CLARRE VEGAN ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ SPEEDY ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MOROCCAN OLIVE OIL ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ ALX AFRICA ]</span>
+                    <span class="mx-4">[ PERSONAL WORKS ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ BRANDING / MOTION / 3D / PRINT / EDITING ]</span>
                     <span class="text-brand-accent">★</span>
                     <!-- Loop repeat for smooth seamless marquee -->
                     <span class="mx-4">[ PUBLICIS-WBC ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AFCON 2025 • CAF ]</span>
-                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ GIORGIO ARMANI ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AXA ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ NESTLÉ ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ AXA GLOBAL ]</span>
-                    <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ SPEEDY AUTO ]</span>
+                    <span class="mx-4">[ ALX AFRICA ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MAHINDRA ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ YAMED PROMOTION ]</span>
+                    <span class="mx-4">[ YAMED ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ ICE ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ WAFA IMA ASSISTANCE ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ NESTLÉ NAN & NIDO ]</span>
+                    <span class="mx-4">[ CLARRE VEGAN ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ SPEEDY ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ MOROCCAN OLIVE OIL ]</span>
                     <span class="text-brand-accent">★</span>
-                    <span class="mx-4">[ ALX AFRICA ]</span>
+                    <span class="mx-4">[ PERSONAL WORKS ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ BRANDING / MOTION / 3D / PRINT / EDITING ]</span>
                     <span class="text-brand-accent">★</span>`;
@@ -154,9 +166,6 @@ function updateTabCounts(html) {
 // Helper: replace #project-list-wrapper
 function updateListWrapper(html) {
   const startTag = '<div class="flex flex-col border-b border-brand-border" id="project-list-wrapper">';
-  const endTag = '</div>\n\n                <!-- Floating Live Desktop Preview Tooltip';
-  const altEndTag = '</div>\n                <!-- Floating Live Desktop Preview Tooltip';
-
   const startIndex = html.indexOf(startTag);
   if (startIndex === -1) {
     console.warn('Could not find startTag for #project-list-wrapper');
@@ -193,7 +202,6 @@ function updateGridView(html) {
   }
 
   // Find the closing </div> of #work-grid-view
-  // The next section is <!-- ================================================================= -->\n        <!-- ABOUT
   const aboutIndex = html.indexOf('id="about"', startIndex);
   if (aboutIndex === -1) {
     console.warn('Could not find #about section after #work-grid-view');
@@ -208,6 +216,35 @@ function updateGridView(html) {
   const after = html.substring(gridCloseIndex);
 
   return `${before}\n\n${cardsHtml}\n\n            ${after}`;
+}
+
+// Helper: update specific project stage metadata in project subpages
+function updateProjectStageMetadata(html, p) {
+  // 1. Title tag
+  html = html.replace(/<title>.*?<\/title>/, `<title>${p.title} — Anass Biyguise</title>`);
+
+  // 2. Breadcrumb title
+  html = html.replace(/(<span class="text-brand-dark font-bold uppercase">)[^<]*(<\/span>)/g, `$1${p.title}$2`);
+
+  // 3. Discipline badge in stage
+  html = html.replace(/(<!-- Discipline Badge -->[\s\S]*?<span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"><\/span>\s*<span>)[^<]*(<\/span>)/, `$1${p.badgeText}$2`);
+
+  // 4. Project title in stage (h1)
+  html = html.replace(/(<!-- Project Title -->[\s\S]*?<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">)[\s\S]*?(<\/h1>)/, `$1\n                            ${p.title}\n                        $2`);
+
+  // 5. Metadata Table: Client
+  html = html.replace(/(<span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Client<\/span>\s*<span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">)[^<]*(<\/span>)/, `$1${p.client}$2`);
+
+  // 6. Metadata Table: Year
+  html = html.replace(/(<span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Year<\/span>\s*<span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">)[^<]*(<\/span>)/, `$1${p.year}$2`);
+
+  // 7. Metadata Table: Deliverables
+  html = html.replace(/(<span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Deliverables<\/span>\s*<span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">)[^<]*(<\/span>)/, `$1${p.deliverables}$2`);
+
+  // 8. Main image alt text
+  html = html.replace(/(<img id="main-image" alt=")[^"]*(")/, `$1${p.title} visual preview$2`);
+
+  return html;
 }
 
 // 5. Update index.html and home.html
@@ -238,40 +275,40 @@ function updateGridView(html) {
 });
 
 // 6. Update all project HTML files
-const projectFiles = [
-  'axa/axa.html',
-  'axa/index.html',
-  'alx/alx.html',
-  'alx/index.html',
-  'armani/armani.html',
-  'armani/index.html',
-  'caf/caf.html',
-  'caf/index.html',
-  'clarre/clarre.html',
-  'clarre/index.html',
-  'ice/ice.html',
-  'ice/index.html',
-  'loreal/loreal.html',
-  'loreal/index.html',
-  'loreal/lrp.html',
-  'mahindra/mahindra.html',
-  'mahindra/index.html',
-  'personal/personal.html',
-  'personal/index.html',
-  'personal/sculptures.html',
-  'speedy/speedy.html',
-  'speedy/index.html',
-  'yamed/yamed.html',
-  'yamed/index.html',
-  'Moroccan Olive Oil/moroccan-olive-oil.html',
-  'Moroccan Olive Oil/index.html',
-  'NAN - NIDO/nan-nido.html',
-  'NAN - NIDO/index.html',
-  'Wafa IMA Assistance/wafa-ima.html',
-  'Wafa IMA Assistance/index.html'
+const projectFileMappings = [
+  { file: 'armani/armani.html', slug: 'armani' },
+  { file: 'armani/index.html', slug: 'armani' },
+  { file: 'axa/axa.html', slug: 'axa' },
+  { file: 'axa/index.html', slug: 'axa' },
+  { file: 'NAN - NIDO/nan-nido.html', slug: 'nan-nido' },
+  { file: 'NAN - NIDO/index.html', slug: 'nan-nido' },
+  { file: 'caf/caf.html', slug: 'caf' },
+  { file: 'caf/index.html', slug: 'caf' },
+  { file: 'loreal/loreal.html', slug: 'loreal' },
+  { file: 'loreal/index.html', slug: 'loreal' },
+  { file: 'loreal/lrp.html', slug: 'loreal' },
+  { file: 'alx/alx.html', slug: 'alx' },
+  { file: 'alx/index.html', slug: 'alx' },
+  { file: 'mahindra/mahindra.html', slug: 'mahindra' },
+  { file: 'mahindra/index.html', slug: 'mahindra' },
+  { file: 'yamed/yamed.html', slug: 'yamed' },
+  { file: 'yamed/index.html', slug: 'yamed' },
+  { file: 'ice/ice.html', slug: 'ice' },
+  { file: 'ice/index.html', slug: 'ice' },
+  { file: 'Wafa IMA Assistance/wafa-ima.html', slug: 'wafa-ima' },
+  { file: 'Wafa IMA Assistance/index.html', slug: 'wafa-ima' },
+  { file: 'clarre/clarre.html', slug: 'clarre' },
+  { file: 'clarre/index.html', slug: 'clarre' },
+  { file: 'speedy/speedy.html', slug: 'speedy' },
+  { file: 'speedy/index.html', slug: 'speedy' },
+  { file: 'Moroccan Olive Oil/moroccan-olive-oil.html', slug: 'moroccan-olive-oil' },
+  { file: 'Moroccan Olive Oil/index.html', slug: 'moroccan-olive-oil' },
+  { file: 'personal/personal.html', slug: 'personal' },
+  { file: 'personal/index.html', slug: 'personal' },
+  { file: 'personal/sculptures.html', slug: 'personal' }
 ];
 
-projectFiles.forEach(file => {
+projectFileMappings.forEach(({ file, slug }) => {
   if (!fs.existsSync(file)) {
     console.warn(`File does not exist: ${file}`);
     return;
@@ -283,6 +320,12 @@ projectFiles.forEach(file => {
 
   // Update #project-list-wrapper
   html = updateListWrapper(html);
+
+  // Update stage metadata for this specific project
+  const projectObj = projects.find(p => p.slug === slug);
+  if (projectObj) {
+    html = updateProjectStageMetadata(html, projectObj);
+  }
 
   fs.writeFileSync(file, html, 'utf8');
   console.log(`Updated project file: ${file}`);
