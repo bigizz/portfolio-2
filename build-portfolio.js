@@ -198,7 +198,7 @@ ${thumbBtns}
   return html;
 }
 
-// Generate files for all 14 projects
+// Generate files for all 15 projects
 projects.forEach(p => {
   const content = renderProjectPage(p);
   const targetDir = path.resolve(p.folder);
@@ -214,7 +214,11 @@ projects.forEach(p => {
   const slugFile = path.join(targetDir, `${p.slug}.html`);
   fs.writeFileSync(slugFile, content, 'utf8');
 
+  if (p.slug === 'nestle') {
+    fs.writeFileSync(path.join(targetDir, 'nan-nido.html'), content, 'utf8');
+  }
+
   console.log(`Generated: ${indexFile} and ${slugFile}`);
 });
 
-console.log('All 14 project pages successfully generated and synchronized!');
+console.log('All 15 project pages successfully generated and synchronized!');

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// 14 master portfolio projects definition
+// 15 master portfolio projects definition
 const projects = [
   {
     id: '01',
@@ -15,7 +15,7 @@ const projects = [
     badgeText: '3D / CGI',
     deliverables: 'CGI Luxury Packshot, Lighting',
     image: '/armani/armani.jpg',
-    description: 'A photorealistic 3D product visualization for Giorgio Armani beauty packaging. Designed with precision physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.',
+    description: 'A CGI product visualization for Giorgio Armani Si Passione fragrance. Designed with precision physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1025241625?fl=pl&fe=sh', thumb: '/armani/armani-img1.jpg', alt: 'Armani CGI Packshot' }
     ]
@@ -43,24 +43,25 @@ const projects = [
   },
   {
     id: '03',
-    slug: 'nan-nido',
-    folder: 'NAN - NIDO',
-    url: '/nan-nido',
+    slug: 'nestle',
+    folder: 'nestlé',
+    url: '/nestle',
     title: 'Nestlé',
     client: 'Nestlé Nutrition',
     year: '2025',
-    category: '3d print',
-    badgeText: '3D & Print',
-    deliverables: 'Supermarket POS Display Architecture, Packshots, Digital Toolkits',
-    image: '/NAN - NIDO/nan-nido.png',
-    description: 'Retail spatial architecture, POS display stands, and nutritional packaging 3D packshots for Nestlé NAN OPTIPRO and NIDO infant nutrition ranges across Middle East and North Africa retail outlets.',
+    category: 'motion editing 3d print',
+    badgeText: 'Motion & Editing',
+    deliverables: 'Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots',
+    image: '/nestlé/nan-nido.jpg',
+    description: 'Dynamic YouTube pre-roll advertising campaign featuring high-impact video editing and motion graphics for Nestlé Cerelac, alongside retail spatial architecture, POS display stands, and nutritional packaging 3D packshots for NAN OPTIPRO and NIDO infant nutrition ranges.',
     media: [
-      { type: 'image', src: '/NAN - NIDO/1.png', thumb: '/NAN - NIDO/1.png', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
-      { type: 'image', src: '/NAN - NIDO/2.png', thumb: '/NAN - NIDO/2.png', alt: 'Nestlé POS Display Angle View' },
-      { type: 'image', src: '/NAN - NIDO/3.png', thumb: '/NAN - NIDO/3.png', alt: 'Nestlé Retail Merchandising Detail' },
-      { type: 'image', src: '/NAN - NIDO/1x1display vf 1.png', thumb: '/NAN - NIDO/1x1display vf 1.png', alt: 'NAN Display Square Campaign Format' },
-      { type: 'image', src: '/NAN - NIDO/toolkit vf 1.png', thumb: '/NAN - NIDO/toolkit vf 1.png', alt: 'Nestlé Digital Campaign Toolkit 1' },
-      { type: 'image', src: '/NAN - NIDO/toolkit vf 3.png', thumb: '/NAN - NIDO/toolkit vf 3.png', alt: 'Nestlé Digital Campaign Toolkit 3' }
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237982214?fl=pl&fe=sh', thumb: '/nestlé/video-cerelac-thumb.jpg', alt: 'Nestlé Cerelac YouTube Pre-Roll Ad' },
+      { type: 'image', src: '/nestlé/1.jpg', thumb: '/nestlé/1.jpg', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
+      { type: 'image', src: '/nestlé/2.jpg', thumb: '/nestlé/2.jpg', alt: 'Nestlé POS Display Angle View' },
+      { type: 'image', src: '/nestlé/3.jpg', thumb: '/nestlé/3.jpg', alt: 'Nestlé Retail Merchandising Detail' },
+      { type: 'image', src: '/nestlé/1x1display vf 1.jpg', thumb: '/nestlé/1x1display vf 1.jpg', alt: 'NAN Display Square Campaign Format' },
+      { type: 'image', src: '/nestlé/toolkit vf 1.jpg', thumb: '/nestlé/toolkit vf 1.jpg', alt: 'Nestlé Digital Campaign Toolkit 1' },
+      { type: 'image', src: '/nestlé/toolkit vf 3.jpg', thumb: '/nestlé/toolkit vf 3.jpg', alt: 'Nestlé Digital Campaign Toolkit 3' }
     ]
   },
   {
@@ -83,6 +84,24 @@ const projects = [
   },
   {
     id: '05',
+    slug: 'taous',
+    folder: 'taous',
+    url: '/taous',
+    title: 'Taous',
+    client: 'Taous',
+    year: '2026',
+    category: '3d',
+    badgeText: '3D / CGI',
+    deliverables: '3D Product Modeling, CGI Packshots (2026 Gamme)',
+    image: '/taous/taous.jpg',
+    description: 'Complete 3D product modeling and CGI packshot visualization for the new 2026 Taous product range (gamme), featuring high-fidelity packaging geometry, cosmetic fluid materials, and studio renders for national key visual campaigns.',
+    media: [
+      { type: 'image', src: '/taous/all.jpg', thumb: '/taous/all.jpg', alt: 'Taous 2026 Product Gamme 3D Modeling' },
+      { type: 'image', src: '/taous/KV.jpg', thumb: '/taous/KV.jpg', alt: 'Taous 2026 Key Visual Campaign' }
+    ]
+  },
+  {
+    id: '06',
     slug: 'loreal',
     folder: 'loreal',
     url: '/loreal',
@@ -108,7 +127,7 @@ const projects = [
     ]
   },
   {
-    id: '06',
+    id: '07',
     slug: 'alx',
     folder: 'alx',
     url: '/alx',
@@ -128,7 +147,7 @@ const projects = [
     ]
   },
   {
-    id: '07',
+    id: '08',
     slug: 'mahindra',
     folder: 'mahindra',
     url: '/mahindra',
@@ -142,15 +161,15 @@ const projects = [
     description: 'Comprehensive automotive advertising direction for Mahindra Morocco, featuring cinematic launch motion for the XUV 3XO SUV, national print billboard campaign collateral, and seasonal digital activations.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237668658?fl=pl&fe=sh', thumb: '/mahindra/video-xuv3xo-thumb.jpg', alt: 'Mahindra XUV 3XO Motion Film' },
-      { type: 'image', src: '/mahindra/XUV300 Post .png', thumb: '/mahindra/XUV300 Post .png', alt: 'Mahindra XUV 300 Visual' },
-      { type: 'image', src: '/mahindra/Affiche page offre.png', thumb: '/mahindra/Affiche page offre.png', alt: 'Mahindra National Campaign Poster' },
-      { type: 'image', src: '/mahindra/post 4.png', thumb: '/mahindra/post 4.png', alt: 'Mahindra Digital Promotion Grid' },
+      { type: 'image', src: '/mahindra/XUV300 Post .jpg', thumb: '/mahindra/XUV300 Post .jpg', alt: 'Mahindra XUV 300 Visual' },
+      { type: 'image', src: '/mahindra/Affiche page offre.jpg', thumb: '/mahindra/Affiche page offre.jpg', alt: 'Mahindra National Campaign Poster' },
+      { type: 'image', src: '/mahindra/post 4.jpg', thumb: '/mahindra/post 4.jpg', alt: 'Mahindra Digital Promotion Grid' },
       { type: 'image', src: '/mahindra/mahindra-img1.jpg', thumb: '/mahindra/mahindra-img1.jpg', alt: 'Mahindra Dealership Print Catalog' },
       { type: 'image', src: '/mahindra/mahindra-img5.jpg', thumb: '/mahindra/mahindra-img5.jpg', alt: 'Mahindra Brand Visual Guidelines' }
     ]
   },
   {
-    id: '08',
+    id: '09',
     slug: 'yamed',
     folder: 'yamed',
     url: '/yamed',
@@ -160,19 +179,19 @@ const projects = [
     category: 'branding editing motion',
     badgeText: 'Branding & Motion',
     deliverables: 'Architectural Video Tours, Luxury Editorial, Social Media',
-    image: '/yamed/yamed.png',
+    image: '/yamed/yamed.jpg',
     description: 'Premium branding and architectural cinematic motion for Yamed Promotion luxury residential developments, showcasing "Résidence Les Sources", "VILLA 28", and "Terre Océane" residences with refined editorial typography.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688326?fl=pl&fe=sh', thumb: '/yamed/video-sources-thumb.jpg', alt: 'Résidence Les Sources Tour' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688920?fl=pl&fe=sh', thumb: '/yamed/video-villa28-thumb.jpg', alt: 'VILLA 28 Motion Showcase' },
-      { type: 'image', src: '/yamed/post2.png', thumb: '/yamed/post2.png', alt: 'Terre Océane Editorial Visual' },
-      { type: 'image', src: '/yamed/post7.png', thumb: '/yamed/post7.png', alt: 'Yamed Architecture Showcase' },
-      { type: 'image', src: '/yamed/c2698 Post 03_.png', thumb: '/yamed/c2698 Post 03_.png', alt: 'Yamed Prestige Living' },
-      { type: 'image', src: '/yamed/post10.png', thumb: '/yamed/post10.png', alt: 'Yamed Digital Campaign' }
+      { type: 'image', src: '/yamed/post2.jpg', thumb: '/yamed/post2.jpg', alt: 'Terre Océane Editorial Visual' },
+      { type: 'image', src: '/yamed/post7.jpg', thumb: '/yamed/post7.jpg', alt: 'Yamed Architecture Showcase' },
+      { type: 'image', src: '/yamed/c2698 Post 03_.jpg', thumb: '/yamed/c2698 Post 03_.jpg', alt: 'Yamed Prestige Living' },
+      { type: 'image', src: '/yamed/post10.jpg', thumb: '/yamed/post10.jpg', alt: 'Yamed Digital Campaign' }
     ]
   },
   {
-    id: '09',
+    id: '10',
     slug: 'ice',
     folder: 'ice',
     url: '/ice',
@@ -189,7 +208,7 @@ const projects = [
     ]
   },
   {
-    id: '10',
+    id: '11',
     slug: 'wafa-ima',
     folder: 'Wafa IMA Assistance',
     url: '/wafa-ima',
@@ -199,17 +218,17 @@ const projects = [
     category: 'branding',
     badgeText: 'Branding',
     deliverables: 'Outdoor Advertising, National Holiday Posters, Auto Premium Campaign',
-    image: '/Wafa IMA Assistance/wafa.png',
+    image: '/Wafa IMA Assistance/wafa.jpg',
     description: 'National print advertising and creative direction for Wafa IMA Assistance, spanning Wafa Auto Premium roadside assistance campaigns, international student coverage, and commemorative national holiday posters.',
     media: [
-      { type: 'image', src: '/Wafa IMA Assistance/wafa auto premium.png', thumb: '/Wafa IMA Assistance/wafa auto premium.png', alt: 'Wafa Auto Premium Roadside Campaign' },
-      { type: 'image', src: '/Wafa IMA Assistance/wafa étudiant expartié.png', thumb: '/Wafa IMA Assistance/wafa étudiant expartié.png', alt: 'Wafa Étudiant Expatrié Assistance' },
-      { type: 'image', src: '/Wafa IMA Assistance/marche verte.png', thumb: '/Wafa IMA Assistance/marche verte.png', alt: 'Wafa Marche Verte Commemorative Poster' },
-      { type: 'image', src: '/Wafa IMA Assistance/victoire.png', thumb: '/Wafa IMA Assistance/victoire.png', alt: 'Wafa Victoire Sports Campaign' }
+      { type: 'image', src: '/Wafa IMA Assistance/wafa auto premium.jpg', thumb: '/Wafa IMA Assistance/wafa auto premium.jpg', alt: 'Wafa Auto Premium Roadside Campaign' },
+      { type: 'image', src: '/Wafa IMA Assistance/wafa étudiant expartié.jpg', thumb: '/Wafa IMA Assistance/wafa étudiant expartié.jpg', alt: 'Wafa Étudiant Expatrié Assistance' },
+      { type: 'image', src: '/Wafa IMA Assistance/marche verte.jpg', thumb: '/Wafa IMA Assistance/marche verte.jpg', alt: 'Wafa Marche Verte Commemorative Poster' },
+      { type: 'image', src: '/Wafa IMA Assistance/victoire.jpg', thumb: '/Wafa IMA Assistance/victoire.jpg', alt: 'Wafa Victoire Sports Campaign' }
     ]
   },
   {
-    id: '11',
+    id: '12',
     slug: 'clarre',
     folder: 'clarre',
     url: '/clarre',
@@ -228,7 +247,7 @@ const projects = [
     ]
   },
   {
-    id: '12',
+    id: '13',
     slug: 'speedy',
     folder: 'speedy',
     url: '/speedy',
@@ -238,18 +257,18 @@ const projects = [
     category: 'branding motion editing print',
     badgeText: 'Branding & Motion',
     deliverables: '3D CGI Commercial, Campaign Posters, Social Assets',
-    image: '/speedy/speedy.png',
+    image: '/speedy/speedy.jpg',
     description: 'A playful surreal 3D CGI campaign for Speedy auto centers featuring a pool sculpted in the silhouette of a mechanical wrench, highlighting summertime vehicle diagnostics and service specials.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237687389?fl=pl&fe=sh', thumb: '/speedy/video-speedy-thumb.jpg', alt: 'Speedy Commercial Motion' },
-      { type: 'image', src: '/speedy/check-up.png', thumb: '/speedy/check-up.png', alt: 'Speedy Check-Up 3D Poster' },
-      { type: 'image', src: '/speedy/vidange.png', thumb: '/speedy/vidange.png', alt: 'Speedy Vidange Campaign' },
-      { type: 'image', src: '/speedy/vitres.png', thumb: '/speedy/vitres.png', alt: 'Speedy Traitement Vitres' },
-      { type: 'image', src: '/speedy/Screenshot 2026-10-19 210523.png', thumb: '/speedy/Screenshot 2026-10-19 210523.png', alt: 'Speedy Seasonal Promotion' }
+      { type: 'image', src: '/speedy/check-up.jpg', thumb: '/speedy/check-up.jpg', alt: 'Speedy Check-Up 3D Poster' },
+      { type: 'image', src: '/speedy/vidange.jpg', thumb: '/speedy/vidange.jpg', alt: 'Speedy Vidange Campaign' },
+      { type: 'image', src: '/speedy/vitres.jpg', thumb: '/speedy/vitres.jpg', alt: 'Speedy Traitement Vitres' },
+      { type: 'image', src: '/speedy/Screenshot 2026-10-19 210523.jpg', thumb: '/speedy/Screenshot 2026-10-19 210523.jpg', alt: 'Speedy Seasonal Promotion' }
     ]
   },
   {
-    id: '13',
+    id: '14',
     slug: 'moroccan-olive-oil',
     folder: 'Moroccan Olive Oil',
     url: '/moroccan-olive-oil',
@@ -259,17 +278,17 @@ const projects = [
     category: 'branding',
     badgeText: 'Branding',
     deliverables: 'Label Design, Marble & Botanical CGI Packshot, Brand Identity',
-    image: '/Moroccan Olive Oil/moo.png',
+    image: '/Moroccan Olive Oil/moo.jpg',
     description: 'Art direction and packaging design for Moroccan Olive Oil (MOO) under the "Morocco Kingdom of Taste" collective mark. Styled with Italian Carrara marble pedestals, fresh olive branches, and geometric heritage backdrops.',
     media: [
-      { type: 'image', src: '/Moroccan Olive Oil/1.png', thumb: '/Moroccan Olive Oil/1.png', alt: 'MOO Extra Virgin Olive Oil Bottle Packshot' },
-      { type: 'image', src: '/Moroccan Olive Oil/2.png', thumb: '/Moroccan Olive Oil/2.png', alt: 'MOO Heritage Packaging Front View' },
-      { type: 'image', src: '/Moroccan Olive Oil/3.png', thumb: '/Moroccan Olive Oil/3.png', alt: 'MOO Premium Label Gold Foil Detail' },
-      { type: 'image', src: '/Moroccan Olive Oil/4.png', thumb: '/Moroccan Olive Oil/4.png', alt: 'MOO Editorial Brand Campaign' }
+      { type: 'image', src: '/Moroccan Olive Oil/1.jpg', thumb: '/Moroccan Olive Oil/1.jpg', alt: 'MOO Extra Virgin Olive Oil Bottle Packshot' },
+      { type: 'image', src: '/Moroccan Olive Oil/2.jpg', thumb: '/Moroccan Olive Oil/2.jpg', alt: 'MOO Heritage Packaging Front View' },
+      { type: 'image', src: '/Moroccan Olive Oil/3.jpg', thumb: '/Moroccan Olive Oil/3.jpg', alt: 'MOO Premium Label Gold Foil Detail' },
+      { type: 'image', src: '/Moroccan Olive Oil/4.jpg', thumb: '/Moroccan Olive Oil/4.jpg', alt: 'MOO Editorial Brand Campaign' }
     ]
   },
   {
-    id: '14',
+    id: '15',
     slug: 'personal',
     folder: 'personal',
     url: '/personal',

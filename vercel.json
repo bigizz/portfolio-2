@@ -75,8 +75,20 @@
       "destination": "/Moroccan Olive Oil/index.html"
     },
     {
+      "source": "/nestle",
+      "destination": "/nestlé/index.html"
+    },
+    {
+      "source": "/nestlé",
+      "destination": "/nestlé/index.html"
+    },
+    {
       "source": "/nan-nido",
-      "destination": "/NAN - NIDO/index.html"
+      "destination": "/nestlé/index.html"
+    },
+    {
+      "source": "/taous",
+      "destination": "/taous/index.html"
     },
     {
       "source": "/wafa-ima",

@@ -92,6 +92,8 @@ const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]<
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ TAOUS ]</span>
+                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ ALX AFRICA ]</span>
@@ -124,6 +126,8 @@ const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]<
                     <span class="mx-4">[ NESTLÉ ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ AFCON 2025 ]</span>
+                    <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ TAOUS ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
@@ -280,10 +284,13 @@ const projectFileMappings = [
   { file: 'armani/index.html', slug: 'armani' },
   { file: 'axa/axa.html', slug: 'axa' },
   { file: 'axa/index.html', slug: 'axa' },
-  { file: 'NAN - NIDO/nan-nido.html', slug: 'nan-nido' },
-  { file: 'NAN - NIDO/index.html', slug: 'nan-nido' },
+  { file: 'nestlé/nestle.html', slug: 'nestle' },
+  { file: 'nestlé/nan-nido.html', slug: 'nestle' },
+  { file: 'nestlé/index.html', slug: 'nestle' },
   { file: 'caf/caf.html', slug: 'caf' },
   { file: 'caf/index.html', slug: 'caf' },
+  { file: 'taous/taous.html', slug: 'taous' },
+  { file: 'taous/index.html', slug: 'taous' },
   { file: 'loreal/loreal.html', slug: 'loreal' },
   { file: 'loreal/index.html', slug: 'loreal' },
   { file: 'loreal/lrp.html', slug: 'loreal' },

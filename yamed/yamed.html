@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xml:lang="en" translate="no" class="notranslate">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Language" content="en">
@@ -11,15 +12,17 @@
     <!-- Google Fonts: Inter for UI, Space Mono for crisp editorial metadata -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
     <!-- CDNs -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- GSAP Core & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
@@ -68,8 +71,8 @@
         }
 
         body {
-            cursor: default; 
-            background-color: var(--color-bg); 
+            cursor: default;
+            background-color: var(--color-bg);
             color: var(--color-text);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -77,18 +80,34 @@
         }
 
         /* Lenis base styles */
-        html.lenis { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
-        .lenis.lenis-scrolling iframe { pointer-events: none; }
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
 
         /* Custom Interactive Cursor (Desktop) */
         @media (hover: hover) and (pointer: fine) {
             .custom-cursor {
                 position: fixed;
-                top: 0; left: 0;
-                width: 20px; height: 20px;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
                 border-radius: 50%;
                 background-color: rgba(255, 62, 19, 0.2);
                 border: 1px solid rgba(255, 62, 19, 0.8);
@@ -98,9 +117,14 @@
                 transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
                 opacity: 0;
             }
-            .custom-cursor.active { opacity: 1; }
+
+            .custom-cursor.active {
+                opacity: 1;
+            }
+
             .custom-cursor.hovering {
-                width: 48px; height: 48px;
+                width: 48px;
+                height: 48px;
                 background-color: rgba(255, 62, 19, 0.15);
                 border-color: #FF3E13;
             }
@@ -113,6 +137,7 @@
             transform: translateY(12px) scale(0.96);
             transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .live-preview-box.is-visible {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -124,16 +149,25 @@
             color: #FFFFFF;
             border-color: #111111;
         }
+
         .tab-btn[aria-selected="true"] .tab-count {
             background-color: #FF3E13;
             color: #FFFFFF;
         }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
 
-        body.modal-open { overflow: hidden; }
-    
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
         /* Lower line spacing for Let's Talk call-to-action on desktop */
         @media (min-width: 1024px) {
             #lets-talk-btn {
@@ -143,41 +177,53 @@
 
         /* Gentle pulse to invite scrolling through media */
         @keyframes gentlePulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.08);
                 box-shadow: 0 8px 20px -4px rgba(255, 62, 19, 0.4);
             }
         }
+
         .invite-pulse {
             animation: gentlePulse 2.5s ease-in-out infinite;
         }
+
         .invite-pulse:hover {
             animation: none;
         }
     </style>
 </head>
-<body class="selection:bg-brand-accent selection:text-white font-sans antialiased bg-brand-bg text-brand-dark min-h-screen flex flex-col">
+
+<body
+    class="selection:bg-brand-accent selection:text-white font-sans antialiased bg-brand-bg text-brand-dark min-h-screen flex flex-col">
 
     <div id="cursor-indicator" class="custom-cursor hidden md:block"></div>
 
     <!-- ========================================================================= -->
     <!-- TOP STICKY NAVIGATION BAR (Matching Homepage Editorial Design) -->
     <!-- ========================================================================= -->
-    <header class="sticky top-0 z-50 w-full bg-brand-bg/90 backdrop-blur-md border-b border-brand-border transition-all duration-300">
+    <header
+        class="sticky top-0 z-50 w-full bg-brand-bg/90 backdrop-blur-md border-b border-brand-border transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
-            
+
             <!-- Left: Identity & Live Availability -->
             <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
-                <a href="/home" class="group flex items-center gap-2.5 focus:outline-none" aria-label="Anass Biyguise - Back to homepage">
+                <a href="/home" class="group flex items-center gap-2.5 focus:outline-none"
+                    aria-label="Anass Biyguise - Back to homepage">
                     <img src="/logo.gif" alt="Anass Biyguise Monogram"
                         class="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-contain bg-brand-dark transition-transform group-hover:scale-105">
                     <div class="flex flex-col">
-                        <span class="text-xs sm:text-sm font-black tracking-tight uppercase leading-none">Anass Biyguise</span>
-                        <span class="text-[10px] sm:text-[11px] font-mono text-brand-muted tracking-tight flex items-center gap-1.5 mt-0.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+                        <span class="text-xs sm:text-sm font-black tracking-tight uppercase leading-none">Anass
+                            Biyguise</span>
+                        <span
+                            class="text-[10px] sm:text-[11px] font-mono text-brand-muted tracking-tight flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+                                aria-hidden="true"></span>
                             <span>Available</span>
                         </span>
                     </div>
@@ -188,7 +234,8 @@
             <div class="flex items-center gap-2">
                 <a href="/home#work-section"
                     class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono font-bold uppercase tracking-wider text-brand-dark hover:border-brand-accent hover:text-brand-accent transition-all shadow-sm">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
                         <polyline points="12 19 5 12 12 5"></polyline>
                     </svg>
@@ -227,11 +274,13 @@
         <!-- ========================================================================= -->
         <!-- PROJECT STAGE (Editorial Split View) -->
         <!-- ========================================================================= -->
-        <section class="flex flex-col lg:flex-row w-full min-h-[calc(100svh-4rem)] sm:min-h-[calc(100svh-5rem)] border-b border-brand-border">
-            
+        <section
+            class="flex flex-col lg:flex-row w-full min-h-[calc(100svh-4rem)] sm:min-h-[calc(100svh-5rem)] border-b border-brand-border">
+
             <!-- Left: Media Viewer Stage -->
-            <div class="w-full lg:w-[60%] bg-brand-surface-alt flex flex-col lg:flex-row p-6 pt-8 lg:p-12 lg:pt-12 gap-6 lg:gap-8 relative lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] border-b lg:border-b-0 lg:border-r border-brand-border">
-                
+            <div
+                class="w-full lg:w-[60%] bg-brand-surface-alt flex flex-col lg:flex-row p-6 pt-8 lg:p-12 lg:pt-12 gap-6 lg:gap-8 relative lg:sticky lg:top-20 lg:h-[calc(100svh-5rem)] border-b lg:border-b-0 lg:border-r border-brand-border">
+
                 <!-- Thumbnails Switcher -->
                 <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
                     <!-- 01. Résidence Les Sources Tour -->
@@ -257,34 +306,34 @@
                     </button>
 
                     <!-- 03. Terre Océane Editorial Visual -->
-                    <button onclick="changeMainMedia('image', '/yamed/post2.png', this)"
+                    <button onclick="changeMainMedia('image', '/yamed/post2.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Terre Océane Editorial Visual">
-                        <img src="/yamed/post2.png" alt="Terre Océane Editorial Visual" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/yamed/post2.jpg" alt="Terre Océane Editorial Visual" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
 
                     <!-- 04. Yamed Architecture Showcase -->
-                    <button onclick="changeMainMedia('image', '/yamed/post7.png', this)"
+                    <button onclick="changeMainMedia('image', '/yamed/post7.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Yamed Architecture Showcase">
-                        <img src="/yamed/post7.png" alt="Yamed Architecture Showcase" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/yamed/post7.jpg" alt="Yamed Architecture Showcase" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
 
                     <!-- 05. Yamed Prestige Living -->
-                    <button onclick="changeMainMedia('image', '/yamed/c2698 Post 03_.png', this)"
+                    <button onclick="changeMainMedia('image', '/yamed/c2698 Post 03_.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Yamed Prestige Living">
-                        <img src="/yamed/c2698 Post 03_.png" alt="Yamed Prestige Living" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/yamed/c2698 Post 03_.jpg" alt="Yamed Prestige Living" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
 
                     <!-- 06. Yamed Digital Campaign -->
-                    <button onclick="changeMainMedia('image', '/yamed/post10.png', this)"
+                    <button onclick="changeMainMedia('image', '/yamed/post10.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Yamed Digital Campaign">
-                        <img src="/yamed/post10.png" alt="Yamed Digital Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        <img src="/yamed/post10.jpg" alt="Yamed Digital Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                     </button>
                 </div>
@@ -338,22 +387,25 @@
             <!-- Right: Editorial Project Info & Metadata -->
             <div class="w-full lg:w-[40%] bg-brand-bg flex flex-col justify-center px-6 py-12 sm:px-10 lg:p-14 xl:p-16">
                 <div class="max-w-lg mx-auto w-full flex flex-col items-start text-left">
-                    
+
                     <!-- Discipline Badge -->
                     <div class="mb-4">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"
+                                aria-hidden="true"></span>
                             <span>Branding & Motion</span>
                         </div>
                     </div>
 
                     <!-- Project Title -->
                     <div class="w-full">
-                        <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
-                            Yamed
+                        <h1
+                            class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
+                            AXA
                         </h1>
                     </div>
-                    
+
                     <!-- Project Story -->
                     <div class="w-full">
                         <p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">
@@ -384,7 +436,11 @@
                         <a href="#work-section" onclick="event.preventDefault(); scrollToSection('#work-section');"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-dark text-white text-xs font-mono font-bold uppercase tracking-wider hover:bg-brand-accent transition-all duration-200">
                             <span>Explore All Works</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
                         </a>
                         <button type="button" onclick="openContactModal()"
                             class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white border border-brand-border text-brand-dark text-xs font-mono font-bold uppercase tracking-wider hover:border-brand-accent hover:text-brand-accent transition-all duration-200">
@@ -403,7 +459,8 @@
         <section id="work-section" class="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Section Header & Controls Bar -->
-            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 sm:pb-8 border-b border-brand-border">
+            <div
+                class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 sm:pb-8 border-b border-brand-border">
 
                 <div>
                     <div class="flex items-center gap-2.5 mb-2">
@@ -425,37 +482,43 @@
                             onclick="setDisciplineFilter('all')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>All</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">14</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">15</span>
                         </button>
                         <button type="button" role="tab" id="tab-branding" aria-selected="false"
                             onclick="setDisciplineFilter('branding')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Branding</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">10</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">10</span>
                         </button>
                         <button type="button" role="tab" id="tab-motion" aria-selected="false"
                             onclick="setDisciplineFilter('motion')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Motion</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">5</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">6</span>
                         </button>
                         <button type="button" role="tab" id="tab-3d" aria-selected="false"
                             onclick="setDisciplineFilter('3d')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>3D</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">7</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">8</span>
                         </button>
                         <button type="button" role="tab" id="tab-print" aria-selected="false"
                             onclick="setDisciplineFilter('print')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Print</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">4</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">4</span>
                         </button>
                         <button type="button" role="tab" id="tab-editing" aria-selected="false"
                             onclick="setDisciplineFilter('editing')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Editing</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">6</span>
+                            <span
+                                class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">7</span>
                         </button>
                     </div>
                 </div>
@@ -521,11 +584,11 @@
                     </article>
 
                     <!-- 03. Nestlé -->
-                    <article data-category="3d print" data-image="/NAN - NIDO/nan-nido.png" data-title="Nestlé"
-                        data-client="Nestlé Nutrition" data-year="2025" data-deliverables="Supermarket POS Display Architecture, Packshots, Digital Toolkits"
-                        data-url="/nan-nido"
+                    <article data-category="motion editing 3d print" data-image="/nestlé/nan-nido.jpg" data-title="Nestlé"
+                        data-client="Nestlé Nutrition" data-year="2025" data-deliverables="Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots"
+                        data-url="/nestle"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/nan-nido"
+                        <a href="/nestle"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">03.</span>
@@ -534,13 +597,13 @@
                                         Nestlé
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D & Print</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Motion & Editing</span>
                                         <span class="text-xs font-mono text-brand-muted">2025</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D & Print</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Motion & Editing</span>
                                 <span class="text-brand-muted">Nestlé Nutrition // 2025</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
@@ -574,7 +637,34 @@
                         </a>
                     </article>
 
-                    <!-- 05. L'Oréal Group -->
+                    <!-- 05. Taous -->
+                    <article data-category="3d" data-image="/taous/taous.jpg" data-title="Taous"
+                        data-client="Taous" data-year="2026" data-deliverables="3D Product Modeling, CGI Packshots (2026 Gamme)"
+                        data-url="/taous"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/taous"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">05.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Taous
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D / CGI</span>
+                                        <span class="text-xs font-mono text-brand-muted">2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D / CGI</span>
+                                <span class="text-brand-muted">Taous // 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 06. L'Oréal Group -->
                     <article data-category="3d branding editing" data-image="/loreal/loreal.jpg" data-title="L'Oréal Group"
                         data-client="L'Oréal" data-year="Ongoing" data-deliverables="CGI Product Packshots, Commercial Motion, Social Grids"
                         data-url="/loreal"
@@ -582,7 +672,7 @@
                         <a href="/loreal"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">05.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         L'Oréal Group
@@ -601,7 +691,7 @@
                         </a>
                     </article>
 
-                    <!-- 06. ALX Africa -->
+                    <!-- 07. ALX Africa -->
                     <article data-category="branding 3d editing" data-image="/alx/alx.jpg" data-title="ALX Africa"
                         data-client="ALX" data-year="2024 - 2026" data-deliverables="AI for Creatives Commercial, Editorial Design, Social Campaigns"
                         data-url="/alx"
@@ -609,7 +699,7 @@
                         <a href="/alx"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         ALX Africa
@@ -628,7 +718,7 @@
                         </a>
                     </article>
 
-                    <!-- 07. Mahindra -->
+                    <!-- 08. Mahindra -->
                     <article data-category="branding editing motion" data-image="/mahindra/mahindra.jpg" data-title="Mahindra"
                         data-client="Mahindra Morocco" data-year="Ongoing" data-deliverables="XUV 3XO Motion Film, Print Posters, Social Campaigns"
                         data-url="/mahindra"
@@ -636,7 +726,7 @@
                         <a href="/mahindra"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Mahindra
@@ -655,15 +745,15 @@
                         </a>
                     </article>
 
-                    <!-- 08. Yamed -->
-                    <article data-category="branding editing motion" data-image="/yamed/yamed.png" data-title="Yamed"
+                    <!-- 09. Yamed -->
+                    <article data-category="branding editing motion" data-image="/yamed/yamed.jpg" data-title="Yamed"
                         data-client="Yamed Group" data-year="Ongoing" data-deliverables="Architectural Video Tours, Luxury Editorial, Social Media"
                         data-url="/yamed"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/yamed"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Yamed
@@ -682,7 +772,7 @@
                         </a>
                     </article>
 
-                    <!-- 09. ICE -->
+                    <!-- 10. ICE -->
                     <article data-category="branding 3d" data-image="/ice/ice.jpg" data-title="ICE"
                         data-client="ICE" data-year="2025" data-deliverables="Branding, 3D Typography, Spatial Art"
                         data-url="/ice"
@@ -690,7 +780,7 @@
                         <a href="/ice"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         ICE
@@ -709,15 +799,15 @@
                         </a>
                     </article>
 
-                    <!-- 10. Wafa IMA Assistance -->
-                    <article data-category="branding" data-image="/Wafa IMA Assistance/wafa.png" data-title="Wafa IMA Assistance"
+                    <!-- 11. Wafa IMA Assistance -->
+                    <article data-category="branding" data-image="/Wafa IMA Assistance/wafa.jpg" data-title="Wafa IMA Assistance"
                         data-client="Wafa IMA Assistance" data-year="Ongoing" data-deliverables="Outdoor Advertising, National Holiday Posters, Auto Premium Campaign"
                         data-url="/wafa-ima"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/wafa-ima"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">11.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Wafa IMA Assistance
@@ -736,7 +826,7 @@
                         </a>
                     </article>
 
-                    <!-- 11. Clarre Vegan -->
+                    <!-- 12. Clarre Vegan -->
                     <article data-category="3d" data-image="/clarre/clarre.jpg" data-title="Clarre Vegan"
                         data-client="Clarre Vegan" data-year="2024" data-deliverables="3D Packaging, Kinetic Typography, Product Reveal"
                         data-url="/clarre"
@@ -744,7 +834,7 @@
                         <a href="/clarre"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">11.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">12.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Clarre Vegan
@@ -763,15 +853,15 @@
                         </a>
                     </article>
 
-                    <!-- 12. Speedy -->
-                    <article data-category="branding motion editing print" data-image="/speedy/speedy.png" data-title="Speedy"
+                    <!-- 13. Speedy -->
+                    <article data-category="branding motion editing print" data-image="/speedy/speedy.jpg" data-title="Speedy"
                         data-client="Speedy Morocco" data-year="Ongoing" data-deliverables="3D CGI Commercial, Campaign Posters, Social Assets"
                         data-url="/speedy"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/speedy"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">12.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">13.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Speedy
@@ -790,15 +880,15 @@
                         </a>
                     </article>
 
-                    <!-- 13. Moroccan Olive Oil -->
-                    <article data-category="branding" data-image="/Moroccan Olive Oil/moo.png" data-title="Moroccan Olive Oil"
+                    <!-- 14. Moroccan Olive Oil -->
+                    <article data-category="branding" data-image="/Moroccan Olive Oil/moo.jpg" data-title="Moroccan Olive Oil"
                         data-client="MOO" data-year="2026" data-deliverables="Label Design, Marble & Botanical CGI Packshot, Brand Identity"
                         data-url="/moroccan-olive-oil"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/moroccan-olive-oil"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">13.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">14.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Moroccan Olive Oil
@@ -817,7 +907,7 @@
                         </a>
                     </article>
 
-                    <!-- 14. Personal Works -->
+                    <!-- 15. Personal Works -->
                     <article data-category="branding motion 3d" data-image="/personal/personal.jpg" data-title="Personal Works"
                         data-client="Self-Initiated Works" data-year="Ongoing" data-deliverables="Experimental 3D Simulations, Surreal Saga, Cultural CGI"
                         data-url="/personal"
@@ -825,7 +915,7 @@
                         <a href="/personal"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">14.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">15.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Personal Works
@@ -852,13 +942,15 @@
                     aria-hidden="true">
                     <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3">
                         <img id="preview-image" src="../armani/armani.jpg" alt="" class="w-full h-full object-cover">
-                        <div class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brand-dark/80 backdrop-blur-sm text-[10px] font-mono text-white">
+                        <div
+                            class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-brand-dark/80 backdrop-blur-sm text-[10px] font-mono text-white">
                             <span id="preview-category">3D / CGI</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-start">
                         <div>
-                            <h4 id="preview-title" class="text-sm font-black uppercase tracking-tight text-brand-dark leading-tight">
+                            <h4 id="preview-title"
+                                class="text-sm font-black uppercase tracking-tight text-brand-dark leading-tight">
                                 Project Title
                             </h4>
                             <p id="preview-meta" class="text-[11px] font-mono text-brand-muted mt-0.5">
@@ -887,21 +979,46 @@
                         <div>
                             <div class="flex items-center gap-3 mb-6">
                                 <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
-                                <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-brand-dark">
+                                <h2
+                                    class="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-brand-dark">
                                     About the Designer
                                 </h2>
                             </div>
 
-                            <h3 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight uppercase leading-[0.95] text-brand-dark mb-6">
-                                Crafting Identities for presence
-                            </h3>
+                            <!-- Perfectly Aligned Profile Photo & Identity -->
+                            <div class="flex items-center gap-5 sm:gap-6 mb-6 pb-6 border-b border-brand-border">
+                                <div
+                                    class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border border-brand-border shadow-md flex-shrink-0 group bg-brand-surface-alt">
+                                    <img src="../profile.jpg" onerror="this.onerror=null;this.src='/profile.jpg'"
+                                        alt="Anass Biyguise"
+                                        class="w-full h-full object-cover grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                                </div>
+                                <div class="min-w-0">
+                                    <span
+                                        class="text-xs font-mono text-brand-accent font-bold uppercase tracking-wider block mb-1">
+                                        Graphic Designer
+                                    </span>
+                                    <h3
+                                        class="text-2xl sm:text-3xl font-black tracking-tight uppercase leading-[0.98] text-brand-dark">
+                                        Anass Biyguise
+                                    </h3>
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        <span
+                                            class="text-[11px] font-mono text-brand-muted uppercase tracking-wider">Available
+                                            &bull; Morocco</span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <p class="text-sm sm:text-base text-brand-muted leading-relaxed mb-4">
-                                I am Anass Biyguise, a multidisciplinary graphic designer and art director specializing in branding, motion design, photorealistic 3D, and editorial print.
+                                I am a multidisciplinary graphic designer specializing
+                                in branding, motion design, 3D/CGI, video editing, print & web.
                             </p>
 
                             <p class="text-sm sm:text-base text-brand-muted leading-relaxed mb-8">
-                                With a background spanning top agencies and creative studios, I bridge strategic conceptual thinking with sharp execution.
+                                With a background spanning top agencies and creative
+                                studios, I bridge strategic conceptual thinking with sharp execution.
                             </p>
                         </div>
 
@@ -923,41 +1040,54 @@
 
                         <!-- Experience Table -->
                         <div>
-                            <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                            <span
+                                class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
                                 // EXPERIENCE
                             </span>
                             <div class="border-t border-brand-border flex flex-col">
-                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                <div
+                                    class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
                                     <div class="flex items-center gap-3">
-                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Publicis-WBC</span>
+                                        <span
+                                            class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Publicis-WBC</span>
                                         <span class="text-xs font-mono text-brand-muted">/ Graphic Designer</span>
                                     </div>
                                     <span class="text-xs font-mono text-brand-accent font-bold">03/2024 — Present</span>
                                 </div>
-                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                <div
+                                    class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
                                     <div class="flex items-center gap-3">
-                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Disruptia</span>
-                                        <span class="text-xs font-mono text-brand-muted">/ Motion & Brand Designer</span>
+                                        <span
+                                            class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Disruptia</span>
+                                        <span class="text-xs font-mono text-brand-muted">/ Motion & Brand
+                                            Designer</span>
                                     </div>
                                     <span class="text-xs font-mono text-brand-accent font-bold">12/2023 — 02/2024</span>
                                 </div>
-                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                <div
+                                    class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
                                     <div class="flex items-center gap-3">
-                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Artcoustic</span>
+                                        <span
+                                            class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Artcoustic</span>
                                         <span class="text-xs font-mono text-brand-muted">/ Motion Designer</span>
                                     </div>
                                     <span class="text-xs font-mono text-brand-accent font-bold">10/2023 — 12/2023</span>
                                 </div>
-                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                <div
+                                    class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
                                     <div class="flex items-center gap-3">
-                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Neomotion</span>
+                                        <span
+                                            class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Neomotion</span>
                                         <span class="text-xs font-mono text-brand-muted">/ Graphic Designer</span>
                                     </div>
                                     <span class="text-xs font-mono text-brand-accent font-bold">08/2023 — 10/2023</span>
                                 </div>
-                                <div class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
+                                <div
+                                    class="py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-1 group hover:pl-2 transition-all">
                                     <div class="flex items-center gap-3">
-                                        <span class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Nassim Azarzar</span>
+                                        <span
+                                            class="text-sm sm:text-base font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Nassim
+                                            Azarzar</span>
                                         <span class="text-xs font-mono text-brand-muted">/ Design Apprentice</span>
                                     </div>
                                     <span class="text-xs font-mono text-brand-accent font-bold">02/2023 — 08/2023</span>
@@ -968,7 +1098,8 @@
                         <!-- Education & Competencies -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div>
-                                <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                                <span
+                                    class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
                                     // EDUCATION
                                 </span>
                                 <ul class="flex flex-col gap-3 text-xs font-mono border-t border-brand-border pt-4">
@@ -988,10 +1119,12 @@
                             </div>
 
                             <div>
-                                <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
+                                <span
+                                    class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted block mb-4">
                                     // EXPERTISE
                                 </span>
-                                <ul class="flex flex-col gap-2 text-xs font-mono text-brand-dark border-t border-brand-border pt-4">
+                                <ul
+                                    class="flex flex-col gap-2 text-xs font-mono text-brand-dark border-t border-brand-border pt-4">
                                     <li class="flex items-center gap-2">
                                         <span class="text-brand-accent">▸</span> Brand Identity &amp; Visual Design
                                     </li>
@@ -1032,7 +1165,8 @@
     <!-- ========================================================================= -->
     <!-- FOOTER (Identical to Homepage, High-impact, Direct Contact) -->
     <!-- ========================================================================= -->
-    <footer id="contact" class="bg-brand-dark text-white pt-16 sm:pt-24 pb-12 border-t border-brand-dark overflow-hidden">
+    <footer id="contact"
+        class="bg-brand-dark text-white pt-16 sm:pt-24 pb-12 border-t border-brand-dark overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="flex flex-col lg:flex-row justify-between items-start gap-12 mb-16 sm:mb-20">
@@ -1045,7 +1179,8 @@
                     <button type="button" id="lets-talk-btn" onclick="openContactModal()"
                         class="group text-left text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] md:leading-[0.8] lg:leading-[0.75] hover:text-brand-accent transition-colors duration-300 focus:outline-none">
                         Let's<br>
-                        <span class="inline-flex items-center gap-4 sm:gap-6 group-hover:translate-x-3 transition-transform duration-300">
+                        <span
+                            class="inline-flex items-center gap-4 sm:gap-6 group-hover:translate-x-3 transition-transform duration-300">
                             Talk
                             <span class="text-3xl sm:text-5xl md:text-6xl text-brand-accent">↗</span>
                         </span>
@@ -1058,46 +1193,77 @@
                     <a href="mailto:bekiz.me@gmail.com" target="_blank" rel="noopener noreferrer"
                         class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
                         <div class="flex items-center gap-3">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
                             <span class="font-bold tracking-wider">EMAIL</span>
                         </div>
-                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+                        <span
+                            class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
 
                     <a href="tel:+212693087105" target="_blank" rel="noopener noreferrer"
                         class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
                         <div class="flex items-center gap-3">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
                             <span class="font-bold tracking-wider">PHONE</span>
                         </div>
-                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+                        <span
+                            class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
 
                     <a href="https://www.instagram.com/bigiz_4d/" target="_blank" rel="noopener noreferrer"
                         class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
                         <div class="flex items-center gap-3">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                            </svg>
                             <span class="font-bold tracking-wider">INSTAGRAM</span>
                         </div>
-                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+                        <span
+                            class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
 
                     <a href="https://www.linkedin.com/in/anassbiyguise/" target="_blank" rel="noopener noreferrer"
                         class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
                         <div class="flex items-center gap-3">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect width="4" height="12" x="2" y="9"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
                             <span class="font-bold tracking-wider">LINKEDIN</span>
                         </div>
-                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+                        <span
+                            class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
 
                     <a href="https://bigizz.github.io/bigiz/" target="_blank" rel="noopener noreferrer"
                         class="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-brand-accent hover:bg-brand-accent text-white flex items-center justify-between text-xs font-mono transition-all group">
                         <div class="flex items-center gap-3">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z"></path></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path
+                                    d="M12 3c.132 5.868 4.132 9.868 10 10-5.868.132-9.868 4.132-10 10-.132-5.868-4.132-9.868-10-10 5.868-.132 9.868-4.132 10-10Z">
+                                </path>
+                            </svg>
                             <span class="font-bold tracking-wider">EXPERIMENTAL</span>
                         </div>
-                        <span class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
+                        <span
+                            class="opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">↗</span>
                     </a>
 
                 </div>
@@ -1105,7 +1271,8 @@
             </div>
 
             <!-- Bottom Metadata & Back to Top -->
-            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-400">
+            <div
+                class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-400">
                 <div class="flex items-center gap-4">
                     <span>© 2026 Anass Biyguise</span>
                     <span class="text-white/20">/</span>
@@ -1116,7 +1283,11 @@
                     class="flex items-center gap-2 hover:text-white transition-colors focus:outline-none"
                     aria-label="Scroll back to top of page">
                     <span>Back to Top</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
                 </button>
             </div>
 
@@ -1128,17 +1299,23 @@
     <!-- ========================================================================= -->
     <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title"
         class="fixed inset-0 z-[100000] hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-        <div class="relative w-full max-w-lg bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border shadow-2xl">
+        <div
+            class="relative w-full max-w-lg bg-brand-card p-6 sm:p-8 rounded-2xl border border-brand-border shadow-2xl">
             <div class="flex items-center justify-between pb-4 mb-4 border-b border-brand-border">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-                    <h3 id="contact-modal-title" class="text-xs font-mono font-bold uppercase tracking-widest text-brand-dark">
+                    <h3 id="contact-modal-title"
+                        class="text-xs font-mono font-bold uppercase tracking-widest text-brand-dark">
                         Say Hi / Direct Contact
                     </h3>
                 </div>
                 <button type="button" onclick="closeContactModal()"
-                    class="p-1 rounded-full text-brand-muted hover:text-brand-dark focus:outline-none" aria-label="Close dialog">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    class="p-1 rounded-full text-brand-muted hover:text-brand-dark focus:outline-none"
+                    aria-label="Close dialog">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             </div>
 
@@ -1169,7 +1346,8 @@
                 </a>
             </div>
 
-            <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between text-[11px] font-mono text-brand-muted">
+            <div
+                class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between text-[11px] font-mono text-brand-muted">
                 <span>Location: Casablanca, Morocco</span>
                 <span>GMT+1</span>
             </div>
@@ -1181,7 +1359,8 @@
         class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 w-12 h-12 rounded-full bg-brand-dark text-white border border-white/10 shadow-2xl flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-3 hover:bg-brand-accent hover:border-brand-accent focus:outline-none group cursor-pointer"
         aria-label="Back to top">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-y-0.5 transition-transform duration-200" aria-hidden="true">
+            stroke-linecap="round" stroke-linejoin="round"
+            class="group-hover:-translate-y-0.5 transition-transform duration-200" aria-hidden="true">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
@@ -1221,16 +1400,16 @@
             const mainVideo = document.getElementById('main-video');
 
             if (type === 'image') {
-                if(videoWrapper) videoWrapper.classList.add('hidden');
-                if(mainVideo) mainVideo.src = "";
-                if(mainImg) {
+                if (videoWrapper) videoWrapper.classList.add('hidden');
+                if (mainVideo) mainVideo.src = "";
+                if (mainImg) {
                     mainImg.src = src;
                     mainImg.classList.remove('hidden');
                 }
             } else if (type === 'vimeo') {
-                if(mainImg) mainImg.classList.add('hidden');
-                if(videoWrapper) videoWrapper.classList.remove('hidden');
-                if(mainVideo) mainVideo.src = src;
+                if (mainImg) mainImg.classList.add('hidden');
+                if (videoWrapper) videoWrapper.classList.remove('hidden');
+                if (mainVideo) mainVideo.src = src;
             }
 
             // Update thumb borders
@@ -1239,13 +1418,13 @@
                 b.classList.remove('border-brand-dark');
                 b.classList.add('border-transparent', 'opacity-60');
                 const img = b.querySelector('img');
-                if(img) img.classList.add('grayscale');
+                if (img) img.classList.add('grayscale');
             });
 
             btn.classList.add('border-brand-dark');
             btn.classList.remove('border-transparent', 'opacity-60');
             const activeImg = btn.querySelector('img');
-            if(activeImg) activeImg.classList.remove('grayscale');
+            if (activeImg) activeImg.classList.remove('grayscale');
 
             currentMediaIndex = allBtns.indexOf(btn);
             if (currentMediaIndex === -1) currentMediaIndex = 0;
@@ -1280,7 +1459,7 @@
         });
 
         // Touch Swipe Navigation for mobile
-        (function() {
+        (function () {
             let touchStartX = 0;
             let touchEndX = 0;
             const stage = document.querySelector('.group\\/stage') || document.getElementById('main-video-wrapper');
@@ -1497,4 +1676,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -65,6 +65,22 @@ function resolvePath(urlPath) {
     candidate = candidate + '.html';
   }
 
+  // Graceful fallback for renamed/accented directories & png to jpg conversion
+  if (!fs.existsSync(candidate)) {
+    if (cleanUrl.startsWith('/NAN - NIDO/')) {
+      const alt = path.join(ROOT, 'nestlé', cleanUrl.substring('/NAN - NIDO/'.length));
+      if (fs.existsSync(alt)) candidate = alt;
+    } else if (cleanUrl.startsWith('/nestle/')) {
+      const alt = path.join(ROOT, 'nestlé', cleanUrl.substring('/nestle/'.length));
+      if (fs.existsSync(alt)) candidate = alt;
+    }
+
+    if (!fs.existsSync(candidate) && candidate.toLowerCase().endsWith('.png')) {
+      const jpgCandidate = candidate.slice(0, -4) + '.jpg';
+      if (fs.existsSync(jpgCandidate)) candidate = jpgCandidate;
+    }
+  }
+
   return candidate;
 }
 

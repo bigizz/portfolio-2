@@ -93,6 +93,8 @@ const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]<
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ TAOUS ]</span>
+                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ ALX AFRICA ]</span>
@@ -126,6 +128,8 @@ const marqueeContent = `                    <span class="mx-4">[ PUBLICIS-WBC ]<
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ AFCON 2025 ]</span>
                     <span class="text-brand-accent">★</span>
+                    <span class="mx-4">[ TAOUS ]</span>
+                    <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ L'ORÉAL GROUP ]</span>
                     <span class="text-brand-accent">★</span>
                     <span class="mx-4">[ ALX AFRICA ]</span>
@@ -155,6 +159,10 @@ const thumbnailsArrayStr = `const PROJECT_THUMBNAILS = [\n` +
 
 ['index.html', 'home.html'].forEach(filename => {
   let content = fs.readFileSync(filename, 'utf8');
+
+  // 0. Hero Project Counter
+  content = content.replace(/<strong class="text-brand-accent font-bold">\d+<\/strong> Projects Curated/g,
+    `<strong class="text-brand-accent font-bold">${counts.all}</strong> Projects Curated`);
 
   // 1. Marquee
   const tickerRegex = /<div class="animate-ticker text-xs sm:text-sm font-mono font-bold uppercase tracking-wider">[\s\S]*?<\/div>/;
@@ -202,5 +210,5 @@ const thumbnailsArrayStr = `const PROJECT_THUMBNAILS = [\n` +
   content = content.replace(preloadRegex, thumbnailsArrayStr);
 
   fs.writeFileSync(filename, content, 'utf8');
-  console.log(`Updated ${filename} with all 14 projects!`);
+  console.log(`Updated ${filename} with all 15 projects!`);
 });
