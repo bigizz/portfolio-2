@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TotalEnergies CAF AFCON 2025 — Anass Biyguise</title>
+    <title>AFCON 2025 (CAF) — Anass Biyguise</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Google Fonts: Inter for UI, Space Mono for crisp editorial metadata -->
@@ -140,6 +140,23 @@
                 line-height: 0.8 !important;
             }
         }
+
+        /* Gentle pulse to invite scrolling through media */
+        @keyframes gentlePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+                box-shadow: 0 8px 20px -4px rgba(255, 62, 19, 0.4);
+            }
+        }
+        .invite-pulse {
+            animation: gentlePulse 2.5s ease-in-out infinite;
+        }
+        .invite-pulse:hover {
+            animation: none;
+        }
     </style>
 </head>
 <body class="selection:bg-brand-accent selection:text-white font-sans antialiased bg-brand-bg text-brand-dark min-h-screen flex flex-col">
@@ -179,7 +196,7 @@
                 </a>
                 <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-mono text-brand-muted">
                     <span>/</span>
-                    <span class="text-brand-dark font-bold uppercase">TotalEnergies CAF</span>
+                    <span class="text-brand-dark font-bold uppercase">AFCON 2025 (CAF)</span>
                 </span>
             </div>
 
@@ -217,16 +234,19 @@
                 
                 <!-- Thumbnails Switcher -->
                 <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-
+                    <!-- 01. AFCON 2025 Stadium Print -->
                     <button onclick="changeMainMedia('image', '/caf/caf-img2.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
-                        <img src="/caf/caf-img2.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="AFCON 2025 Stadium Print">
+                        <img src="/caf/caf-img2.jpg" alt="AFCON 2025 Stadium Print" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
                         
                     </button>
 
+                    <!-- 02. AFCON 2025 Motion Identity -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1180949504?fl=pl&fe=sh', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm">
-                        <img src="/caf/caf-img1.jpg" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="AFCON 2025 Motion Identity">
+                        <img src="/caf/caf-img1.jpg" alt="AFCON 2025 Motion Identity" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -234,11 +254,48 @@
                     </button>
                 </div>
 
-                <!-- Main Active Media -->
-                <div class="flex-1 flex items-center justify-center relative w-full h-[45vh] lg:h-full pb-6 lg:pb-0">
-                    <img id="main-image" src="/caf/caf-img2.jpg" alt="TotalEnergies CAF visual preview" class=" max-w-[90%] max-h-[90%] object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-105 border border-brand-border">
-                    <div id="main-video-wrapper" class="hidden w-[95%] md:w-[90%] aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border">
-                        <iframe id="main-video" src="" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
+                <!-- Main Active Media Stage with Prev/Next Navigation in Empty Sides -->
+                <div class="flex-1 flex flex-col items-center justify-center relative w-full h-[50vh] lg:h-full pb-4 lg:pb-0 min-w-0">
+                    
+                    <!-- Media Stage Row: Left Arrow | Centered Media | Right Arrow -->
+                    <div class="w-full flex-1 flex items-center justify-between gap-2 sm:gap-4 relative min-w-0 min-h-0">
+                        
+                        <!-- Prev Media Arrow (Left empty side) -->
+                        <button type="button" onclick="navigateMedia(-1)" 
+                            class="media-nav-btn flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-dark hover:text-white backdrop-blur-md border border-brand-border shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none group cursor-pointer z-20"
+                            aria-label="Previous project media">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                        </button>
+
+                        <!-- Centered Media Viewer (Constrained between the arrows) -->
+                        <div class="flex-1 h-full max-h-[calc(100svh-12rem)] flex items-center justify-center relative min-w-0 min-h-0 overflow-hidden">
+                            <img id="main-image" alt="AFCON 2025 (CAF) visual preview" src="/caf/caf-img2.jpg" class="max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
+                            <div id="main-video-wrapper" class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
+                                <iframe id="main-video" src="" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Next Media Arrow (Right empty side, invites scrolling) -->
+                        <button type="button" onclick="navigateMedia(1)" 
+                            class="media-nav-btn invite-pulse flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-dark hover:text-white backdrop-blur-md border border-brand-border shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none group cursor-pointer z-20"
+                            aria-label="Next project media">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-0.5">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Media Counter Pill (Positioned cleanly below media, no overlay) -->
+                    <div id="media-counter-pill"  class="mt-3 flex-shrink-0 flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-brand-border shadow-sm text-xs font-mono font-bold text-brand-dark select-none transition-all">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
+                        <span id="media-counter-current" class="text-brand-dark font-black">01</span>
+                        <span class="text-brand-muted">/</span>
+                        <span id="media-counter-total" class="text-brand-muted">02</span>
+                        <span class="text-[10px] text-brand-muted font-normal uppercase tracking-wider hidden sm:inline ml-0.5">Media</span>
                     </div>
                 </div>
             </div>
@@ -251,21 +308,21 @@
                     <div class="mb-4">
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
                             <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
-                            <span>Print / Campaign</span>
+                            <span>Print Collateral</span>
                         </div>
                     </div>
 
                     <!-- Project Title -->
                     <div class="w-full">
                         <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
-                            TotalEnergies CAF
+                            AFCON 2025 (CAF)
                         </h1>
                     </div>
                     
                     <!-- Project Story -->
                     <div class="w-full">
                         <p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">
-                            I spearheaded the visual identity and environmental design for the AFCON 2025 takeover of the Casablanca / Rabat Tramway, transforming the city’s primary transit artery into a mobile celebration of African football. My work extended beyond aesthetics to include functional design, ensuring that the spirit of the tournament was as accessible as it was visually stunning.
+                            Comprehensive stadium collateral and official print design system for the Africa Cup of Nations Morocco 2025, celebrating pan-African athletic excellence through dynamic typography and vibrant cultural patterns.
                         </p>
                     </div>
 
@@ -273,7 +330,7 @@
                     <div class="w-full border-t border-brand-border mb-8 text-left">
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Client</span>
-                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">TotalEnergies / Afcon</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">TotalEnergies CAF</span>
                         </div>
                         
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
@@ -283,7 +340,7 @@
 
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Deliverables</span>
-                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">Print & Environmental Design</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">Official Print Identity, Stadium Collateral</span>
                         </div>
                     </div>
 
@@ -333,37 +390,37 @@
                             onclick="setDisciplineFilter('all')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>All</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">11</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">14</span>
                         </button>
                         <button type="button" role="tab" id="tab-branding" aria-selected="false"
                             onclick="setDisciplineFilter('branding')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Branding</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">4</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">9</span>
                         </button>
                         <button type="button" role="tab" id="tab-motion" aria-selected="false"
                             onclick="setDisciplineFilter('motion')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Motion</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">5</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">8</span>
                         </button>
                         <button type="button" role="tab" id="tab-3d" aria-selected="false"
                             onclick="setDisciplineFilter('3d')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>3D</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">7</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">8</span>
                         </button>
                         <button type="button" role="tab" id="tab-print" aria-selected="false"
                             onclick="setDisciplineFilter('print')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Print</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">3</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">7</span>
                         </button>
                         <button type="button" role="tab" id="tab-editing" aria-selected="false"
                             onclick="setDisciplineFilter('editing')"
                             class="tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider border border-transparent transition-all flex items-center gap-1.5 whitespace-nowrap focus:outline-none">
                             <span>Editing</span>
-                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">5</span>
+                            <span class="tab-count text-[10px] px-1.5 py-0.2 rounded-full bg-brand-border text-brand-dark font-normal">4</span>
                         </button>
                     </div>
                 </div>
@@ -404,9 +461,9 @@
                     <!-- 02. AFCON 2025 (CAF) -->
                     <article data-category="print editing" data-image="/caf/caf.jpg" data-title="AFCON 2025 (CAF)"
                         data-client="TotalEnergies CAF" data-year="2026" data-deliverables="Official Print Identity, Stadium Collateral"
-                        data-url="/caf/"
+                        data-url="/caf"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/caf/"
+                        <a href="/caf"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">02.</span>
@@ -442,22 +499,22 @@
                                         ICE
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Branding / 3D</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Branding & 3D</span>
                                         <span class="text-xs font-mono text-brand-muted">2026</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Branding / 3D</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Branding & 3D</span>
                                 <span class="text-brand-muted">Personal Studio // 2026</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
 
-                    <!-- 04. AXA -->
-                    <article data-category="branding motion" data-image="/axa/axa.jpg" data-title="AXA"
-                        data-client="AXA Global" data-year="Ongoing" data-deliverables="Motion Identity, Digital Guidelines"
+                    <!-- 04. AXA Global -->
+                    <article data-category="branding motion" data-image="/axa/axa.jpg" data-title="AXA Global"
+                        data-client="AXA Global" data-year="Ongoing" data-deliverables="Motion Design, Vehicle Wraps, Social Campaign"
                         data-url="/axa"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/axa"
@@ -466,210 +523,292 @@
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">04.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        AXA
+                                        AXA Global
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Motion Design</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Motion & Branding</span>
                                         <span class="text-xs font-mono text-brand-muted">Ongoing</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Motion Design</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Motion & Branding</span>
                                 <span class="text-brand-muted">AXA Global // Ongoing</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
 
-                    <!-- 05. La Roche-Posay -->
-                    <article data-category="3d" data-image="/lrp/lrp.jpg" data-title="La Roche-Posay"
-                        data-client="La Roche-Posay" data-year="2024" data-deliverables="Precision CGI Packshots, Shading"
-                        data-url="/lrp"
+                    <!-- 05. L'Oréal Group -->
+                    <article data-category="3d motion branding" data-image="/loreal/loreal.jpg" data-title="L'Oréal Group"
+                        data-client="L'Oréal (LRP, Vichy, CeraVe)" data-year="2024 - 2026" data-deliverables="CGI Product Packshots, Commercial Motion, Social Grids"
+                        data-url="/loreal"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/lrp"
+                        <a href="/loreal"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">05.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        La Roche-Posay
+                                        L'Oréal Group
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">CGI Packshot</span>
-                                        <span class="text-xs font-mono text-brand-muted">2024</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Packshots & Motion</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024 - 2026</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">CGI Packshot</span>
-                                <span class="text-brand-muted">La Roche-Posay // 2024</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Packshots & Motion</span>
+                                <span class="text-brand-muted">L'Oréal (LRP, Vichy, CeraVe) // 2024 - 2026</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
 
-                    <!-- 06. VICHY -->
-                    <article data-category="3d motion" data-image="/vichy/vichy.jpg" data-title="VICHY"
-                        data-client="VICHY" data-year="2024" data-deliverables="3D Fluid Simulation, Cosmetic Motion"
-                        data-url="/vichy"
-                        class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/vichy"
-                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
-                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        VICHY
-                                    </h3>
-                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
-                                        <span class="text-xs font-mono text-brand-muted">2024</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
-                                <span class="text-brand-muted">VICHY // 2024</span>
-                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
-                            </div>
-                        </a>
-                    </article>
-
-                    <!-- 07. Clarre Vegan -->
+                    <!-- 06. Clarre Vegan -->
                     <article data-category="3d motion" data-image="/clarre/clarre.jpg" data-title="Clarre Vegan"
-                        data-client="Clarre Vegan" data-year="2025" data-deliverables="3D Animation, Kinetic Packshots"
+                        data-client="Clarre Vegan" data-year="2024" data-deliverables="3D Packaging, Kinetic Typography, Product Reveal"
                         data-url="/clarre"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/clarre"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">06.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         Clarre Vegan
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
-                                        <span class="text-xs font-mono text-brand-muted">2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
-                                <span class="text-brand-muted">Clarre Vegan // 2025</span>
-                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
-                            </div>
-                        </a>
-                    </article>
-
-                    <!-- 08. Mahindra -->
-                    <article data-category="branding print" data-image="/mahindra/mahindra.jpg" data-title="Mahindra"
-                        data-client="Mahindra" data-year="2024-2025" data-deliverables="Social Identity, Print Publication"
-                        data-url="/mahindra"
-                        class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/mahindra"
-                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
-                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        Mahindra
-                                    </h3>
-                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Branding</span>
-                                        <span class="text-xs font-mono text-brand-muted">2024-2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Branding</span>
-                                <span class="text-brand-muted">Mahindra // 2024-2025</span>
-                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
-                            </div>
-                        </a>
-                    </article>
-
-                    <!-- 09. Taxi Inzegan -->
-                    <article data-category="3d motion" data-image="/taxi/taxi.jpg" data-title="Taxi Inzegan"
-                        data-client="Personal" data-year="2024" data-deliverables="Stylized 3D CGI, Environmental Modeling"
-                        data-url="/taxi"
-                        class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/taxi"
-                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
-                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
-                                <div>
-                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        Taxi Inzegan
-                                    </h3>
-                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Animation</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Motion & Packaging</span>
                                         <span class="text-xs font-mono text-brand-muted">2024</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Animation</span>
-                                <span class="text-brand-muted">Personal // 2024</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Motion & Packaging</span>
+                                <span class="text-brand-muted">Clarre Vegan // 2024</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
 
-                    <!-- 10. ALX Africa -->
+                    <!-- 07. Mahindra Auto -->
+                    <article data-category="branding print motion" data-image="/mahindra/mahindra.jpg" data-title="Mahindra Auto"
+                        data-client="Mahindra Morocco" data-year="2024 - 2026" data-deliverables="XUV 3XO Motion Film, Print Posters, Social Campaigns"
+                        data-url="/mahindra"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/mahindra"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">07.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Mahindra Auto
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Automotive Motion & Print</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024 - 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Automotive Motion & Print</span>
+                                <span class="text-brand-muted">Mahindra Morocco // 2024 - 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 08. Personal CGI & Motion -->
+                    <article data-category="3d motion editing" data-image="/personal/personal.jpg" data-title="Personal CGI & Motion"
+                        data-client="Self-Initiated Works" data-year="2024 - 2026" data-deliverables="Experimental 3D Simulations, Surreal Saga, Cultural CGI"
+                        data-url="/personal"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/personal"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">08.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Personal CGI & Motion
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Surreal CGI & Direction</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024 - 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Surreal CGI & Direction</span>
+                                <span class="text-brand-muted">Self-Initiated Works // 2024 - 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 09. ALX Africa -->
                     <article data-category="branding motion editing print" data-image="/alx/alx.jpg" data-title="ALX Africa"
-                        data-client="ALX Africa" data-year="2024-2026" data-deliverables="Commercial Video Edit, Kinetic Branding"
+                        data-client="ALX Global" data-year="2024 - 2026" data-deliverables="AI for Creatives Commercial, Editorial Design, Social Campaigns"
                         data-url="/alx"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="/alx"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
-                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">09.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
                                         ALX Africa
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Editing & Motion</span>
-                                        <span class="text-xs font-mono text-brand-muted">2024-2026</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Brand Identity & Motion</span>
+                                        <span class="text-xs font-mono text-brand-muted">2024 - 2026</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Editing & Motion</span>
-                                <span class="text-brand-muted">ALX Africa // 2024-2026</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Brand Identity & Motion</span>
+                                <span class="text-brand-muted">ALX Global // 2024 - 2026</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
 
-                    <!-- 11. Sculptures Series -->
-                    <article data-category="3d motion editing" data-image="/sculptures/sculptures.jpg" data-title="Sculptures Series"
-                        data-client="Personal" data-year="Ongoing" data-deliverables="Procedural 3D Form, Sound Sync Montage"
-                        data-url="/sculptures"
+                    <!-- 10. Speedy Auto -->
+                    <article data-category="3d motion print" data-image="/speedy/speedy.png" data-title="Speedy Auto"
+                        data-client="Speedy Morocco" data-year="2025" data-deliverables="3D CGI Commercial, Campaign Posters, Social Assets"
+                        data-url="/speedy"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
-                        <a href="/sculptures"
+                        <a href="/speedy"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">10.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Speedy Auto
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D CGI & Summer Campaign</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D CGI & Summer Campaign</span>
+                                <span class="text-brand-muted">Speedy Morocco // 2025</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 11. Yamed Promotion -->
+                    <article data-category="branding motion print" data-image="/yamed/yamed.png" data-title="Yamed Promotion"
+                        data-client="Yamed Group" data-year="2025 - 2026" data-deliverables="Architectural Video Tours, Luxury Editorial, Social Media"
+                        data-url="/yamed"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/yamed"
                             class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
                             <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
                                 <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">11.</span>
                                 <div>
                                     <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
-                                        Sculptures Series
+                                        Yamed Promotion
                                     </h3>
                                     <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
-                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D & Motion Art</span>
-                                        <span class="text-xs font-mono text-brand-muted">Ongoing</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Luxury Real Estate</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025 - 2026</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="hidden md:flex items-center gap-6 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D & Motion Art</span>
-                                <span class="text-brand-muted">Personal // Ongoing</span>
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Luxury Real Estate</span>
+                                <span class="text-brand-muted">Yamed Group // 2025 - 2026</span>
                                 <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
                             </div>
                         </a>
                     </article>
+
+                    <!-- 12. Moroccan Olive Oil (MOO) -->
+                    <article data-category="branding 3d print" data-image="/Moroccan Olive Oil/moo.png" data-title="Moroccan Olive Oil (MOO)"
+                        data-client="Morocco Kingdom of Taste" data-year="2025" data-deliverables="Label Design, Marble & Botanical CGI Packshot, Brand Identity"
+                        data-url="/moroccan-olive-oil"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/moroccan-olive-oil"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">12.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Moroccan Olive Oil (MOO)
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">Luxury Packaging & 3D</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">Luxury Packaging & 3D</span>
+                                <span class="text-brand-muted">Morocco Kingdom of Taste // 2025</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 13. Nestlé (NAN & NIDO) -->
+                    <article data-category="3d branding" data-image="/NAN - NIDO/nan-nido.png" data-title="Nestlé (NAN & NIDO)"
+                        data-client="Nestlé Nutrition" data-year="2025" data-deliverables="Supermarket POS Display Architecture, Packshots, Digital Toolkits"
+                        data-url="/nan-nido"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/nan-nido"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">13.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Nestlé (NAN & NIDO)
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">3D Retail & POS Design</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">3D Retail & POS Design</span>
+                                <span class="text-brand-muted">Nestlé Nutrition // 2025</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 14. Wafa IMA Assistance -->
+                    <article data-category="branding print" data-image="/Wafa IMA Assistance/wafa.png" data-title="Wafa IMA Assistance"
+                        data-client="Wafa IMA Assistance" data-year="2025 - 2026" data-deliverables="Outdoor Advertising, National Holiday Posters, Auto Premium Campaign"
+                        data-url="/wafa-ima"
+                        class="project-row group border-t border-brand-border transition-colors duration-200">
+                        <a href="/wafa-ima"
+                            class="py-5 sm:py-7 flex flex-col md:flex-row md:items-center justify-between gap-3 focus:outline-none group-hover:bg-brand-surface-alt/60 px-2 sm:px-4 rounded-xl transition-all">
+                            <div class="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+                                <span class="font-mono text-xs sm:text-sm text-brand-muted group-hover:text-brand-accent transition-colors">14.</span>
+                                <div>
+                                    <h3 class="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-brand-dark group-hover:text-brand-accent transition-colors">
+                                        Wafa IMA Assistance
+                                    </h3>
+                                    <div class="flex flex-wrap items-center gap-2 mt-1 md:hidden">
+                                        <span class="px-2 py-0.5 rounded-full bg-brand-surface-alt text-[10px] font-mono text-brand-dark uppercase">National Campaign & Ads</span>
+                                        <span class="text-xs font-mono text-brand-muted">2025 - 2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-mono">
+                                <span class="px-3 py-1 rounded-full bg-brand-surface-alt text-brand-dark font-medium border border-brand-border">National Campaign & Ads</span>
+                                <span class="text-brand-muted">Wafa IMA Assistance // 2025 - 2026</span>
+                                <span class="text-lg text-brand-dark group-hover:text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true">↗</span>
+                            </div>
+                        </a>
+                    </article>
+
                 </div>
 
                 <!-- Floating Live Desktop Preview Tooltip (Heyefi style) -->
@@ -1017,6 +1156,29 @@
     <!-- INTERACTION LOGIC & GSAP ANIMATIONS -->
     <!-- ========================================================================= -->
     <script>
+        // Media Index & Navigation State
+        let currentMediaIndex = 0;
+
+        function updateMediaNav() {
+            const allBtns = Array.from(document.querySelectorAll('.thumb-btn'));
+            const curEl = document.getElementById('media-counter-current');
+            const totEl = document.getElementById('media-counter-total');
+            const counterPill = document.getElementById('media-counter-pill');
+            const navBtns = document.querySelectorAll('.media-nav-btn');
+
+            if (allBtns.length <= 1) {
+                if (counterPill) counterPill.style.display = 'none';
+                navBtns.forEach(btn => btn.style.display = 'none');
+                return;
+            }
+
+            if (counterPill) counterPill.style.display = 'flex';
+            navBtns.forEach(btn => btn.style.display = 'flex');
+
+            if (curEl) curEl.textContent = String(currentMediaIndex + 1).padStart(2, '0');
+            if (totEl) totEl.textContent = String(allBtns.length).padStart(2, '0');
+        }
+
         // Media Switcher Function
         function changeMainMedia(type, src, btn) {
             const mainImg = document.getElementById('main-image');
@@ -1037,7 +1199,7 @@
             }
 
             // Update thumb borders
-            const allBtns = document.querySelectorAll('.thumb-btn');
+            const allBtns = Array.from(document.querySelectorAll('.thumb-btn'));
             allBtns.forEach(b => {
                 b.classList.remove('border-brand-dark');
                 b.classList.add('border-transparent', 'opacity-60');
@@ -1049,7 +1211,64 @@
             btn.classList.remove('border-transparent', 'opacity-60');
             const activeImg = btn.querySelector('img');
             if(activeImg) activeImg.classList.remove('grayscale');
+
+            currentMediaIndex = allBtns.indexOf(btn);
+            if (currentMediaIndex === -1) currentMediaIndex = 0;
+
+            // Scroll active thumb into view smoothly
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            // Remove pulse animation after user interaction
+            const nextBtn = document.querySelector('.media-nav-btn.invite-pulse');
+            if (nextBtn) nextBtn.classList.remove('invite-pulse');
+
+            updateMediaNav();
         }
+
+        function navigateMedia(direction) {
+            const allBtns = Array.from(document.querySelectorAll('.thumb-btn'));
+            if (!allBtns.length) return;
+            let newIndex = currentMediaIndex + direction;
+            if (newIndex < 0) newIndex = allBtns.length - 1;
+            if (newIndex >= allBtns.length) newIndex = 0;
+            allBtns[newIndex].click();
+        }
+
+        // Keyboard Arrow Navigation
+        window.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'ArrowLeft') {
+                navigateMedia(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateMedia(1);
+            }
+        });
+
+        // Touch Swipe Navigation for mobile
+        (function() {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const stage = document.querySelector('.group\\/stage') || document.getElementById('main-video-wrapper');
+            if (!stage) return;
+
+            stage.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            stage.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchEndX - touchStartX;
+                if (Math.abs(diff) > 50) {
+                    if (diff < 0) navigateMedia(1);
+                    else navigateMedia(-1);
+                }
+            }, { passive: true });
+        })();
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateMediaNav();
+        });
 
         // Lenis Smooth Scroll (Cross-browser, including Microsoft Edge)
         let lenisInstance = null;

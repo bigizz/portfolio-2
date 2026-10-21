@@ -35,24 +35,52 @@
       "destination": "/ice/index.html"
     },
     {
+      "source": "/loreal",
+      "destination": "/loreal/index.html"
+    },
+    {
       "source": "/lrp",
-      "destination": "/lrp/index.html"
+      "destination": "/loreal/index.html"
+    },
+    {
+      "source": "/vichy",
+      "destination": "/loreal/index.html"
     },
     {
       "source": "/mahindra",
       "destination": "/mahindra/index.html"
     },
     {
+      "source": "/personal",
+      "destination": "/personal/index.html"
+    },
+    {
       "source": "/sculptures",
-      "destination": "/sculptures/index.html"
+      "destination": "/personal/index.html"
     },
     {
       "source": "/taxi",
-      "destination": "/taxi/index.html"
+      "destination": "/personal/index.html"
     },
     {
-      "source": "/vichy",
-      "destination": "/vichy/index.html"
+      "source": "/speedy",
+      "destination": "/speedy/index.html"
+    },
+    {
+      "source": "/yamed",
+      "destination": "/yamed/index.html"
+    },
+    {
+      "source": "/moroccan-olive-oil",
+      "destination": "/Moroccan Olive Oil/index.html"
+    },
+    {
+      "source": "/nan-nido",
+      "destination": "/NAN - NIDO/index.html"
+    },
+    {
+      "source": "/wafa-ima",
+      "destination": "/Wafa IMA Assistance/index.html"
     }
   ]
 }

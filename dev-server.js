@@ -40,6 +40,9 @@ const MIME_TYPES = {
 
 function resolvePath(urlPath) {
   let cleanUrl = urlPath.split('?')[0].split('#')[0];
+  try {
+    cleanUrl = decodeURIComponent(cleanUrl);
+  } catch (e) {}
   if (cleanUrl === '/') cleanUrl = '/index.html';
 
   // Check vercel rewrites
