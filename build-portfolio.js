@@ -19,6 +19,7 @@ function buildWorkSectionHtml() {
     return `                    <!-- ${p.id}. ${p.title} -->
                     <article data-category="${p.category}" data-image="${p.image}" data-title="${p.title}"
                         data-client="${p.client}" data-year="${p.year}" data-deliverables="${p.deliverables}"
+                        data-badge="${p.shortDesc || p.badgeText}"
                         data-url="${p.url}"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="${p.url}"
@@ -84,20 +85,38 @@ function renderProjectPage(p) {
   html = html.replace(/<title>.*?<\/title>/, `<title>${p.title} — Anass Biyguise</title>`);
   html = html.replace(/(<span class="text-brand-dark font-bold uppercase">)[^<]*(<\/span>)/g, `$1${p.title}$2`);
 
-  // 2. Update Discipline Badge in Stage
-  html = html.replace(/(<!-- Discipline Badge -->[\s\S]*?<span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"><\/span>\s*<span>)[^<]*(<\/span>)/, `$1${p.badgeText}$2`);
+  // 2. Update Right Column: Discipline Badge, Project Title, Project Story, Metadata Table
+  const rightColumnPattern = /<!-- Right: Editorial Project Info & Metadata -->[\s\S]*?<!-- Action Trigger:/;
+  const newRightColumn = `<!-- Right: Editorial Project Info & Metadata -->
+            <div class="w-full lg:w-[40%] bg-brand-bg flex flex-col justify-center px-6 py-12 sm:px-10 lg:p-14 xl:p-16">
+                <div class="max-w-lg mx-auto w-full flex flex-col items-start text-left">
 
-  // 3. Update Project Title in Stage
-  html = html.replace(/(<!-- Project Title -->[\s\S]*?<h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">)[\s\S]*?(<\/h1>)/,
-    `$1\n                            ${p.title}\n                        $2`);
+                    <!-- Discipline Badge -->
+                    <div class="mb-4">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"
+                                aria-hidden="true"></span>
+                            <span>${p.badgeText}</span>
+                        </div>
+                    </div>
 
-  // 4. Update Project Description in Stage
-  html = html.replace(/(<!-- Project Story -->[\s\S]*?<p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">)[\s\S]*?(<\/p>)/,
-    `$1\n                            ${p.description}\n                        $2`);
+                    <!-- Project Title -->
+                    <div class="w-full">
+                        <h1
+                            class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
+                            ${p.title}
+                        </h1>
+                    </div>
 
-  // 5. Update Metadata Table
-  const metaTablePattern = /<!-- Metadata Table -->[\s\S]*?<!-- Action Trigger:/;
-  const newMetaTable = `<!-- Metadata Table -->
+                    <!-- Project Story -->
+                    <div class="w-full">
+                        <p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">
+                            ${p.description}
+                        </p>
+                    </div>
+
+                    <!-- Metadata Table -->
                     <div class="w-full border-t border-brand-border mb-8 text-left">
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Client</span>
@@ -116,7 +135,7 @@ function renderProjectPage(p) {
                     </div>
 
                     <!-- Action Trigger:`;
-  html = html.replace(metaTablePattern, newMetaTable);
+  html = html.replace(rightColumnPattern, newRightColumn);
 
   // 6. Update Thumbnails Switcher & Media Stage Row
   const stageSectionPattern = /<!-- Thumbnails Switcher -->[\s\S]*?<!-- Right: Editorial Project Info & Metadata -->/;
