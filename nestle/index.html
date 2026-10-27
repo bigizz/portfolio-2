@@ -134,15 +134,19 @@
 
         /* Live Hover Preview Tooltip (Desktop) */
         .live-preview-box {
-            pointer-events: none;
+            position: fixed !important;
+            pointer-events: none !important;
             opacity: 0;
+            visibility: hidden;
             transform: translateY(12px) scale(0.96);
-            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+            z-index: 99999 !important;
         }
 
         .live-preview-box.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) scale(1) !important;
         }
 
         /* Filter Tab Active State */
@@ -960,10 +964,17 @@
 
                 <!-- Floating Live Desktop Preview Tooltip (Heyefi style) -->
                 <div id="desktop-live-preview"
-                    class="live-preview-box hidden lg:block fixed z-40 w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
+                    class="live-preview-box hidden lg:block fixed z-[99999] w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
                     aria-hidden="true">
-                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3">
-                        <img id="preview-image" src="../armani/armani.jpg" alt="" class="w-full h-full object-cover">
+                    <div
+                        class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3 flex items-center justify-center">
+                        <img id="preview-image" src="" alt=""
+                            class="w-full h-full object-cover transition-opacity duration-200 opacity-0">
+                        <div id="preview-loading"
+                            class="hidden absolute inset-0 flex items-center justify-center bg-brand-surface-alt">
+                            <span
+                                class="w-5 h-5 rounded-full border-2 border-brand-accent border-t-transparent animate-spin"></span>
+                        </div>
                         <div
                             class="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-brand-dark/85 backdrop-blur-sm text-[10px] font-mono font-bold text-white max-w-[85%] truncate">
                             <span id="preview-category">3D / CGI</span>
@@ -1445,6 +1456,20 @@
                     lenisInstance.resize();
                     if (window.ScrollTrigger) ScrollTrigger.refresh();
                 });
+
+                // Smooth scrolling anchor links (#work-section, #about, etc.)
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        const targetId = this.getAttribute('href');
+                        if (targetId && targetId !== '#') {
+                            const targetEl = document.querySelector(targetId);
+                            if (targetEl) {
+                                e.preventDefault();
+                                lenisInstance.scrollTo(targetEl, { offset: -90, duration: 1.1 });
+                            }
+                        }
+                    });
+                });
             } catch (e) {
                 console.warn("Lenis initialization error:", e);
             }
@@ -1456,6 +1481,30 @@
             window.addEventListener('DOMContentLoaded', initLenis);
             window.addEventListener('load', initLenis);
         }
+
+        // BFCache & page navigation lifecycle handlers to ensure smooth scrolling never freezes
+        window.addEventListener('pageshow', (e) => {
+            if (lenisInstance) {
+                lenisInstance.start();
+                lenisInstance.resize();
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            } else {
+                initLenis();
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && lenisInstance) {
+                lenisInstance.start();
+                lenisInstance.resize();
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            if (lenisInstance) {
+                lenisInstance.stop();
+            }
+        });
 
         function scrollToTop() {
             if (lenisInstance) {
@@ -1579,51 +1628,6 @@
             updateMediaNav();
         });
 
-        // Lenis Smooth Scroll (Cross-browser, including Microsoft Edge)
-        let lenisInstance = null;
-
-        if (typeof Lenis !== 'undefined') {
-            try {
-                lenisInstance = new Lenis({
-                    duration: 1.2,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                    orientation: 'vertical',
-                    gestureOrientation: 'vertical',
-                    smoothWheel: true,
-                    wheelMultiplier: 1.0,
-                    touchMultiplier: 1.5,
-                    infinite: false
-                });
-
-                if (window.ScrollTrigger) {
-                    lenisInstance.on('scroll', ScrollTrigger.update);
-                }
-
-                function raf(time) {
-                    lenisInstance.raf(time);
-                    requestAnimationFrame(raf);
-                }
-                requestAnimationFrame(raf);
-                window.lenis = lenisInstance;
-
-                // Handle smooth scrolling for all anchor links (#work-section, #about, etc.)
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        const targetId = this.getAttribute('href');
-                        if (targetId && targetId !== '#') {
-                            const targetEl = document.querySelector(targetId);
-                            if (targetEl) {
-                                e.preventDefault();
-                                lenisInstance.scrollTo(targetEl, { offset: -90, duration: 1.2 });
-                            }
-                        }
-                    });
-                });
-            } catch (e) {
-                console.warn("Lenis initialization error:", e);
-            }
-        }
-
         // Smooth Scroll To Section (In-Page)
         function scrollToSection(selector) {
             const target = document.querySelector(selector);
@@ -1640,14 +1644,6 @@
         function filterByDiscipline(discipline) {
             setDisciplineFilter(discipline);
             scrollToSection('#work-section');
-        }
-
-        function scrollToTop() {
-            if (lenisInstance) {
-                lenisInstance.scrollTo(0, { duration: 1.2 });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         }
 
         // Discipline Filter Engine
@@ -1672,78 +1668,133 @@
         // Live Desktop Hover Preview Tooltip
         const previewBox = document.getElementById('desktop-live-preview');
         const previewImg = document.getElementById('preview-image');
+        const previewLoading = document.getElementById('preview-loading');
         const previewCat = document.getElementById('preview-category');
         const previewTitle = document.getElementById('preview-title');
         const previewMeta = document.getElementById('preview-meta');
         const cursorIndicator = document.getElementById('cursor-indicator');
 
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            let mouseX = 0, mouseY = 0;
+        // Preload all 15 project thumbnails immediately into browser cache for 0ms instant display
+        const PROJECT_THUMBNAILS = [
+            '/armani/armani.jpg',
+            '/axa/axa.jpg',
+            '/nestle/nan-nido.jpg',
+            '/caf/caf.jpg',
+            '/taous/taous.jpg',
+            '/loreal/loreal.jpg',
+            '/alx/alx.jpg',
+            '/mahindra/mahindra.jpg',
+            '/yamed/yamed.jpg',
+            '/ice/ice.jpg',
+            '/wafa-ima/wafa.jpg',
+            '/clarre/clarre.jpg',
+            '/speedy/speedy.jpg',
+            '/moroccan-olive-oil/moo.jpg',
+            '/personal/personal.jpg'
+        ];
+        PROJECT_THUMBNAILS.forEach(url => {
+            const preloader = new Image();
+            preloader.src = url;
+        });
 
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+        let mouseX = 0, mouseY = 0;
+        let currentTargetImage = '';
 
-                if (cursorIndicator) {
-                    cursorIndicator.classList.add('active');
-                    cursorIndicator.style.left = `${mouseX}px`;
-                    cursorIndicator.style.top = `${mouseY}px`;
-                }
+        function positionPreview(clientX, clientY) {
+            if (!previewBox) return;
+            const offset = 24;
+            let posX = clientX + offset;
+            let posY = clientY - 120;
 
-                if (previewBox && previewBox.classList.contains('is-visible')) {
-                    const offset = 24;
-                    let posX = mouseX + offset;
-                    let posY = mouseY - 120;
+            const boxWidth = 320;
+            const boxHeight = 280;
+            if (posX + boxWidth > window.innerWidth) {
+                posX = clientX - boxWidth - offset;
+            }
+            if (posY < 80) posY = 80;
+            if (posY + boxHeight > window.innerHeight) {
+                posY = window.innerHeight - boxHeight - 20;
+            }
 
-                    const boxWidth = 320;
-                    const boxHeight = 280;
-                    if (posX + boxWidth > window.innerWidth) {
-                        posX = mouseX - boxWidth - offset;
-                    }
-                    if (posY < 80) posY = 80;
-                    if (posY + boxHeight > window.innerHeight) {
-                        posY = window.innerHeight - boxHeight - 20;
-                    }
-
-                    previewBox.style.left = `${posX}px`;
-                    previewBox.style.top = `${posY}px`;
-                }
-            });
-
-            const rows = document.querySelectorAll('#project-list-wrapper .project-row');
-            rows.forEach(row => {
-                row.addEventListener('mouseenter', () => {
-                    const img = row.getAttribute('data-image');
-                    const title = row.getAttribute('data-title');
-                    const client = row.getAttribute('data-client');
-                    const year = row.getAttribute('data-year');
-                    const deliverables = row.getAttribute('data-deliverables');
-                    const badge = row.getAttribute('data-badge') || row.getAttribute('data-category') || 'Project';
-
-                    if (previewImg) previewImg.src = img;
-                    if (previewTitle) previewTitle.textContent = title;
-                    if (previewMeta) previewMeta.textContent = `${client} // ${year}`;
-                    if (previewCat) previewCat.textContent = badge;
-
-                    if (previewBox) previewBox.classList.add('is-visible');
-                    if (cursorIndicator) cursorIndicator.classList.add('hovering');
-                });
-
-                row.addEventListener('mouseleave', () => {
-                    if (previewBox) previewBox.classList.remove('is-visible');
-                    if (cursorIndicator) cursorIndicator.classList.remove('hovering');
-                });
-            });
-
-            document.querySelectorAll('a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    if (cursorIndicator) cursorIndicator.classList.add('hovering');
-                });
-                el.addEventListener('mouseleave', () => {
-                    if (cursorIndicator) cursorIndicator.classList.remove('hovering');
-                });
-            });
+            previewBox.style.left = `${posX}px`;
+            previewBox.style.top = `${posY}px`;
         }
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (cursorIndicator) {
+                cursorIndicator.classList.add('active');
+                cursorIndicator.style.left = `${mouseX}px`;
+                cursorIndicator.style.top = `${mouseY}px`;
+            }
+
+            if (previewBox && previewBox.classList.contains('is-visible')) {
+                positionPreview(mouseX, mouseY);
+            }
+        });
+
+        // Attach hover events to project list rows
+        const rows = document.querySelectorAll('#project-list-wrapper .project-row');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', (e) => {
+                const img = row.getAttribute('data-image');
+                const title = row.getAttribute('data-title');
+                const client = row.getAttribute('data-client');
+                const year = row.getAttribute('data-year');
+                const badge = row.getAttribute('data-badge') || row.getAttribute('data-category') || 'Project';
+
+                if (previewTitle) previewTitle.textContent = title;
+                if (previewMeta) previewMeta.textContent = `${client} // ${year}`;
+                if (previewCat) previewCat.textContent = badge;
+
+                if (previewImg && img) {
+                    currentTargetImage = img;
+                    const loader = new Image();
+                    loader.src = img;
+
+                    if (loader.complete && loader.naturalWidth > 0) {
+                        previewImg.src = img;
+                        previewImg.classList.remove('opacity-0');
+                        previewImg.classList.add('opacity-100');
+                        if (previewLoading) previewLoading.classList.add('hidden');
+                    } else {
+                        previewImg.classList.remove('opacity-100');
+                        previewImg.classList.add('opacity-0');
+                        if (previewLoading) previewLoading.classList.remove('hidden');
+
+                        loader.onload = () => {
+                            if (currentTargetImage === img) {
+                                previewImg.src = img;
+                                previewImg.classList.remove('opacity-0');
+                                previewImg.classList.add('opacity-100');
+                                if (previewLoading) previewLoading.classList.add('hidden');
+                            }
+                        };
+                    }
+                }
+
+                positionPreview(e.clientX || mouseX, e.clientY || mouseY);
+                if (previewBox) previewBox.classList.add('is-visible');
+                if (cursorIndicator) cursorIndicator.classList.add('hovering');
+            });
+
+            row.addEventListener('mouseleave', () => {
+                if (previewBox) previewBox.classList.remove('is-visible');
+                if (cursorIndicator) cursorIndicator.classList.remove('hovering');
+            });
+        });
+
+        // Interactive cursor hovering for links and buttons
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (cursorIndicator) cursorIndicator.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                if (cursorIndicator) cursorIndicator.classList.remove('hovering');
+            });
+        });
 
         // Contact Modal Logic
         const contactModal = document.getElementById('contact-modal');

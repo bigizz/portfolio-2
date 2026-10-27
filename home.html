@@ -222,15 +222,19 @@
 
         /* Hover Preview Window on Desktop */
         .live-preview-box {
-            pointer-events: none;
+            position: fixed !important;
+            pointer-events: none !important;
             opacity: 0;
+            visibility: hidden;
             transform: translateY(12px) scale(0.96);
-            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+            z-index: 99999 !important;
         }
 
         .live-preview-box.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) scale(1) !important;
         }
 
         /* Tab active state */
@@ -1168,7 +1172,7 @@
 
                 <!-- Floating Live Desktop Preview Tooltip (Heyefi style) -->
                 <div id="desktop-live-preview"
-                    class="live-preview-box hidden lg:block fixed z-40 w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
+                    class="live-preview-box hidden lg:block fixed z-[99999] w-80 bg-brand-card p-3 rounded-2xl shadow-2xl border border-brand-border pointer-events-none"
                     aria-hidden="true">
                     <div
                         class="relative aspect-[4/3] rounded-xl overflow-hidden bg-brand-surface-alt mb-3 flex items-center justify-center">
@@ -2241,6 +2245,30 @@
             window.addEventListener('load', initLenis);
         }
 
+        // BFCache & page navigation lifecycle handlers to ensure smooth scrolling never freezes
+        window.addEventListener('pageshow', (e) => {
+            if (lenisInstance) {
+                lenisInstance.start();
+                lenisInstance.resize();
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            } else {
+                initLenis();
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && lenisInstance) {
+                lenisInstance.start();
+                lenisInstance.resize();
+            }
+        });
+
+        window.addEventListener('pagehide', () => {
+            if (lenisInstance) {
+                lenisInstance.stop();
+            }
+        });
+
         function scrollToTop() {
             if (lenisInstance) {
                 lenisInstance.scrollTo(0, { duration: 1.2 });
@@ -2371,46 +2399,46 @@
             preloader.src = url;
         });
 
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            let mouseX = 0, mouseY = 0;
-            let currentTargetImage = '';
+        function positionPreview(clientX, clientY) {
+            if (!previewBox) return;
+            const offset = 24;
+            let posX = clientX + offset;
+            let posY = clientY - 120;
 
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+            // Bound checks
+            const boxWidth = 320;
+            const boxHeight = 280;
+            if (posX + boxWidth > window.innerWidth) {
+                posX = clientX - boxWidth - offset;
+            }
+            if (posY < 80) posY = 80;
+            if (posY + boxHeight > window.innerHeight) {
+                posY = window.innerHeight - boxHeight - 20;
+            }
 
-                if (cursorIndicator) {
-                    cursorIndicator.classList.add('active');
-                    cursorIndicator.style.left = `${mouseX}px`;
-                    cursorIndicator.style.top = `${mouseY}px`;
-                }
+            previewBox.style.left = `${posX}px`;
+            previewBox.style.top = `${posY}px`;
+        }
 
-                if (previewBox && previewBox.classList.contains('is-visible')) {
-                    // Position floating preview cleanly near cursor without overflowing screen
-                    const offset = 24;
-                    let posX = mouseX + offset;
-                    let posY = mouseY - 120;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
 
-                    // Bound checks
-                    const boxWidth = 320;
-                    const boxHeight = 280;
-                    if (posX + boxWidth > window.innerWidth) {
-                        posX = mouseX - boxWidth - offset;
-                    }
-                    if (posY < 80) posY = 80;
-                    if (posY + boxHeight > window.innerHeight) {
-                        posY = window.innerHeight - boxHeight - 20;
-                    }
+            if (cursorIndicator) {
+                cursorIndicator.classList.add('active');
+                cursorIndicator.style.left = `${mouseX}px`;
+                cursorIndicator.style.top = `${mouseY}px`;
+            }
 
-                    previewBox.style.left = `${posX}px`;
-                    previewBox.style.top = `${posY}px`;
-                }
-            });
+            if (previewBox && previewBox.classList.contains('is-visible')) {
+                positionPreview(mouseX, mouseY);
+            }
+        });
 
-            // Attach hover events to project list rows
-            const rows = document.querySelectorAll('#project-list-wrapper .project-row');
-            rows.forEach(row => {
-                row.addEventListener('mouseenter', () => {
+        // Attach hover events to project list rows
+        const rows = document.querySelectorAll('#project-list-wrapper .project-row');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', (e) => {
                     const img = row.getAttribute('data-image');
                     const title = row.getAttribute('data-title');
                     const client = row.getAttribute('data-client');
@@ -2449,6 +2477,7 @@
                         }
                     }
 
+                    positionPreview(e.clientX || mouseX, e.clientY || mouseY);
                     if (previewBox) previewBox.classList.add('is-visible');
                     if (cursorIndicator) cursorIndicator.classList.add('hovering');
                 });
@@ -2468,7 +2497,6 @@
                     if (cursorIndicator) cursorIndicator.classList.remove('hovering');
                 });
             });
-        }
 
         // Showreel Video Modal
         const reelModal = document.getElementById('reel-modal');
