@@ -289,18 +289,34 @@
 
                 <!-- Thumbnails Switcher -->
                 <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-                    <!-- 01. AXA CampagneAuto 2025 -->
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237583080?fl=pl&fe=sh', this)"
+                    <!-- 01. AXA Tramway Campaign Visuals -->
+                    <button onclick="changeMainMedia('image', '/axa/tram.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="AXA Tramway Campaign Visuals">
+                        <img src="/axa/tram.jpg" alt="AXA Tramway Campaign Visuals" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 02. AXA Social Media Grid -->
+                    <button onclick="changeMainMedia('image', '/axa/social.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="AXA Social Media Grid">
+                        <img src="/axa/social.jpg" alt="AXA Social Media Grid" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 03. AXA CampagneAuto 2025 -->
+                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237583080?fl=pl&fe=sh', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="AXA CampagneAuto 2025">
-                        <img src="/axa/video-2025-thumb.jpg" alt="AXA CampagneAuto 2025" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        <img src="/axa/video-2025-thumb.jpg" alt="AXA CampagneAuto 2025" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
 
-                    <!-- 02. AXA CampagneAuto 2024 -->
+                    <!-- 04. AXA CampagneAuto 2024 -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237582541?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="AXA CampagneAuto 2024">
@@ -309,22 +325,6 @@
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
-                    </button>
-
-                    <!-- 03. AXA Tramway Campaign Visuals -->
-                    <button onclick="changeMainMedia('image', '/axa/tram.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="AXA Tramway Campaign Visuals">
-                        <img src="/axa/tram.jpg" alt="AXA Tramway Campaign Visuals" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
-                    </button>
-
-                    <!-- 04. AXA Social Media Grid -->
-                    <button onclick="changeMainMedia('image', '/axa/social.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="AXA Social Media Grid">
-                        <img src="/axa/social.jpg" alt="AXA Social Media Grid" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
                     </button>
 
                     <!-- 05. MyAXA Motion Branding -->
@@ -357,9 +357,9 @@
 
                         <!-- Centered Media Viewer (Constrained between the arrows) -->
                         <div class="flex-1 h-full max-h-[calc(100svh-12rem)] flex items-center justify-center relative min-w-0 min-h-0 overflow-hidden">
-                            <img id="main-image" alt="AXA visual preview" src="" class="hidden max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
-                            <div id="main-video-wrapper" class="w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
-                                <iframe id="main-video" src="https://player.vimeo.com/video/1237583080?fl=pl&fe=sh" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
+                            <img id="main-image" alt="AXA visual preview" src="/axa/tram.jpg" class="max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
+                            <div id="main-video-wrapper" class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
+                                <iframe id="main-video" src="" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
                             </div>
                         </div>
 

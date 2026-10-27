@@ -1,0 +1,4 @@
+A CGI product visualization for Giorgio Armani Si Passione fragrance. Physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.
+
+Deliverables
+CGI, 3D, motion

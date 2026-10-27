@@ -289,18 +289,42 @@
 
                 <!-- Thumbnails Switcher -->
                 <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-                    <!-- 01. La Roche-Posay Effaclar Campaign -->
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237658736?fl=pl&fe=sh', this)"
+                    <!-- 01. La Roche-Posay Social Assets -->
+                    <button onclick="changeMainMedia('image', '/loreal/lrp-social.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="La Roche-Posay Social Assets">
+                        <img src="/loreal/lrp-social.jpg" alt="La Roche-Posay Social Assets" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 02. Vichy Social Campaign -->
+                    <button onclick="changeMainMedia('image', '/loreal/vichy-social.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="Vichy Social Campaign">
+                        <img src="/loreal/vichy-social.jpg" alt="Vichy Social Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 03. CeraVe Social Design -->
+                    <button onclick="changeMainMedia('image', '/loreal/cerave-social.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="CeraVe Social Design">
+                        <img src="/loreal/cerave-social.jpg" alt="CeraVe Social Design" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 04. La Roche-Posay Effaclar Campaign -->
+                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237658736?fl=pl&fe=sh', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="La Roche-Posay Effaclar Campaign">
-                        <img src="/loreal/video-effaclar-thumb.jpg" alt="La Roche-Posay Effaclar Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        <img src="/loreal/video-effaclar-thumb.jpg" alt="La Roche-Posay Effaclar Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
                         
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
                     </button>
 
-                    <!-- 02. Vichy Dercos Commercial -->
+                    <!-- 05. Vichy Dercos Commercial -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237660002?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Vichy Dercos Commercial">
@@ -311,7 +335,7 @@
                         </div>
                     </button>
 
-                    <!-- 03. ANTHELIOS UVMUNE 400 CGI -->
+                    <!-- 06. ANTHELIOS UVMUNE 400 CGI -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237662484?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="ANTHELIOS UVMUNE 400 CGI">
@@ -322,7 +346,7 @@
                         </div>
                     </button>
 
-                    <!-- 04. L'Oréal Corporate Brand Film -->
+                    <!-- 07. L'Oréal Corporate Brand Film -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1237662781?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="L'Oréal Corporate Brand Film">
@@ -333,7 +357,7 @@
                         </div>
                     </button>
 
-                    <!-- 05. Vichy Dercos 2En 1 REVEAL -->
+                    <!-- 08. Vichy Dercos 2En 1 REVEAL -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1101152674?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="Vichy Dercos 2En 1 REVEAL">
@@ -344,7 +368,7 @@
                         </div>
                     </button>
 
-                    <!-- 06. La Roche-Posay Fluid CGI -->
+                    <!-- 09. La Roche-Posay Fluid CGI -->
                     <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/997369361?fl=pl&fe=sh', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
                         aria-label="La Roche-Posay Fluid CGI">
@@ -353,38 +377,6 @@
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                         </div>
-                    </button>
-
-                    <!-- 07. La Roche-Posay Social Assets -->
-                    <button onclick="changeMainMedia('image', '/loreal/lrp-social.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="La Roche-Posay Social Assets">
-                        <img src="/loreal/lrp-social.jpg" alt="La Roche-Posay Social Assets" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
-                    </button>
-
-                    <!-- 08. Vichy Social Campaign -->
-                    <button onclick="changeMainMedia('image', '/loreal/vichy-social.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="Vichy Social Campaign">
-                        <img src="/loreal/vichy-social.jpg" alt="Vichy Social Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
-                    </button>
-
-                    <!-- 09. CeraVe Social Design -->
-                    <button onclick="changeMainMedia('image', '/loreal/cerave-social.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="CeraVe Social Design">
-                        <img src="/loreal/cerave-social.jpg" alt="CeraVe Social Design" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
-                    </button>
-
-                    <!-- 10. LRP Out-of-Home Campaign -->
-                    <button onclick="changeMainMedia('image', '/loreal/lrp-img1.jpg', this)"
-                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="LRP Out-of-Home Campaign">
-                        <img src="/loreal/lrp-img1.jpg" alt="LRP Out-of-Home Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
-                        
                     </button>
                 </div>
 
@@ -406,9 +398,9 @@
 
                         <!-- Centered Media Viewer (Constrained between the arrows) -->
                         <div class="flex-1 h-full max-h-[calc(100svh-12rem)] flex items-center justify-center relative min-w-0 min-h-0 overflow-hidden">
-                            <img id="main-image" alt="L'Oréal Group visual preview" src="" class="hidden max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
-                            <div id="main-video-wrapper" class="w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
-                                <iframe id="main-video" src="https://player.vimeo.com/video/1237658736?fl=pl&fe=sh" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
+                            <img id="main-image" alt="L'Oréal Group visual preview" src="/loreal/lrp-social.jpg" class="max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
+                            <div id="main-video-wrapper" class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
+                                <iframe id="main-video" src="" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
                             </div>
                         </div>
 
@@ -428,7 +420,7 @@
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
                         <span id="media-counter-current" class="text-brand-dark font-black">01</span>
                         <span class="text-brand-muted">/</span>
-                        <span id="media-counter-total" class="text-brand-muted">10</span>
+                        <span id="media-counter-total" class="text-brand-muted">09</span>
                         <span class="text-[10px] text-brand-muted font-normal uppercase tracking-wider hidden sm:inline ml-0.5">Media</span>
                     </div>
                 </div>

@@ -36,10 +36,10 @@ const projects = [
     image: '/axa/axa.jpg',
     description: 'Comprehensive brand and motion design across national auto insurance campaigns, tramway vehicle wraps, UI motion for the MyAXA app, and multi-format digital social campaigns.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237583080?fl=pl&fe=sh', thumb: '/axa/video-2025-thumb.jpg', alt: 'AXA CampagneAuto 2025' },
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237582541?fl=pl&fe=sh', thumb: '/axa/video-2024-thumb.jpg', alt: 'AXA CampagneAuto 2024' },
       { type: 'image', src: '/axa/tram.jpg', thumb: '/axa/tram.jpg', alt: 'AXA Tramway Campaign Visuals' },
       { type: 'image', src: '/axa/social.jpg', thumb: '/axa/social.jpg', alt: 'AXA Social Media Grid' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237583080?fl=pl&fe=sh', thumb: '/axa/video-2025-thumb.jpg', alt: 'AXA CampagneAuto 2025' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237582541?fl=pl&fe=sh', thumb: '/axa/video-2024-thumb.jpg', alt: 'AXA CampagneAuto 2024' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1097831551?fl=pl&fe=sh', thumb: '/axa/video-myaxa-thumb.jpg', alt: 'MyAXA Motion Branding' }
     ]
   },
@@ -58,13 +58,13 @@ const projects = [
     image: '/nestle/nan-nido.jpg',
     description: 'Dynamic YouTube pre-roll advertising campaign featuring high-impact video editing and motion graphics for Nestlé Cerelac, alongside retail spatial architecture, POS display stands, and nutritional packaging 3D packshots for NAN OPTIPRO and NIDO infant nutrition ranges.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237982214?fl=pl&fe=sh', thumb: '/nestle/video-cerelac-thumb.jpg', alt: 'Nestlé Cerelac YouTube Pre-Roll Ad' },
       { type: 'image', src: '/nestle/1.jpg', thumb: '/nestle/1.jpg', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
       { type: 'image', src: '/nestle/2.jpg', thumb: '/nestle/2.jpg', alt: 'Nestlé POS Display Angle View' },
       { type: 'image', src: '/nestle/3.jpg', thumb: '/nestle/3.jpg', alt: 'Nestlé Retail Merchandising Detail' },
       { type: 'image', src: '/nestle/1x1display vf 1.jpg', thumb: '/nestle/1x1display vf 1.jpg', alt: 'NAN Display Square Campaign Format' },
       { type: 'image', src: '/nestle/toolkit vf 1.jpg', thumb: '/nestle/toolkit vf 1.jpg', alt: 'Nestlé Digital Campaign Toolkit 1' },
-      { type: 'image', src: '/nestle/toolkit vf 3.jpg', thumb: '/nestle/toolkit vf 3.jpg', alt: 'Nestlé Digital Campaign Toolkit 3' }
+      { type: 'image', src: '/nestle/toolkit vf 3.jpg', thumb: '/nestle/toolkit vf 3.jpg', alt: 'Nestlé Digital Campaign Toolkit 3' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237982214?fl=pl&fe=sh', thumb: '/nestle/video-cerelac-thumb.jpg', alt: 'Nestlé Cerelac YouTube Pre-Roll Ad' }
     ]
   },
   {
@@ -120,16 +120,15 @@ const projects = [
     image: '/loreal/loreal.jpg',
     description: "Multidisciplinary art direction and 3D visual production for L'Oréal active cosmetics divisions, including La Roche-Posay (Effaclar, Anthelios UVMune 400), Vichy Dercos 2-in-1 Reveal, and CeraVe campaign activations.",
     media: [
+      { type: 'image', src: '/loreal/lrp-social.jpg', thumb: '/loreal/lrp-social.jpg', alt: 'La Roche-Posay Social Assets' },
+      { type: 'image', src: '/loreal/vichy-social.jpg', thumb: '/loreal/vichy-social.jpg', alt: 'Vichy Social Campaign' },
+      { type: 'image', src: '/loreal/cerave-social.jpg', thumb: '/loreal/cerave-social.jpg', alt: 'CeraVe Social Design' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237658736?fl=pl&fe=sh', thumb: '/loreal/video-effaclar-thumb.jpg', alt: 'La Roche-Posay Effaclar Campaign' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237660002?fl=pl&fe=sh', thumb: '/loreal/video-vichy-dercos-thumb.jpg', alt: 'Vichy Dercos Commercial' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237662484?fl=pl&fe=sh', thumb: '/loreal/video-anthelios-thumb.jpg', alt: 'ANTHELIOS UVMUNE 400 CGI' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1237662781?fl=pl&fe=sh', thumb: '/loreal/video-corpo-thumb.jpg', alt: "L'Oréal Corporate Brand Film" },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1101152674?fl=pl&fe=sh', thumb: '/loreal/video-dercos-2en1-thumb.jpg', alt: 'Vichy Dercos 2En 1 REVEAL' },
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/997369361?fl=pl&fe=sh', thumb: '/loreal/video-larocheposay-cgi-thumb.jpg', alt: 'La Roche-Posay Fluid CGI' },
-      { type: 'image', src: '/loreal/lrp-social.jpg', thumb: '/loreal/lrp-social.jpg', alt: 'La Roche-Posay Social Assets' },
-      { type: 'image', src: '/loreal/vichy-social.jpg', thumb: '/loreal/vichy-social.jpg', alt: 'Vichy Social Campaign' },
-      { type: 'image', src: '/loreal/cerave-social.jpg', thumb: '/loreal/cerave-social.jpg', alt: 'CeraVe Social Design' },
-      { type: 'image', src: '/loreal/lrp-img1.jpg', thumb: '/loreal/lrp-img1.jpg', alt: 'LRP Out-of-Home Campaign' }
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/997369361?fl=pl&fe=sh', thumb: '/loreal/video-larocheposay-cgi-thumb.jpg', alt: 'La Roche-Posay Fluid CGI' }
     ]
   },
   {
@@ -147,10 +146,10 @@ const projects = [
     image: '/alx/alx.jpg',
     description: 'Dynamic brand campaigns and educational tech motion design for ALX Africa, including the flagship "AI for Creatives" motion sequence, social media design frameworks, and print publications.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237690955?fl=pl&fe=sh', thumb: '/alx/video-ai-2024-thumb.jpg', alt: 'ALX - AI for Creatives 2024' },
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1025241946?fl=pl&fe=sh', thumb: '/alx/alx-img1.jpg', alt: 'ALX Creative Motion Identity' },
       { type: 'image', src: '/alx/alx-img2.jpg', thumb: '/alx/alx-img2.jpg', alt: 'ALX Editorial System' },
-      { type: 'image', src: '/alx/alx-img3.jpg', thumb: '/alx/alx-img3.jpg', alt: 'ALX Visual Communication' }
+      { type: 'image', src: '/alx/alx-img3.jpg', thumb: '/alx/alx-img3.jpg', alt: 'ALX Visual Communication' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237690955?fl=pl&fe=sh', thumb: '/alx/video-ai-2024-thumb.jpg', alt: 'ALX - AI for Creatives 2024' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1025241946?fl=pl&fe=sh', thumb: '/alx/alx-img1.jpg', alt: 'ALX Creative Motion Identity' }
     ]
   },
   {
@@ -168,12 +167,12 @@ const projects = [
     image: '/mahindra/mahindra.jpg',
     description: 'Comprehensive automotive advertising direction for Mahindra Morocco, featuring cinematic launch motion for the XUV 3XO SUV, national print billboard campaign collateral, and seasonal digital activations.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237668658?fl=pl&fe=sh', thumb: '/mahindra/video-xuv3xo-thumb.jpg', alt: 'Mahindra XUV 3XO Motion Film' },
       { type: 'image', src: '/mahindra/XUV300 Post .jpg', thumb: '/mahindra/XUV300 Post .jpg', alt: 'Mahindra XUV 300 Visual' },
       { type: 'image', src: '/mahindra/Affiche page offre.jpg', thumb: '/mahindra/Affiche page offre.jpg', alt: 'Mahindra National Campaign Poster' },
       { type: 'image', src: '/mahindra/post 4.jpg', thumb: '/mahindra/post 4.jpg', alt: 'Mahindra Digital Promotion Grid' },
       { type: 'image', src: '/mahindra/mahindra-img1.jpg', thumb: '/mahindra/mahindra-img1.jpg', alt: 'Mahindra Dealership Print Catalog' },
-      { type: 'image', src: '/mahindra/mahindra-img5.jpg', thumb: '/mahindra/mahindra-img5.jpg', alt: 'Mahindra Brand Visual Guidelines' }
+      { type: 'image', src: '/mahindra/mahindra-img5.jpg', thumb: '/mahindra/mahindra-img5.jpg', alt: 'Mahindra Brand Visual Guidelines' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237668658?fl=pl&fe=sh', thumb: '/mahindra/video-xuv3xo-thumb.jpg', alt: 'Mahindra XUV 3XO Motion Film' }
     ]
   },
   {
@@ -191,12 +190,12 @@ const projects = [
     image: '/yamed/yamed.jpg',
     description: 'Premium branding and architectural cinematic motion for Yamed Promotion luxury residential developments, showcasing "Résidence Les Sources", "VILLA 28", and "Terre Océane" residences with refined editorial typography.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688326?fl=pl&fe=sh', thumb: '/yamed/video-sources-thumb.jpg', alt: 'Résidence Les Sources Tour' },
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688920?fl=pl&fe=sh', thumb: '/yamed/video-villa28-thumb.jpg', alt: 'VILLA 28 Motion Showcase' },
       { type: 'image', src: '/yamed/post2.jpg', thumb: '/yamed/post2.jpg', alt: 'Terre Océane Editorial Visual' },
       { type: 'image', src: '/yamed/post7.jpg', thumb: '/yamed/post7.jpg', alt: 'Yamed Architecture Showcase' },
       { type: 'image', src: '/yamed/c2698 Post 03_.jpg', thumb: '/yamed/c2698 Post 03_.jpg', alt: 'Yamed Prestige Living' },
-      { type: 'image', src: '/yamed/post10.jpg', thumb: '/yamed/post10.jpg', alt: 'Yamed Digital Campaign' }
+      { type: 'image', src: '/yamed/post10.jpg', thumb: '/yamed/post10.jpg', alt: 'Yamed Digital Campaign' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688326?fl=pl&fe=sh', thumb: '/yamed/video-sources-thumb.jpg', alt: 'Résidence Les Sources Tour' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237688920?fl=pl&fe=sh', thumb: '/yamed/video-villa28-thumb.jpg', alt: 'VILLA 28 Motion Showcase' }
     ]
   },
   {
@@ -273,11 +272,11 @@ const projects = [
     image: '/speedy/speedy.jpg',
     description: 'A playful surreal 3D CGI campaign for Speedy auto centers featuring a pool sculpted in the silhouette of a mechanical wrench, highlighting summertime vehicle diagnostics and service specials.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237687389?fl=pl&fe=sh', thumb: '/speedy/video-speedy-thumb.jpg', alt: 'Speedy Commercial Motion' },
       { type: 'image', src: '/speedy/check-up.jpg', thumb: '/speedy/check-up.jpg', alt: 'Speedy Check-Up 3D Poster' },
       { type: 'image', src: '/speedy/vidange.jpg', thumb: '/speedy/vidange.jpg', alt: 'Speedy Vidange Campaign' },
       { type: 'image', src: '/speedy/vitres.jpg', thumb: '/speedy/vitres.jpg', alt: 'Speedy Traitement Vitres' },
-      { type: 'image', src: '/speedy/Screenshot 2026-10-19 210523.jpg', thumb: '/speedy/Screenshot 2026-10-19 210523.jpg', alt: 'Speedy Seasonal Promotion' }
+      { type: 'image', src: '/speedy/Screenshot 2026-10-19 210523.jpg', thumb: '/speedy/Screenshot 2026-10-19 210523.jpg', alt: 'Speedy Seasonal Promotion' },
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237687389?fl=pl&fe=sh', thumb: '/speedy/video-speedy-thumb.jpg', alt: 'Speedy Commercial Motion' }
     ]
   },
   {
