@@ -1,6 +1,18 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/moo",
+      "destination": "/moroccan-olive-oil",
+      "permanent": true
+    },
+    {
+      "source": "/wafaima",
+      "destination": "/wafa-ima",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/home",
