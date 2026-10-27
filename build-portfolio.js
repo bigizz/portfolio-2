@@ -217,7 +217,7 @@ ${thumbBtns}
   return html;
 }
 
-// Generate files for all 15 projects
+// Generate files for all 15 projects (keep strictly ONE index.html per project)
 projects.forEach(p => {
   const content = renderProjectPage(p);
   const targetDir = path.resolve(p.folder);
@@ -225,19 +225,11 @@ projects.forEach(p => {
     fs.mkdirSync(targetDir, { recursive: true });
   }
 
-  // 1. index.html in project folder
+  // Strictly single index.html per project folder
   const indexFile = path.join(targetDir, 'index.html');
   fs.writeFileSync(indexFile, content, 'utf8');
 
-  // 2. <slug>.html in project folder (e.g. loreal.html, mahindra.html, etc.)
-  const slugFile = path.join(targetDir, `${p.slug}.html`);
-  fs.writeFileSync(slugFile, content, 'utf8');
-
-  if (p.slug === 'nestle') {
-    fs.writeFileSync(path.join(targetDir, 'nan-nido.html'), content, 'utf8');
-  }
-
-  console.log(`Generated: ${indexFile} and ${slugFile}`);
+  console.log(`Generated: ${indexFile}`);
 });
 
-console.log('All 15 project pages successfully generated and synchronized!');
+console.log('All 15 project pages successfully generated and synchronized (single index.html per project)!');

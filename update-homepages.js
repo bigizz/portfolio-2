@@ -15,6 +15,7 @@ function generateWorkSection() {
     return `                    <!-- ${p.id}. ${p.title} -->
                     <article data-category="${p.category}" data-image="${p.image}" data-title="${p.title}"
                         data-client="${p.client}" data-year="${p.year}" data-deliverables="${p.deliverables}"
+                        data-badge="${p.shortDesc || p.badgeText}"
                         data-url="${p.url}"
                         class="project-row group border-t border-brand-border transition-colors duration-200">
                         <a href="${p.url}"

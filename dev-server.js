@@ -68,10 +68,16 @@ function resolvePath(urlPath) {
   // Graceful fallback for renamed/accented directories & png to jpg conversion
   if (!fs.existsSync(candidate)) {
     if (cleanUrl.startsWith('/NAN - NIDO/')) {
-      const alt = path.join(ROOT, 'nestlé', cleanUrl.substring('/NAN - NIDO/'.length));
+      const alt = path.join(ROOT, 'nestle', cleanUrl.substring('/NAN - NIDO/'.length));
       if (fs.existsSync(alt)) candidate = alt;
-    } else if (cleanUrl.startsWith('/nestle/')) {
-      const alt = path.join(ROOT, 'nestlé', cleanUrl.substring('/nestle/'.length));
+    } else if (cleanUrl.startsWith('/nestlé/')) {
+      const alt = path.join(ROOT, 'nestle', cleanUrl.substring('/nestlé/'.length));
+      if (fs.existsSync(alt)) candidate = alt;
+    } else if (cleanUrl.startsWith('/Wafa IMA Assistance/')) {
+      const alt = path.join(ROOT, 'wafa-ima', cleanUrl.substring('/Wafa IMA Assistance/'.length));
+      if (fs.existsSync(alt)) candidate = alt;
+    } else if (cleanUrl.startsWith('/Moroccan Olive Oil/')) {
+      const alt = path.join(ROOT, 'moroccan-olive-oil', cleanUrl.substring('/Moroccan Olive Oil/'.length));
       if (fs.existsSync(alt)) candidate = alt;
     }
 

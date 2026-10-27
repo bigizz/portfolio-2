@@ -72,19 +72,23 @@
     },
     {
       "source": "/moroccan-olive-oil",
-      "destination": "/Moroccan Olive Oil/index.html"
+      "destination": "/moroccan-olive-oil/index.html"
+    },
+    {
+      "source": "/moo",
+      "destination": "/moroccan-olive-oil/index.html"
     },
     {
       "source": "/nestle",
-      "destination": "/nestlé/index.html"
+      "destination": "/nestle/index.html"
     },
     {
       "source": "/nestlé",
-      "destination": "/nestlé/index.html"
+      "destination": "/nestle/index.html"
     },
     {
       "source": "/nan-nido",
-      "destination": "/nestlé/index.html"
+      "destination": "/nestle/index.html"
     },
     {
       "source": "/taous",
@@ -92,7 +96,11 @@
     },
     {
       "source": "/wafa-ima",
-      "destination": "/Wafa IMA Assistance/index.html"
+      "destination": "/wafa-ima/index.html"
+    },
+    {
+      "source": "/wafaima",
+      "destination": "/wafa-ima/index.html"
     }
   ]
 }

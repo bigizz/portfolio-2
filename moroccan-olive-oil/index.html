@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Language" content="en">
     <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giorgio Armani — Anass Biyguise</title>
+    <title>Moroccan Olive Oil — Anass Biyguise</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <!-- Google Fonts: Inter for UI, Space Mono for crisp editorial metadata -->
@@ -245,7 +245,7 @@
                 </a>
                 <span class="hidden md:inline-flex items-center gap-1.5 text-xs font-mono text-brand-muted">
                     <span>/</span>
-                    <span class="text-brand-dark font-bold uppercase">Giorgio Armani</span>
+                    <span class="text-brand-dark font-bold uppercase">Moroccan Olive Oil</span>
                 </span>
             </div>
 
@@ -285,15 +285,36 @@
 
                 <!-- Thumbnails Switcher -->
                 <div class="flex flex-row lg:flex-col gap-3 w-full lg:w-20 flex-shrink-0 overflow-x-auto lg:overflow-y-auto no-scrollbar pb-2 lg:pb-0 z-10">
-                    <!-- 01. Armani CGI Packshot -->
-                    <button onclick="changeMainMedia('vimeo', 'https://player.vimeo.com/video/1025241625?fl=pl&fe=sh', this)"
+                    <!-- 01. MOO Extra Virgin Olive Oil Bottle Packshot -->
+                    <button onclick="changeMainMedia('image', '/moroccan-olive-oil/1.jpg', this)"
                         class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-brand-dark p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
-                        aria-label="Armani CGI Packshot">
-                        <img src="/armani/armani-img1.jpg" alt="Armani CGI Packshot" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
+                        aria-label="MOO Extra Virgin Olive Oil Bottle Packshot">
+                        <img src="/moroccan-olive-oil/1.jpg" alt="MOO Extra Virgin Olive Oil Bottle Packshot" loading="lazy" class="w-full h-full object-cover rounded-lg  group-hover:grayscale-0">
                         
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 m-1 rounded-lg">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                        </div>
+                    </button>
+
+                    <!-- 02. MOO Heritage Packaging Front View -->
+                    <button onclick="changeMainMedia('image', '/moroccan-olive-oil/2.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="MOO Heritage Packaging Front View">
+                        <img src="/moroccan-olive-oil/2.jpg" alt="MOO Heritage Packaging Front View" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 03. MOO Premium Label Gold Foil Detail -->
+                    <button onclick="changeMainMedia('image', '/moroccan-olive-oil/3.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="MOO Premium Label Gold Foil Detail">
+                        <img src="/moroccan-olive-oil/3.jpg" alt="MOO Premium Label Gold Foil Detail" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
+                    </button>
+
+                    <!-- 04. MOO Editorial Brand Campaign -->
+                    <button onclick="changeMainMedia('image', '/moroccan-olive-oil/4.jpg', this)"
+                        class="thumb-btn group relative w-16 lg:w-full aspect-square bg-white border-2 border-transparent opacity-60 p-1 rounded-xl hover:border-brand-accent transition-all flex-shrink-0 focus:outline-none shadow-sm"
+                        aria-label="MOO Editorial Brand Campaign">
+                        <img src="/moroccan-olive-oil/4.jpg" alt="MOO Editorial Brand Campaign" loading="lazy" class="w-full h-full object-cover rounded-lg grayscale group-hover:grayscale-0">
+                        
                     </button>
                 </div>
 
@@ -304,7 +325,7 @@
                     <div class="w-full flex-1 flex items-center justify-between gap-2 sm:gap-4 relative min-w-0 min-h-0">
                         
                         <!-- Prev Media Arrow (Left empty side) -->
-                        <button type="button" onclick="navigateMedia(-1)" style="display: none;"
+                        <button type="button" onclick="navigateMedia(-1)" 
                             class="media-nav-btn flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-dark hover:text-white backdrop-blur-md border border-brand-border shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none group cursor-pointer z-20"
                             aria-label="Previous project media">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:-translate-x-0.5">
@@ -315,14 +336,14 @@
 
                         <!-- Centered Media Viewer (Constrained between the arrows) -->
                         <div class="flex-1 h-full max-h-[calc(100svh-12rem)] flex items-center justify-center relative min-w-0 min-h-0 overflow-hidden">
-                            <img id="main-image" alt="Giorgio Armani visual preview" src="" class="hidden max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
-                            <div id="main-video-wrapper" class="w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
-                                <iframe id="main-video" src="https://player.vimeo.com/video/1025241625?fl=pl&fe=sh" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
+                            <img id="main-image" alt="Moroccan Olive Oil visual preview" src="/moroccan-olive-oil/1.jpg" class="max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border">
+                            <div id="main-video-wrapper" class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black">
+                                <iframe id="main-video" src="" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen class="absolute top-0 left-0 w-full h-full bg-black"></iframe>
                             </div>
                         </div>
 
                         <!-- Next Media Arrow (Right empty side, invites scrolling) -->
-                        <button type="button" onclick="navigateMedia(1)" style="display: none;"
+                        <button type="button" onclick="navigateMedia(1)" 
                             class="media-nav-btn invite-pulse flex-shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/90 hover:bg-brand-accent text-brand-dark hover:text-white backdrop-blur-md border border-brand-border shadow-md hover:shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none group cursor-pointer z-20"
                             aria-label="Next project media">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-0.5">
@@ -333,11 +354,11 @@
                     </div>
 
                     <!-- Media Counter Pill (Positioned cleanly below media, no overlay) -->
-                    <div id="media-counter-pill" style="display: none;" class="mt-3 flex-shrink-0 flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-brand-border shadow-sm text-xs font-mono font-bold text-brand-dark select-none transition-all">
+                    <div id="media-counter-pill"  class="mt-3 flex-shrink-0 flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md border border-brand-border shadow-sm text-xs font-mono font-bold text-brand-dark select-none transition-all">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" aria-hidden="true"></span>
                         <span id="media-counter-current" class="text-brand-dark font-black">01</span>
                         <span class="text-brand-muted">/</span>
-                        <span id="media-counter-total" class="text-brand-muted">01</span>
+                        <span id="media-counter-total" class="text-brand-muted">04</span>
                         <span class="text-[10px] text-brand-muted font-normal uppercase tracking-wider hidden sm:inline ml-0.5">Media</span>
                     </div>
                 </div>
@@ -353,7 +374,7 @@
                             class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-surface-alt border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-muted">
                             <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"
                                 aria-hidden="true"></span>
-                            <span>3D / CGI</span>
+                            <span>Branding</span>
                         </div>
                     </div>
 
@@ -361,14 +382,14 @@
                     <div class="w-full">
                         <h1
                             class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-tight text-brand-dark mb-6">
-                            Giorgio Armani
+                            Moroccan Olive Oil
                         </h1>
                     </div>
 
                     <!-- Project Story -->
                     <div class="w-full">
                         <p class="text-brand-muted font-normal text-sm sm:text-base leading-relaxed mb-8">
-                            A CGI product visualization for Giorgio Armani Si Passione fragrance. Designed with precision physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.
+                            Art direction and packaging design for Moroccan Olive Oil (MOO) under the "Morocco Kingdom of Taste" collective mark. Styled with Italian Carrara marble pedestals, fresh olive branches, and geometric heritage backdrops.
                         </p>
                     </div>
 
@@ -376,17 +397,17 @@
                     <div class="w-full border-t border-brand-border mb-8 text-left">
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Client</span>
-                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">Giorgio Armani</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">MOO</span>
                         </div>
                         
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Year</span>
-                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">2024</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors">2026</span>
                         </div>
 
                         <div class="py-4 border-b border-brand-border flex justify-between items-center group cursor-default transition-all">
                             <span class="text-xs font-mono font-bold uppercase tracking-widest text-brand-muted">Deliverables</span>
-                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">CGI Luxury Packshot, Studio Lighting</span>
+                            <span class="text-xs font-mono font-bold text-brand-dark group-hover:text-brand-accent transition-colors text-right">Label Design, Marble & Botanical CGI Packshot, Brand Identity</span>
                         </div>
                     </div>
 
@@ -545,7 +566,7 @@
                     </article>
 
                     <!-- 03. Nestlé -->
-                    <article data-category="motion editing 3d print" data-image="/nestlé/nan-nido.jpg" data-title="Nestlé"
+                    <article data-category="motion editing 3d print" data-image="/nestle/nan-nido.jpg" data-title="Nestlé"
                         data-client="Nestlé Nutrition" data-year="2025" data-deliverables="Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots"
                         data-badge="Pre-Roll Ad & Retail POS"
                         data-url="/nestle"
@@ -769,7 +790,7 @@
                     </article>
 
                     <!-- 11. Wafa IMA Assistance -->
-                    <article data-category="branding" data-image="/Wafa IMA Assistance/wafa.jpg" data-title="Wafa IMA Assistance"
+                    <article data-category="branding" data-image="/wafa-ima/wafa.jpg" data-title="Wafa IMA Assistance"
                         data-client="Wafa IMA Assistance" data-year="Ongoing" data-deliverables="Outdoor Advertising, National Holiday Posters, Auto Premium Campaign"
                         data-badge="National Advertising"
                         data-url="/wafa-ima"
@@ -853,7 +874,7 @@
                     </article>
 
                     <!-- 14. Moroccan Olive Oil -->
-                    <article data-category="branding" data-image="/Moroccan Olive Oil/moo.jpg" data-title="Moroccan Olive Oil"
+                    <article data-category="branding" data-image="/moroccan-olive-oil/moo.jpg" data-title="Moroccan Olive Oil"
                         data-client="MOO" data-year="2026" data-deliverables="Label Design, Marble & Botanical CGI Packshot, Brand Identity"
                         data-badge="Packaging & CGI Packshot"
                         data-url="/moroccan-olive-oil"
@@ -1344,6 +1365,79 @@
     <!-- INTERACTION LOGIC & GSAP ANIMATIONS -->
     <!-- ========================================================================= -->
     <script>
+        // Initialize Lenis smooth scroll with robust lifecycle management
+        let lenisInstance = null;
+
+        function initLenis() {
+            if (typeof Lenis === 'undefined' || lenisInstance) return;
+
+            try {
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+
+                lenisInstance = new Lenis({
+                    duration: 1.1,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    orientation: 'vertical',
+                    gestureOrientation: 'vertical',
+                    smoothWheel: true,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.5,
+                    infinite: false
+                });
+
+                window.lenis = lenisInstance;
+
+                if (window.ScrollTrigger) {
+                    lenisInstance.on('scroll', ScrollTrigger.update);
+                }
+
+                if (window.gsap && window.gsap.ticker) {
+                    gsap.ticker.add((time) => {
+                        lenisInstance.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0);
+                } else {
+                    function raf(time) {
+                        lenisInstance.raf(time);
+                        requestAnimationFrame(raf);
+                    }
+                    requestAnimationFrame(raf);
+                }
+
+                if (window.ResizeObserver && document.body) {
+                    const ro = new ResizeObserver(() => {
+                        lenisInstance.resize();
+                        if (window.ScrollTrigger) ScrollTrigger.refresh();
+                    });
+                    ro.observe(document.body);
+                }
+
+                window.addEventListener('load', () => {
+                    lenisInstance.resize();
+                    if (window.ScrollTrigger) ScrollTrigger.refresh();
+                });
+            } catch (e) {
+                console.warn("Lenis initialization error:", e);
+            }
+        }
+
+        if (typeof Lenis !== 'undefined') {
+            initLenis();
+        } else {
+            window.addEventListener('DOMContentLoaded', initLenis);
+            window.addEventListener('load', initLenis);
+        }
+
+        function scrollToTop() {
+            if (lenisInstance) {
+                lenisInstance.scrollTo(0, { duration: 1.1 });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
         // Media Index & Navigation State
         let currentMediaIndex = 0;
 

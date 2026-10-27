@@ -279,41 +279,23 @@ function updateProjectStageMetadata(html, p) {
   console.log(`Updated homepage: ${filepath}`);
 });
 
-// 6. Update all project HTML files
+// 6. Update all project HTML files (strictly single index.html per project)
 const projectFileMappings = [
-  { file: 'armani/armani.html', slug: 'armani' },
   { file: 'armani/index.html', slug: 'armani' },
-  { file: 'axa/axa.html', slug: 'axa' },
   { file: 'axa/index.html', slug: 'axa' },
-  { file: 'nestlé/nestle.html', slug: 'nestle' },
-  { file: 'nestlé/nan-nido.html', slug: 'nestle' },
-  { file: 'nestlé/index.html', slug: 'nestle' },
-  { file: 'caf/caf.html', slug: 'caf' },
+  { file: 'nestle/index.html', slug: 'nestle' },
   { file: 'caf/index.html', slug: 'caf' },
-  { file: 'taous/taous.html', slug: 'taous' },
   { file: 'taous/index.html', slug: 'taous' },
-  { file: 'loreal/loreal.html', slug: 'loreal' },
   { file: 'loreal/index.html', slug: 'loreal' },
-  { file: 'loreal/lrp.html', slug: 'loreal' },
-  { file: 'alx/alx.html', slug: 'alx' },
   { file: 'alx/index.html', slug: 'alx' },
-  { file: 'mahindra/mahindra.html', slug: 'mahindra' },
   { file: 'mahindra/index.html', slug: 'mahindra' },
-  { file: 'yamed/yamed.html', slug: 'yamed' },
   { file: 'yamed/index.html', slug: 'yamed' },
-  { file: 'ice/ice.html', slug: 'ice' },
   { file: 'ice/index.html', slug: 'ice' },
-  { file: 'Wafa IMA Assistance/wafa-ima.html', slug: 'wafa-ima' },
-  { file: 'Wafa IMA Assistance/index.html', slug: 'wafa-ima' },
-  { file: 'clarre/clarre.html', slug: 'clarre' },
+  { file: 'wafa-ima/index.html', slug: 'wafa-ima' },
   { file: 'clarre/index.html', slug: 'clarre' },
-  { file: 'speedy/speedy.html', slug: 'speedy' },
   { file: 'speedy/index.html', slug: 'speedy' },
-  { file: 'Moroccan Olive Oil/moroccan-olive-oil.html', slug: 'moroccan-olive-oil' },
-  { file: 'Moroccan Olive Oil/index.html', slug: 'moroccan-olive-oil' },
-  { file: 'personal/personal.html', slug: 'personal' },
-  { file: 'personal/index.html', slug: 'personal' },
-  { file: 'personal/sculptures.html', slug: 'personal' }
+  { file: 'moroccan-olive-oil/index.html', slug: 'moroccan-olive-oil' },
+  { file: 'personal/index.html', slug: 'personal' }
 ];
 
 projectFileMappings.forEach(({ file, slug }) => {

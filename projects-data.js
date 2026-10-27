@@ -46,7 +46,7 @@ const projects = [
   {
     id: '03',
     slug: 'nestle',
-    folder: 'nestlé',
+    folder: 'nestle',
     url: '/nestle',
     title: 'Nestlé',
     client: 'Nestlé Nutrition',
@@ -55,16 +55,16 @@ const projects = [
     badgeText: 'Motion & Editing',
     shortDesc: 'Pre-Roll Ad & Retail POS',
     deliverables: 'Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots',
-    image: '/nestlé/nan-nido.jpg',
+    image: '/nestle/nan-nido.jpg',
     description: 'Dynamic YouTube pre-roll advertising campaign featuring high-impact video editing and motion graphics for Nestlé Cerelac, alongside retail spatial architecture, POS display stands, and nutritional packaging 3D packshots for NAN OPTIPRO and NIDO infant nutrition ranges.',
     media: [
-      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237982214?fl=pl&fe=sh', thumb: '/nestlé/video-cerelac-thumb.jpg', alt: 'Nestlé Cerelac YouTube Pre-Roll Ad' },
-      { type: 'image', src: '/nestlé/1.jpg', thumb: '/nestlé/1.jpg', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
-      { type: 'image', src: '/nestlé/2.jpg', thumb: '/nestlé/2.jpg', alt: 'Nestlé POS Display Angle View' },
-      { type: 'image', src: '/nestlé/3.jpg', thumb: '/nestlé/3.jpg', alt: 'Nestlé Retail Merchandising Detail' },
-      { type: 'image', src: '/nestlé/1x1display vf 1.jpg', thumb: '/nestlé/1x1display vf 1.jpg', alt: 'NAN Display Square Campaign Format' },
-      { type: 'image', src: '/nestlé/toolkit vf 1.jpg', thumb: '/nestlé/toolkit vf 1.jpg', alt: 'Nestlé Digital Campaign Toolkit 1' },
-      { type: 'image', src: '/nestlé/toolkit vf 3.jpg', thumb: '/nestlé/toolkit vf 3.jpg', alt: 'Nestlé Digital Campaign Toolkit 3' }
+      { type: 'vimeo', src: 'https://player.vimeo.com/video/1237982214?fl=pl&fe=sh', thumb: '/nestle/video-cerelac-thumb.jpg', alt: 'Nestlé Cerelac YouTube Pre-Roll Ad' },
+      { type: 'image', src: '/nestle/1.jpg', thumb: '/nestle/1.jpg', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
+      { type: 'image', src: '/nestle/2.jpg', thumb: '/nestle/2.jpg', alt: 'Nestlé POS Display Angle View' },
+      { type: 'image', src: '/nestle/3.jpg', thumb: '/nestle/3.jpg', alt: 'Nestlé Retail Merchandising Detail' },
+      { type: 'image', src: '/nestle/1x1display vf 1.jpg', thumb: '/nestle/1x1display vf 1.jpg', alt: 'NAN Display Square Campaign Format' },
+      { type: 'image', src: '/nestle/toolkit vf 1.jpg', thumb: '/nestle/toolkit vf 1.jpg', alt: 'Nestlé Digital Campaign Toolkit 1' },
+      { type: 'image', src: '/nestle/toolkit vf 3.jpg', thumb: '/nestle/toolkit vf 3.jpg', alt: 'Nestlé Digital Campaign Toolkit 3' }
     ]
   },
   {
@@ -220,7 +220,7 @@ const projects = [
   {
     id: '11',
     slug: 'wafa-ima',
-    folder: 'Wafa IMA Assistance',
+    folder: 'wafa-ima',
     url: '/wafa-ima',
     title: 'Wafa IMA Assistance',
     client: 'Wafa IMA Assistance',
@@ -229,13 +229,13 @@ const projects = [
     badgeText: 'Branding',
     shortDesc: 'National Advertising',
     deliverables: 'Outdoor Advertising, National Holiday Posters, Auto Premium Campaign',
-    image: '/Wafa IMA Assistance/wafa.jpg',
+    image: '/wafa-ima/wafa.jpg',
     description: 'National print advertising and creative direction for Wafa IMA Assistance, spanning Wafa Auto Premium roadside assistance campaigns, international student coverage, and commemorative national holiday posters.',
     media: [
-      { type: 'image', src: '/Wafa IMA Assistance/wafa auto premium.jpg', thumb: '/Wafa IMA Assistance/wafa auto premium.jpg', alt: 'Wafa Auto Premium Roadside Campaign' },
-      { type: 'image', src: '/Wafa IMA Assistance/wafa étudiant expartié.jpg', thumb: '/Wafa IMA Assistance/wafa étudiant expartié.jpg', alt: 'Wafa Étudiant Expatrié Assistance' },
-      { type: 'image', src: '/Wafa IMA Assistance/marche verte.jpg', thumb: '/Wafa IMA Assistance/marche verte.jpg', alt: 'Wafa Marche Verte Commemorative Poster' },
-      { type: 'image', src: '/Wafa IMA Assistance/victoire.jpg', thumb: '/Wafa IMA Assistance/victoire.jpg', alt: 'Wafa Victoire Sports Campaign' }
+      { type: 'image', src: '/wafa-ima/wafa auto premium.jpg', thumb: '/wafa-ima/wafa auto premium.jpg', alt: 'Wafa Auto Premium Roadside Campaign' },
+      { type: 'image', src: '/wafa-ima/wafa étudiant expartié.jpg', thumb: '/wafa-ima/wafa étudiant expartié.jpg', alt: 'Wafa Étudiant Expatrié Assistance' },
+      { type: 'image', src: '/wafa-ima/marche verte.jpg', thumb: '/wafa-ima/marche verte.jpg', alt: 'Wafa Marche Verte Commemorative Poster' },
+      { type: 'image', src: '/wafa-ima/victoire.jpg', thumb: '/wafa-ima/victoire.jpg', alt: 'Wafa Victoire Sports Campaign' }
     ]
   },
   {
@@ -283,7 +283,7 @@ const projects = [
   {
     id: '14',
     slug: 'moroccan-olive-oil',
-    folder: 'Moroccan Olive Oil',
+    folder: 'moroccan-olive-oil',
     url: '/moroccan-olive-oil',
     title: 'Moroccan Olive Oil',
     client: 'MOO',
@@ -292,13 +292,13 @@ const projects = [
     badgeText: 'Branding',
     shortDesc: 'Packaging & CGI Packshot',
     deliverables: 'Label Design, Marble & Botanical CGI Packshot, Brand Identity',
-    image: '/Moroccan Olive Oil/moo.jpg',
+    image: '/moroccan-olive-oil/moo.jpg',
     description: 'Art direction and packaging design for Moroccan Olive Oil (MOO) under the "Morocco Kingdom of Taste" collective mark. Styled with Italian Carrara marble pedestals, fresh olive branches, and geometric heritage backdrops.',
     media: [
-      { type: 'image', src: '/Moroccan Olive Oil/1.jpg', thumb: '/Moroccan Olive Oil/1.jpg', alt: 'MOO Extra Virgin Olive Oil Bottle Packshot' },
-      { type: 'image', src: '/Moroccan Olive Oil/2.jpg', thumb: '/Moroccan Olive Oil/2.jpg', alt: 'MOO Heritage Packaging Front View' },
-      { type: 'image', src: '/Moroccan Olive Oil/3.jpg', thumb: '/Moroccan Olive Oil/3.jpg', alt: 'MOO Premium Label Gold Foil Detail' },
-      { type: 'image', src: '/Moroccan Olive Oil/4.jpg', thumb: '/Moroccan Olive Oil/4.jpg', alt: 'MOO Editorial Brand Campaign' }
+      { type: 'image', src: '/moroccan-olive-oil/1.jpg', thumb: '/moroccan-olive-oil/1.jpg', alt: 'MOO Extra Virgin Olive Oil Bottle Packshot' },
+      { type: 'image', src: '/moroccan-olive-oil/2.jpg', thumb: '/moroccan-olive-oil/2.jpg', alt: 'MOO Heritage Packaging Front View' },
+      { type: 'image', src: '/moroccan-olive-oil/3.jpg', thumb: '/moroccan-olive-oil/3.jpg', alt: 'MOO Premium Label Gold Foil Detail' },
+      { type: 'image', src: '/moroccan-olive-oil/4.jpg', thumb: '/moroccan-olive-oil/4.jpg', alt: 'MOO Editorial Brand Campaign' }
     ]
   },
   {

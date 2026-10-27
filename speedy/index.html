@@ -577,7 +577,7 @@
                     </article>
 
                     <!-- 03. Nestlé -->
-                    <article data-category="motion editing 3d print" data-image="/nestlé/nan-nido.jpg" data-title="Nestlé"
+                    <article data-category="motion editing 3d print" data-image="/nestle/nan-nido.jpg" data-title="Nestlé"
                         data-client="Nestlé Nutrition" data-year="2025" data-deliverables="Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots"
                         data-badge="Pre-Roll Ad & Retail POS"
                         data-url="/nestle"
@@ -801,7 +801,7 @@
                     </article>
 
                     <!-- 11. Wafa IMA Assistance -->
-                    <article data-category="branding" data-image="/Wafa IMA Assistance/wafa.jpg" data-title="Wafa IMA Assistance"
+                    <article data-category="branding" data-image="/wafa-ima/wafa.jpg" data-title="Wafa IMA Assistance"
                         data-client="Wafa IMA Assistance" data-year="Ongoing" data-deliverables="Outdoor Advertising, National Holiday Posters, Auto Premium Campaign"
                         data-badge="National Advertising"
                         data-url="/wafa-ima"
@@ -885,7 +885,7 @@
                     </article>
 
                     <!-- 14. Moroccan Olive Oil -->
-                    <article data-category="branding" data-image="/Moroccan Olive Oil/moo.jpg" data-title="Moroccan Olive Oil"
+                    <article data-category="branding" data-image="/moroccan-olive-oil/moo.jpg" data-title="Moroccan Olive Oil"
                         data-client="MOO" data-year="2026" data-deliverables="Label Design, Marble & Botanical CGI Packshot, Brand Identity"
                         data-badge="Packaging & CGI Packshot"
                         data-url="/moroccan-olive-oil"
@@ -1376,6 +1376,79 @@
     <!-- INTERACTION LOGIC & GSAP ANIMATIONS -->
     <!-- ========================================================================= -->
     <script>
+        // Initialize Lenis smooth scroll with robust lifecycle management
+        let lenisInstance = null;
+
+        function initLenis() {
+            if (typeof Lenis === 'undefined' || lenisInstance) return;
+
+            try {
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+
+                lenisInstance = new Lenis({
+                    duration: 1.1,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    orientation: 'vertical',
+                    gestureOrientation: 'vertical',
+                    smoothWheel: true,
+                    wheelMultiplier: 1.0,
+                    touchMultiplier: 1.5,
+                    infinite: false
+                });
+
+                window.lenis = lenisInstance;
+
+                if (window.ScrollTrigger) {
+                    lenisInstance.on('scroll', ScrollTrigger.update);
+                }
+
+                if (window.gsap && window.gsap.ticker) {
+                    gsap.ticker.add((time) => {
+                        lenisInstance.raf(time * 1000);
+                    });
+                    gsap.ticker.lagSmoothing(0);
+                } else {
+                    function raf(time) {
+                        lenisInstance.raf(time);
+                        requestAnimationFrame(raf);
+                    }
+                    requestAnimationFrame(raf);
+                }
+
+                if (window.ResizeObserver && document.body) {
+                    const ro = new ResizeObserver(() => {
+                        lenisInstance.resize();
+                        if (window.ScrollTrigger) ScrollTrigger.refresh();
+                    });
+                    ro.observe(document.body);
+                }
+
+                window.addEventListener('load', () => {
+                    lenisInstance.resize();
+                    if (window.ScrollTrigger) ScrollTrigger.refresh();
+                });
+            } catch (e) {
+                console.warn("Lenis initialization error:", e);
+            }
+        }
+
+        if (typeof Lenis !== 'undefined') {
+            initLenis();
+        } else {
+            window.addEventListener('DOMContentLoaded', initLenis);
+            window.addEventListener('load', initLenis);
+        }
+
+        function scrollToTop() {
+            if (lenisInstance) {
+                lenisInstance.scrollTo(0, { duration: 1.1 });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
         // Media Index & Navigation State
         let currentMediaIndex = 0;
 
