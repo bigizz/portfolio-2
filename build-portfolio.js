@@ -72,8 +72,8 @@ function renderProjectPage(p) {
 
   // Initial media display
   const firstMedia = p.media[0];
-  const initialImgDisplay = firstMedia.type === 'image' ? `src="${firstMedia.src}" class="max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border"` : `src="" class="hidden max-w-full max-h-full object-contain rounded-2xl drop-shadow-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border"`;
-  const initialVideoWrapper = firstMedia.type === 'vimeo' ? `class="w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black"` : `class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden shadow-2xl border border-brand-border bg-black"`;
+  const initialImgDisplay = firstMedia.type === 'image' ? `src="${firstMedia.src}" class="max-w-full max-h-full object-contain rounded-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border"` : `src="" class="hidden max-w-full max-h-full object-contain rounded-2xl transition-transform duration-700 hover:scale-[1.01] border border-brand-border"`;
+  const initialVideoWrapper = firstMedia.type === 'vimeo' ? `class="w-full max-w-full aspect-video relative rounded-2xl overflow-hidden border border-brand-border bg-black"` : `class="hidden w-full max-w-full aspect-video relative rounded-2xl overflow-hidden border border-brand-border bg-black"`;
   const initialVideoSrc = firstMedia.type === 'vimeo' ? firstMedia.src : '';
 
   // Arrows visibility: if only 1 media item, arrows and pill are hidden
