@@ -14,9 +14,9 @@ const projects = [
     category: '3d',
     badgeText: '3D / CGI',
     shortDesc: 'CGI Luxury Packshot',
-    deliverables: 'CGI Luxury Packshot, Studio Lighting',
+    deliverables: 'CGI, 3D, motion',
     image: '/armani/armani.jpg',
-    description: 'A CGI product visualization for Giorgio Armani Si Passione fragrance. Designed with precision physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.',
+    description: 'A CGI product visualization for Giorgio Armani Si Passione fragrance. Physics simulations, microscopic surface texturing, and studio-grade cinematic lighting.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1025241625?fl=pl&fe=sh', thumb: '/armani/armani-img1.jpg', alt: 'Armani CGI Packshot' }
     ]
@@ -32,9 +32,9 @@ const projects = [
     category: 'branding motion editing print',
     badgeText: 'Branding & Motion',
     shortDesc: 'Branding & Motion',
-    deliverables: 'Motion Design, Vehicle Wraps, Social Campaign',
+    deliverables: 'Motion Design, print, Social Campaigns',
     image: '/axa/axa.jpg',
-    description: 'Comprehensive brand and motion design across national auto insurance campaigns, tramway vehicle wraps, UI motion for the MyAXA app, and multi-format digital social campaigns.',
+    description: 'Comprehensive brand and motion design across national auto insurance campaigns, vehicle wraps, and multi-format digital social campaigns.',
     media: [
       { type: 'image', src: '/axa/tram.jpg', thumb: '/axa/tram.jpg', alt: 'AXA Tramway Campaign Visuals' },
       { type: 'image', src: '/axa/social.jpg', thumb: '/axa/social.jpg', alt: 'AXA Social Media Grid' },
@@ -54,9 +54,9 @@ const projects = [
     category: 'motion editing 3d print',
     badgeText: 'Motion & Editing',
     shortDesc: 'Pre-Roll Ad & Retail POS',
-    deliverables: 'Cerelac YouTube Pre-Roll Ad, Video Editing & Motion, Supermarket POS Displays, 3D Packshots',
+    deliverables: 'Video Editing & Motion, POS Displays',
     image: '/nestle/nan-nido.jpg',
-    description: 'Dynamic YouTube pre-roll advertising campaign featuring high-impact video editing and motion graphics for Nestlé Cerelac, alongside retail spatial architecture, POS display stands, and nutritional packaging 3D packshots for NAN OPTIPRO and NIDO infant nutrition ranges.',
+    description: 'YouTube pre-roll advertising campaign featuring video editing and motion graphics for Cerelac, alongside retail spatial architecture, and POS display stands for NAN and NIDO.',
     media: [
       { type: 'image', src: '/nestle/1.jpg', thumb: '/nestle/1.jpg', alt: 'Nestlé NAN 3 OPTIPRO Retail POS Display Stand' },
       { type: 'image', src: '/nestle/2.jpg', thumb: '/nestle/2.jpg', alt: 'Nestlé POS Display Angle View' },
@@ -78,9 +78,9 @@ const projects = [
     category: 'print',
     badgeText: 'Print Collateral',
     shortDesc: 'Stadium Print Identity',
-    deliverables: 'Official Print Identity, Stadium Collateral',
+    deliverables: 'Official Print Identity',
     image: '/caf/caf.jpg',
-    description: 'Comprehensive stadium collateral and official print design system for the Africa Cup of Nations Morocco 2025, celebrating pan-African athletic excellence through dynamic typography and vibrant cultural patterns.',
+    description: 'Official print design system for the Africa Cup of Nations Morocco 2025, celebrating pan-African athletic excellence through dynamic and vibrant cultural patterns.',
     media: [
       { type: 'image', src: '/caf/caf-img2.jpg', thumb: '/caf/caf-img2.jpg', alt: 'AFCON 2025 Stadium Print' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1180949504?fl=pl&fe=sh', thumb: '/caf/caf-img1.jpg', alt: 'AFCON 2025 Motion Identity' }
@@ -97,9 +97,9 @@ const projects = [
     category: '3d',
     badgeText: '3D / CGI',
     shortDesc: '3D Product Modeling',
-    deliverables: '3D Product Modeling, CGI Packshots (2026 Gamme)',
+    deliverables: '3D Product Modeling, Packshots',
     image: '/taous/taous.jpg',
-    description: 'Complete 3D product modeling and CGI packshot visualization for the new 2026 Taous product range (gamme), featuring high-fidelity packaging geometry, cosmetic fluid materials, and studio renders for national key visual campaigns.',
+    description: 'Complete 3D product modeling and packshot visualization for the new 2026 Taous product range, featuring high-fidelity packaging geometry, cosmetic fluid materials, and studio renders for national key visual campaigns.',
     media: [
       { type: 'image', src: '/taous/all.jpg', thumb: '/taous/all.jpg', alt: 'Taous 2026 Product Gamme 3D Modeling' },
       { type: 'image', src: '/taous/KV.jpg', thumb: '/taous/KV.jpg', alt: 'Taous 2026 Key Visual Campaign' }
@@ -116,9 +116,9 @@ const projects = [
     category: '3d branding editing',
     badgeText: '3D & Branding',
     shortDesc: 'CGI Packshots & Motion',
-    deliverables: 'CGI Product Packshots, Commercial Motion, Social Grids',
+    deliverables: 'CGI, Motion, Social Grids',
     image: '/loreal/loreal.jpg',
-    description: "Multidisciplinary art direction and 3D visual production for L'Oréal active cosmetics divisions, including La Roche-Posay (Effaclar, Anthelios UVMune 400), Vichy Dercos 2-in-1 Reveal, and CeraVe campaign activations.",
+    description: "Art direction and 3D visual production for L'Oréal active cosmetics divisions, including La Roche-Posay , Vichy, and CeraVe.",
     media: [
       { type: 'image', src: '/loreal/lrp-social.jpg', thumb: '/loreal/lrp-social.jpg', alt: 'La Roche-Posay Social Assets' },
       { type: 'image', src: '/loreal/vichy-social.jpg', thumb: '/loreal/vichy-social.jpg', alt: 'Vichy Social Campaign' },
@@ -142,9 +142,9 @@ const projects = [
     category: 'branding 3d editing',
     badgeText: 'Branding & 3D',
     shortDesc: 'AI Commercial & Editorial',
-    deliverables: 'AI for Creatives Commercial, Editorial Design, Social Campaigns',
+    deliverables: 'Creatives Commercials, editing, Social Campaigns',
     image: '/alx/alx.jpg',
-    description: 'Dynamic brand campaigns and educational tech motion design for ALX Africa, including the flagship "AI for Creatives" motion sequence, social media design frameworks, and print publications.',
+    description: 'Brand campaigns and motion design for ALX Africa, including social media design frameworks, and print publications.',
     media: [
       { type: 'image', src: '/alx/alx-img2.jpg', thumb: '/alx/alx-img2.jpg', alt: 'ALX Editorial System' },
       { type: 'image', src: '/alx/alx-img3.jpg', thumb: '/alx/alx-img3.jpg', alt: 'ALX Visual Communication' },
@@ -163,9 +163,9 @@ const projects = [
     category: 'branding editing motion',
     badgeText: 'Branding & Motion',
     shortDesc: 'Motion Film & Posters',
-    deliverables: 'XUV 3XO Motion Film, Print Posters, Social Campaigns',
+    deliverables: 'Motion, Print Posters, Social Campaigns',
     image: '/mahindra/mahindra.jpg',
-    description: 'Comprehensive automotive advertising direction for Mahindra Morocco, featuring cinematic launch motion for the XUV 3XO SUV, national print billboard campaign collateral, and seasonal digital activations.',
+    description: 'Comprehensive automotive advertising direction for Mahindra Morocco, national print billboard campaign collateral, and seasonal digital activations.',
     media: [
       { type: 'image', src: '/mahindra/XUV300 Post .jpg', thumb: '/mahindra/XUV300 Post .jpg', alt: 'Mahindra XUV 300 Visual' },
       { type: 'image', src: '/mahindra/Affiche page offre.jpg', thumb: '/mahindra/Affiche page offre.jpg', alt: 'Mahindra National Campaign Poster' },
@@ -186,9 +186,9 @@ const projects = [
     category: 'branding editing motion',
     badgeText: 'Branding & Motion',
     shortDesc: 'Video Tours & Editorial',
-    deliverables: 'Architectural Video Tours, Luxury Editorial, Social Media',
+    deliverables: 'Video Tours, Motion, Social Media',
     image: '/yamed/yamed.jpg',
-    description: 'Premium branding and architectural cinematic motion for Yamed Promotion luxury residential developments, showcasing "Résidence Les Sources", "VILLA 28", and "Terre Océane" residences with refined editorial typography.',
+    description: 'Branding and architectural cinematic motion for Yamed residential developments, showcasing "Résidence Les Sources", "VILLA 28", and "Terre Océane" residences with refined vision.',
     media: [
       { type: 'image', src: '/yamed/post2.jpg', thumb: '/yamed/post2.jpg', alt: 'Terre Océane Editorial Visual' },
       { type: 'image', src: '/yamed/post7.jpg', thumb: '/yamed/post7.jpg', alt: 'Yamed Architecture Showcase' },
@@ -209,9 +209,9 @@ const projects = [
     category: 'branding 3d',
     badgeText: 'Branding & 3D',
     shortDesc: '3D & Spatial Typography',
-    deliverables: 'Branding, 3D Typography, Spatial Art',
+    deliverables: 'Branding, 3D, motion',
     image: '/ice/ice.jpg',
-    description: 'An experimental brand identity exploration combining organic frosted geometry, parametric typography, and spatial lighting mechanics to evoke sensory temperature contrast.',
+    description: 'An experimental brand identity exploration combining organic frosted geometry, parametric typography, and spatial lighting mechanics to evoke sensory contrast.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1184048530?fl=pl&fe=sh', thumb: '/ice/ice-img1.jpg', alt: 'ICE 3D Motion Identity' }
     ]
@@ -227,9 +227,9 @@ const projects = [
     category: 'branding',
     badgeText: 'Branding',
     shortDesc: 'National Advertising',
-    deliverables: 'Outdoor Advertising, National Holiday Posters, Auto Premium Campaign',
+    deliverables: 'Motion, Print, Social Campaigns',
     image: '/wafa-ima/wafa.jpg',
-    description: 'National print advertising and creative direction for Wafa IMA Assistance, spanning Wafa Auto Premium roadside assistance campaigns, international student coverage, and commemorative national holiday posters.',
+    description: 'Print advertising and creative direction for Wafa IMA Assistance, spanning roadside assistance campaigns, international student coverage, and commemorative national holiday posters.',
     media: [
       { type: 'image', src: '/wafa-ima/wafa auto premium.jpg', thumb: '/wafa-ima/wafa auto premium.jpg', alt: 'Wafa Auto Premium Roadside Campaign' },
       { type: 'image', src: '/wafa-ima/wafa étudiant expartié.jpg', thumb: '/wafa-ima/wafa étudiant expartié.jpg', alt: 'Wafa Étudiant Expatrié Assistance' },
@@ -248,9 +248,9 @@ const projects = [
     category: '3d',
     badgeText: '3D / CGI',
     shortDesc: '3D Packaging Reveal',
-    deliverables: '3D Packaging, Kinetic Typography, Product Reveal',
+    deliverables: '3D, motion, Product Reveal',
     image: '/clarre/clarre.jpg',
-    description: 'High-end cosmetic CGI sequence spotlighting clean, organic beauty formulation through plant-derived fluid physics, ultra-tactile glass refraction, and rhythmic kinetic reveals.',
+    description: 'High-end cosmetic CGI sequence spotlighting, organic formulation through fluid physics, ultra-tactile glass refraction, and rhythmic kinetic reveals.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1083914194?fl=pl&fe=sh', thumb: '/clarre/clarre-img1.jpg', alt: 'Clarre Vegan Product Reveal' },
       { type: 'image', src: '/clarre/clarre-img2.jpg', thumb: '/clarre/clarre-img2.jpg', alt: 'Clarre Glass Refraction Packshot' },
@@ -268,9 +268,9 @@ const projects = [
     category: 'branding motion editing print',
     badgeText: 'Branding & Motion',
     shortDesc: '3D CGI Commercial',
-    deliverables: '3D CGI Commercial, Campaign Posters, Social Assets',
+    deliverables: 'Commercials, Campaign Posters, Social Assets',
     image: '/speedy/speedy.jpg',
-    description: 'A playful surreal 3D CGI campaign for Speedy auto centers featuring a pool sculpted in the silhouette of a mechanical wrench, highlighting summertime vehicle diagnostics and service specials.',
+    description: 'Campaigns for Speedy auto centers, highlighting vehicle diagnostics and service specials.',
     media: [
       { type: 'image', src: '/speedy/check-up.jpg', thumb: '/speedy/check-up.jpg', alt: 'Speedy Check-Up 3D Poster' },
       { type: 'image', src: '/speedy/vidange.jpg', thumb: '/speedy/vidange.jpg', alt: 'Speedy Vidange Campaign' },
@@ -290,9 +290,9 @@ const projects = [
     category: 'branding',
     badgeText: 'Branding',
     shortDesc: 'Packaging & CGI Packshot',
-    deliverables: 'Label Design, Marble & Botanical CGI Packshot, Brand Identity',
+    deliverables: 'Branding, Packshot, motion',
     image: '/moroccan-olive-oil/moo.jpg',
-    description: 'Art direction and packaging design for Moroccan Olive Oil (MOO) under the "Morocco Kingdom of Taste" collective mark. Styled with Italian Carrara marble pedestals, fresh olive branches, and geometric heritage backdrops.',
+    description: 'Art direction for Moroccan Olive Oil (MOO). Styled with Carrara marble pedestals, fresh olive branches, and geometric heritage backdrops.',
     media: [
       { type: 'image', src: '/moroccan-olive-oil/1.jpg', thumb: '/moroccan-olive-oil/1.jpg', alt: 'MOO Extra Virgin Olive Oil Bottle Packshot' },
       { type: 'image', src: '/moroccan-olive-oil/2.jpg', thumb: '/moroccan-olive-oil/2.jpg', alt: 'MOO Heritage Packaging Front View' },
@@ -311,9 +311,9 @@ const projects = [
     category: 'branding motion 3d',
     badgeText: 'Branding & Motion',
     shortDesc: 'Surrealist 3D Research',
-    deliverables: 'Experimental 3D Simulations, Surreal Saga, Cultural CGI',
+    deliverables: '3D Simulations, CGI',
     image: '/personal/personal.jpg',
-    description: 'An evolving anthology of personal artistic research in surrealist 3D motion, computational sculpture, Moroccan cultural tributes (Taxi Inzegan, Wa Hia Sinia, WRDA), and advanced kinetic choreography.',
+    description: 'An evolving anthology of personal artistic research in surrealist 3D motion, computational sculpture, and advanced choreography.',
     media: [
       { type: 'vimeo', src: 'https://player.vimeo.com/video/1201537330?fl=pl&fe=sh', thumb: '/personal/video-rainbow-room-thumb.jpg', alt: 'Rainbow Room' },
       { type: 'vimeo', src: 'https://player.vimeo.com/video/917192343?fl=pl&fe=sh', thumb: '/personal/video-revelation-thumb.jpg', alt: 'Revelation' },
